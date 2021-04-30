@@ -1,0 +1,181 @@
+data "aws_iam_policy_document" "step_functions_assume_role_policy" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      identifiers = [
+        "states.amazonaws.com"
+      ]
+      type = "Service"
+    }
+
+    actions = [
+      "sts:AssumeRole"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "step_functions_batch_policy" {
+  statement {
+    actions = [
+      "batch:TerminateJob",
+      "batch:DescribeJobs",
+      "batch:DescribeJobDefinitions",
+      "batch:DescribeJobQueues",
+      "batch:RegisterJobDefinition"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+
+  statement {
+    actions = [
+      "batch:SubmitJob"
+    ]
+
+    resources = [
+      var.batch_job_queue_arn,
+      "arn:aws:batch:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:job-definition/*"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "step_functions_s3" {
+  statement {
+    actions = [
+      "s3:ListBucket"
+    ]
+
+    resources = [
+      var.s3_bucket_arn
+    ]
+  }
+
+  statement {
+    actions = [
+      "s3:*Object"
+    ]
+
+    resources = [
+      var.s3_bucket_arn, "${var.s3_bucket_arn}/*"
+    ]
+  }
+
+  statement {
+    actions = [
+      "kms:Decrypt"
+    ]
+
+    resources = [
+      var.s3_bucket_kms_arn
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "step_functions_cloudwatch" {
+  statement {
+    actions = [
+      "logs:CreateLogDelivery",
+      "logs:GetLogDelivery",
+      "logs:UpdateLogDelivery",
+      "logs:DeleteLogDelivery",
+      "logs:ListLogDeliveries",
+      "logs:PutResourcePolicy",
+      "logs:DescribeResourcePolicies",
+      "logs:DescribeLogGroups"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "step_functions_eventbridge" {
+  statement {
+    actions = [
+      "events:PutTargets",
+      "events:DescribeRule"
+    ]
+
+    resources = [
+      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/StepFunctionsGetEventsForBatchJobsRule",
+    ]
+  }
+
+  statement {
+    actions = [
+      "events:PutRule"
+    ]
+
+    resources = [
+      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/StepFunctionsGetEventsForBatchJobsRule"
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "events:detail-type"
+      values   = ["Batch Job State Change"]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "step_functions_dynamodb" {
+  statement {
+    actions = [
+      "dynamodb:PutItem",
+      "dynamodb:GetItem",
+      "dynamodb:UpdateItem"
+    ]
+
+    resources = [
+      join("", [for arn in aws_dynamodb_table.step_functions_state_table.*.arn : arn])
+    ]
+  }
+}
+
+resource "aws_iam_role" "step_functions_role" {
+  count              = var.active ? 1 : 0
+  name               = "${var.resource_prefix}step_functions_role${var.resource_suffix}"
+  description        = "IAM role for AWS Step Functions to access AWS resources (AWS Batch, AWS DynamoDB)."
+  assume_role_policy = data.aws_iam_policy_document.step_functions_assume_role_policy.json
+
+  tags = var.standard_tags
+}
+
+resource "aws_iam_role_policy" "step_functions_batch" {
+  count  = var.active ? 1 : 0
+  name   = "AWSBatch"
+  role   = aws_iam_role.step_functions_role[0].id
+  policy = data.aws_iam_policy_document.step_functions_batch_policy.json
+}
+
+resource "aws_iam_role_policy" "step_functions_s3" {
+  count  = var.active ? 1 : 0
+  name   = "S3"
+  role   = aws_iam_role.step_functions_role[0].id
+  policy = data.aws_iam_policy_document.step_functions_s3.json
+}
+
+resource "aws_iam_role_policy" "step_functions_cloudwatch" {
+  count  = var.active ? 1 : 0
+  name   = "Cloudwatch"
+  role   = aws_iam_role.step_functions_role[0].id
+  policy = data.aws_iam_policy_document.step_functions_cloudwatch.json
+}
+
+resource "aws_iam_role_policy" "step_functions_eventbridge" {
+  count  = var.active ? 1 : 0
+  name   = "Eventbridge"
+  role   = aws_iam_role.step_functions_role[0].id
+  policy = data.aws_iam_policy_document.step_functions_eventbridge.json
+}
+
+resource "aws_iam_role_policy" "step_functions_dynamodb" {
+  count  = var.active ? 1 : 0
+  name   = "Dynamodb"
+  role   = aws_iam_role.step_functions_role[0].id
+  policy = data.aws_iam_policy_document.step_functions_dynamodb.json
+}
