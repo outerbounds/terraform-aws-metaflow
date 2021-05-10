@@ -10,7 +10,8 @@ Provides the core functionality for Metaflow which includes:
 - an API to record and query past executions (`metadata-service`)
 - orchestrated processing (`step-functions`)
 
-Depends on the output of the project `infra`.
+Depends on a VPC that has been previously set up. The output of the project `infra` is an example 
+configuration of a VPC that can be passed to this module.
 
 ## ECR
 
