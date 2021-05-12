@@ -33,8 +33,8 @@ resource "aws_batch_compute_environment" "cpu" {
        and this compute environment will not have to be destroyed and then created to point to a new Launch Template.
     */
     launch_template {
-      launch_template_id = aws_launch_template.this.id
-      version            = aws_launch_template.this.latest_version
+      launch_template_id = aws_launch_template.cpu.id
+      version            = aws_launch_template.cpu.latest_version
     }
 
     # Security group to apply to the instances launched.
@@ -100,8 +100,8 @@ resource "aws_batch_compute_environment" "large-cpu" {
        and this compute environment will not have to be destroyed and then created to point to a new Launch Template.
     */
     launch_template {
-      launch_template_id = aws_launch_template.this.id
-      version            = aws_launch_template.this.latest_version
+      launch_template_id = aws_launch_template.cpu.id
+      version            = aws_launch_template.cpu.latest_version
     }
 
     # Security group to apply to the instances launched.
@@ -167,8 +167,8 @@ resource "aws_batch_compute_environment" "gpu" {
        and this compute environment will not have to be destroyed and then created to point to a new Launch Template.
     */
     launch_template {
-      launch_template_id = aws_launch_template.this.id
-      version            = aws_launch_template.this.latest_version
+      launch_template_id = aws_launch_template.gpu.id
+      version            = aws_launch_template.gpu.latest_version
     }
 
     # Security group to apply to the instances launched.
