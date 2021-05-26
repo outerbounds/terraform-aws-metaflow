@@ -4,7 +4,7 @@ Our Metaflow Terraform code has been separated into separate modules based on th
 
 ## Computation
 
-Sets up remote computation resources so flows can be run on EC2 instances. These resources do not perform 
+Sets up remote computation resources so flows can be run on Amazon EC2 instances. These resources do not perform 
 orchestration and rely on the data scientist's computer to perform this coordination.
 
 ## Datastore

@@ -7,7 +7,7 @@ resource "aws_launch_template" "cpu" {
   */
   name = "${var.resource_prefix}batch-launch-tmpl-cpu-100gb${var.resource_suffix}"
 
-  # Defines what IAM Role to assume to grant an EC2 instance
+  # Defines what IAM Role to assume to grant an Amazon EC2 instance
   # This role must have a policy to access the kms_key_id used to encrypt the EBS volume
   iam_instance_profile {
     arn = aws_iam_instance_profile.ecs_instance_role.arn
@@ -37,7 +37,7 @@ resource "aws_launch_template" "gpu" {
   */
   name = "${var.resource_prefix}batch-launch-tmpl-gpu-100gb${var.resource_suffix}"
 
-  # Defines what IAM Role to assume to grant an EC2 instance
+  # Defines what IAM Role to assume to grant an Amazon EC2 instance
   # This role must have a policy to access the kms_key_id used to encrypt the EBS volume
   iam_instance_profile {
     arn = aws_iam_instance_profile.ecs_instance_role.arn

@@ -45,22 +45,26 @@ output "METAFLOW_SFN_DYNAMO_DB_TABLE" {
 
 output "metaflow_profile_json" {
   value = jsonencode(
-    {
-      "METAFLOW_BATCH_CONTAINER_REGISTRY"   = element(split("/", aws_ecr_repository.metaflow_batch_image.repository_url), 0),
-      "METAFLOW_BATCH_CONTAINER_IMAGE"      = element(split("/", aws_ecr_repository.metaflow_batch_image.repository_url), 1),
-      "METAFLOW_DATASTORE_SYSROOT_S3"       = module.metaflow-datastore.METAFLOW_DATASTORE_SYSROOT_S3,
-      "METAFLOW_DATATOOLS_S3ROOT"           = module.metaflow-datastore.METAFLOW_DATATOOLS_S3ROOT,
-      "METAFLOW_BATCH_JOB_QUEUE"            = module.metaflow-computation.METAFLOW_BATCH_JOB_QUEUE,
-      "METAFLOW_ECS_S3_ACCESS_IAM_ROLE"     = module.metaflow-computation.METAFLOW_ECS_S3_ACCESS_IAM_ROLE,
-      "METAFLOW_SERVICE_URL"                = module.metaflow-metadata-service.METAFLOW_SERVICE_URL,
-      "METAFLOW_SERVICE_INTERNAL_URL"       = module.metaflow-metadata-service.METAFLOW_SERVICE_INTERNAL_URL,
-      "METAFLOW_SFN_IAM_ROLE"               = module.metaflow-step-functions.metaflow_step_functions_role_arn,
-      "METAFLOW_SFN_STATE_MACHINE_PREFIX"   = replace("${local.resource_prefix}${local.resource_suffix}", "--", "-"),
-      "METAFLOW_EVENTS_SFN_ACCESS_IAM_ROLE" = module.metaflow-step-functions.metaflow_eventbridge_role_arn,
-      "METAFLOW_SFN_DYNAMO_DB_TABLE"        = module.metaflow-step-functions.metaflow_step_functions_dynamodb_table_name,
-      "METAFLOW_DEFAULT_DATASTORE"          = "s3",
-      "METAFLOW_DEFAULT_METADATA"           = "service"
-    }
+    merge(
+      var.enable_custom_batch_container_registry ? {
+        "METAFLOW_BATCH_CONTAINER_REGISTRY" = element(split("/", aws_ecr_repository.metaflow_batch_image[0].repository_url), 0),
+        "METAFLOW_BATCH_CONTAINER_IMAGE"    = element(split("/", aws_ecr_repository.metaflow_batch_image[0].repository_url), 1)
+      } : {},
+      {
+        "METAFLOW_DATASTORE_SYSROOT_S3"       = module.metaflow-datastore.METAFLOW_DATASTORE_SYSROOT_S3,
+        "METAFLOW_DATATOOLS_S3ROOT"           = module.metaflow-datastore.METAFLOW_DATATOOLS_S3ROOT,
+        "METAFLOW_BATCH_JOB_QUEUE"            = module.metaflow-computation.METAFLOW_BATCH_JOB_QUEUE,
+        "METAFLOW_ECS_S3_ACCESS_IAM_ROLE"     = module.metaflow-computation.METAFLOW_ECS_S3_ACCESS_IAM_ROLE,
+        "METAFLOW_SERVICE_URL"                = module.metaflow-metadata-service.METAFLOW_SERVICE_URL,
+        "METAFLOW_SERVICE_INTERNAL_URL"       = module.metaflow-metadata-service.METAFLOW_SERVICE_INTERNAL_URL,
+        "METAFLOW_SFN_IAM_ROLE"               = module.metaflow-step-functions.metaflow_step_functions_role_arn,
+        "METAFLOW_SFN_STATE_MACHINE_PREFIX"   = replace("${local.resource_prefix}${local.resource_suffix}", "--", "-"),
+        "METAFLOW_EVENTS_SFN_ACCESS_IAM_ROLE" = module.metaflow-step-functions.metaflow_eventbridge_role_arn,
+        "METAFLOW_SFN_DYNAMO_DB_TABLE"        = module.metaflow-step-functions.metaflow_step_functions_dynamodb_table_name,
+        "METAFLOW_DEFAULT_DATASTORE"          = "s3",
+        "METAFLOW_DEFAULT_METADATA"           = "service"
+      }
+    )
   )
   description = "Metaflow profile JSON object that can be used to communicate with this Metaflow Stack. Store this in `~/.metaflow/config_[stack-name]` and select with `$ export METAFLOW_PROFILE=[stack-name]`."
 }
@@ -91,7 +95,7 @@ output "metaflow_api_gateway_rest_api_id" {
 }
 
 output "metaflow_batch_container_image" {
-  value       = aws_ecr_repository.metaflow_batch_image.repository_url
+  value       = var.enable_custom_batch_container_registry ? aws_ecr_repository.metaflow_batch_image[0].repository_url : ""
   description = "The ECR repo containing the metaflow batch image"
 }
 

@@ -49,61 +49,61 @@ variable "standard_tags" {
 
 variable "batch_compute_environment_cpu_max_vcpus" {
   type        = string
-  description = "Maximum number of EC2 vCPUs that our CPU Batch Compute Environment can reach."
+  description = "Maximum number of Amazon EC2 vCPUs that our CPU Batch Compute Environment can reach."
   default     = 32
 }
 
 variable "batch_compute_environment_cpu_min_vcpus" {
   type        = string
-  description = "Minimum number of EC2 vCPUs that our CPU Batch Compute Environment should maintain."
+  description = "Minimum number of Amazon EC2 vCPUs that our CPU Batch Compute Environment should maintain."
   default     = 0
 }
 
 variable "batch_compute_environment_cpu_desired_vcpus" {
   type        = string
-  description = "Desired number of EC2 vCPUS in our CPU Batch Compute Environment. A non-zero number will ensure instances are always on and avoid some cold-start problems."
+  description = "Desired number of Amazon EC2 vCPUS in our CPU Batch Compute Environment. A non-zero number will ensure instances are always on and avoid some cold-start problems."
   default     = 0
 }
 
 variable "batch_compute_environment_large_cpu_max_vcpus" {
   type        = string
-  description = "Maximum number of EC2 vCPUs that our large CPU Batch Compute Environment can reach."
+  description = "Maximum number of Amazon EC2 vCPUs that our large CPU Batch Compute Environment can reach."
   default     = 128
 }
 
 variable "batch_compute_environment_large_cpu_min_vcpus" {
   type        = string
-  description = "Minimum number of EC2 vCPUs that our large CPU Batch Compute Environment should maintain."
+  description = "Minimum number of Amazon EC2 vCPUs that our large CPU Batch Compute Environment should maintain."
   default     = 0
 }
 
 variable "batch_compute_environment_large_cpu_desired_vcpus" {
   type        = string
-  description = "Desired number of EC2 vCPUS in our large CPU Batch Compute Environment. A non-zero number will ensure instances are always on and avoid some cold-start problems."
+  description = "Desired number of Amazon EC2 vCPUS in our large CPU Batch Compute Environment. A non-zero number will ensure instances are always on and avoid some cold-start problems."
   default     = 0
 }
 
 variable "batch_compute_environment_gpu_max_vcpus" {
   type        = string
-  description = "Maximum number of EC2 vCPUs that our GPU Batch Compute Environment can reach."
+  description = "Maximum number of Amazon EC2 vCPUs that our GPU Batch Compute Environment can reach."
   default     = 32
 }
 
 variable "batch_compute_environment_gpu_min_vcpus" {
   type        = string
-  description = "Minimum number of EC2 vCPUs that our GPU Batch Compute Environment should maintain."
+  description = "Minimum number of Amazon EC2 vCPUs that our GPU Batch Compute Environment should maintain."
   default     = 0
 }
 
 variable "batch_compute_environment_gpu_desired_vcpus" {
   type        = string
-  description = "Desired number of EC2 vCPUS in our GPU Batch Compute Environment. A non-zero number will ensure instances are always on and avoid some cold-start problems."
+  description = "Desired number of Amazon EC2 vCPUS in our GPU Batch Compute Environment. A non-zero number will ensure instances are always on and avoid some cold-start problems."
   default     = 0
 }
 
 variable "batch_cpu_instance_types" {
   type        = list(string)
-  description = "EC2 instance types allowed for CPU Batch jobs. Types can be explicitly or implicitly requested by data scientists."
+  description = "Amazon EC2 instance types allowed for CPU Batch jobs. Types can be explicitly or implicitly requested by data scientists."
   default = [
     "r5.large",
     "r5.xlarge",
@@ -117,7 +117,7 @@ variable "batch_cpu_instance_types" {
 
 variable "batch_large_cpu_instance_types" {
   type        = list(string)
-  description = "EC2 instance types allowed for larger CPU Batch jobs. Types can be explicitly or implicitly requested by data scientists."
+  description = "Amazon EC2 instance types allowed for larger CPU Batch jobs. Types can be explicitly or implicitly requested by data scientists."
   default = [
     "c4.8xlarge",
     "r5.4xlarge",
@@ -128,7 +128,7 @@ variable "batch_large_cpu_instance_types" {
 
 variable "batch_gpu_instance_types" {
   type        = list(string)
-  description = "EC2 instance types allowed for GPU Batch jobs. Types can be explicitly or implicitly requested by data scientists."
+  description = "Amazon EC2 instance types allowed for GPU Batch jobs. Types can be explicitly or implicitly requested by data scientists."
   default = [
     "p3.2xlarge"
   ]

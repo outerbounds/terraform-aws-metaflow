@@ -48,7 +48,7 @@ resource "aws_batch_compute_environment" "cpu" {
       var.subnet_private_2_id
     ]
 
-    # Type of instance EC2 for on-demand. Can use "SPOT" to use unused instances at discount if available
+    # Type of instance Amazon EC2 for on-demand. Can use "SPOT" to use unused instances at discount if available
     type = "EC2"
 
     tags = var.standard_tags
@@ -115,7 +115,7 @@ resource "aws_batch_compute_environment" "large-cpu" {
       var.subnet_private_2_id
     ]
 
-    # Type of instance EC2 for on-demand. Can use "SPOT" to use unused instances at discount if available
+    # Type of instance Amazon EC2 for on-demand. Can use "SPOT" to use unused instances at discount if available
     type = "EC2"
 
     tags = var.standard_tags
@@ -182,7 +182,7 @@ resource "aws_batch_compute_environment" "gpu" {
       var.subnet_private_2_id
     ]
 
-    # Type of instance EC2 for on-demand. Can use "SPOT" to use unused instances at discount if available
+    # Type of instance Amazon EC2 for on-demand. Can use "SPOT" to use unused instances at discount if available
     type = "EC2"
 
     tags = var.standard_tags

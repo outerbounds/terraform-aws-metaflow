@@ -10,9 +10,9 @@ Provides the core functionality for Metaflow which includes:
 - an API to record and query past executions (`metadata-service`)
 - orchestrated processing (`step-functions`)
 
-Depends on a VPC that has been previously set up. The output of the project `infra` is an example 
-configuration of a VPC that can be passed to this module.
+Depends on an Amazon VPC that has been previously set up. The output of the project `infra` is an example
+configuration of an Amazon VPC that can be passed to this module.
 
-## ECR
+## Amazon ECR
 
-Sets up an AWS ECR to hold the Docker image we wish to use with Metaflow.
+Sets up an Amazon Elastic Container Registry (ECR) to hold the Docker image we wish to use with Metaflow.
