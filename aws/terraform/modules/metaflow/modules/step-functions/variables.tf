@@ -4,6 +4,17 @@ variable "active" {
   type        = bool
 }
 
+variable "batch_job_queue_arn" {
+  type        = string
+  description = "Batch job queue arn"
+}
+
+variable "iam_partition" {
+  type        = string
+  default     = "aws"
+  description = "IAM Partition (Select aws-us-gov for AWS GovCloud, otherwise leave as is)"
+}
+
 variable "resource_prefix" {
   type        = string
   description = "Prefix given to all AWS resources to differentiate between applications"
@@ -12,16 +23,6 @@ variable "resource_prefix" {
 variable "resource_suffix" {
   type        = string
   description = "Suffix given to all AWS resources to differentiate between environment and workspace"
-}
-
-variable "batch_job_queue_arn" {
-  type        = string
-  description = "Batch job queue arn"
-}
-
-variable "standard_tags" {
-  type        = map(string)
-  description = "The standard tags to apply to every AWS resource."
 }
 
 variable "s3_bucket_arn" {
@@ -34,3 +35,7 @@ variable "s3_bucket_kms_arn" {
   description = "arn of the metaflow datastore s3 bucket's kms key"
 }
 
+variable "standard_tags" {
+  type        = map(string)
+  description = "The standard tags to apply to every AWS resource."
+}

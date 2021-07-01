@@ -6,7 +6,7 @@ terraform {
       # hard coding values and avoid self referential issues when attempting to get the `aws_api_gateway_rest_api`'s
       # id for writing the policy. Previously we wrote the policy inline which is the old style. We're jumping from `v3.7.0`
       # `v3.16.0` which is only a minor upgrade.
-      version = "~> 3.16.0"
+      version = "~> 3.38.0"
     }
   }
   required_version = ">= 0.13"

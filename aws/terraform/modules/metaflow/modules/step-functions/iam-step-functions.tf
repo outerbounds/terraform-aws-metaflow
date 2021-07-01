@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "step_functions_batch_policy" {
 
     resources = [
       var.batch_job_queue_arn,
-      "arn:aws:batch:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:job-definition/*"
+      "arn:${var.iam_partition}:batch:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:job-definition/*"
     ]
   }
 }
@@ -101,7 +101,7 @@ data "aws_iam_policy_document" "step_functions_eventbridge" {
     ]
 
     resources = [
-      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/StepFunctionsGetEventsForBatchJobsRule",
+      "arn:${var.iam_partition}:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/StepFunctionsGetEventsForBatchJobsRule",
     ]
   }
 
@@ -111,7 +111,7 @@ data "aws_iam_policy_document" "step_functions_eventbridge" {
     ]
 
     resources = [
-      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/StepFunctionsGetEventsForBatchJobsRule"
+      "arn:${var.iam_partition}:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/StepFunctionsGetEventsForBatchJobsRule"
     ]
 
     condition {
@@ -147,35 +147,35 @@ resource "aws_iam_role" "step_functions_role" {
 
 resource "aws_iam_role_policy" "step_functions_batch" {
   count  = var.active ? 1 : 0
-  name   = "AWSBatch"
+  name   = "aws_batch"
   role   = aws_iam_role.step_functions_role[0].id
   policy = data.aws_iam_policy_document.step_functions_batch_policy.json
 }
 
 resource "aws_iam_role_policy" "step_functions_s3" {
   count  = var.active ? 1 : 0
-  name   = "S3"
+  name   = "s3"
   role   = aws_iam_role.step_functions_role[0].id
   policy = data.aws_iam_policy_document.step_functions_s3.json
 }
 
 resource "aws_iam_role_policy" "step_functions_cloudwatch" {
   count  = var.active ? 1 : 0
-  name   = "Cloudwatch"
+  name   = "cloudwatch"
   role   = aws_iam_role.step_functions_role[0].id
   policy = data.aws_iam_policy_document.step_functions_cloudwatch.json
 }
 
 resource "aws_iam_role_policy" "step_functions_eventbridge" {
   count  = var.active ? 1 : 0
-  name   = "Eventbridge"
+  name   = "event_bridge"
   role   = aws_iam_role.step_functions_role[0].id
   policy = data.aws_iam_policy_document.step_functions_eventbridge.json
 }
 
 resource "aws_iam_role_policy" "step_functions_dynamodb" {
   count  = var.active ? 1 : 0
-  name   = "Dynamodb"
+  name   = "dynamodb"
   role   = aws_iam_role.step_functions_role[0].id
   policy = data.aws_iam_policy_document.step_functions_dynamodb.json
 }

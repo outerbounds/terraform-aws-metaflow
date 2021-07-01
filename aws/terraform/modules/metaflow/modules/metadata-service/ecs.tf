@@ -25,6 +25,10 @@ resource "aws_ecs_task_definition" "this" {
       {
         "containerPort": 8080,
         "hostPort": 8080
+      },
+      {
+        "containerPort": 8082,
+        "hostPort": 8082
       }
     ],
     "environment": [
@@ -48,7 +52,7 @@ EOF
 
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  task_role_arn            = var.fargate_task_role_arn
+  task_role_arn            = aws_iam_role.metadata_svc_ecs_task_role.arn
   execution_role_arn       = var.fargate_execution_role_arn
   cpu                      = 512
   memory                   = 1024
@@ -71,13 +75,19 @@ resource "aws_ecs_service" "this" {
   network_configuration {
     security_groups  = [aws_security_group.metadata_service_security_group.id]
     assign_public_ip = true
-    subnets          = [var.subnet_private_1_id, var.subnet_private_2_id]
+    subnets          = [var.subnet1_id, var.subnet2_id]
   }
 
   load_balancer {
     target_group_arn = aws_lb_target_group.this.arn
     container_name   = "${var.resource_prefix}service${var.resource_suffix}"
     container_port   = 8080
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.db_migrate.arn
+    container_name   = "${var.resource_prefix}service${var.resource_suffix}"
+    container_port   = 8082
   }
 
   lifecycle {

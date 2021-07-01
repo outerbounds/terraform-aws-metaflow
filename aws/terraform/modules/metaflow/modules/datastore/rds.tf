@@ -5,7 +5,7 @@
 */
 resource "aws_db_subnet_group" "this" {
   name       = local.pg_subnet_group_name
-  subnet_ids = [var.subnet_private_1_id, var.subnet_private_2_id]
+  subnet_ids = [var.subnet1_id, var.subnet2_id]
 
   tags = merge(
     var.standard_tags,

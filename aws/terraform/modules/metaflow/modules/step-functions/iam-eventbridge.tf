@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "eventbridge_step_functions_policy" {
     ]
 
     resources = [
-      "arn:aws:states:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:stateMachine:*"
+      "arn:${var.iam_partition}:states:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:stateMachine:*"
     ]
   }
 }
@@ -38,7 +38,7 @@ resource "aws_iam_role" "eventbridge_role" {
 
 resource "aws_iam_role_policy" "eventbridge_step_functions_policy" {
   count  = var.active ? 1 : 0
-  name   = "Step_Functions"
+  name   = "step_functions"
   role   = aws_iam_role.eventbridge_role[0].id
   policy = data.aws_iam_policy_document.eventbridge_step_functions_policy.json
 }
