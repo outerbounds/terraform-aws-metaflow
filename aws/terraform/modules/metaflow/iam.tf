@@ -61,14 +61,10 @@ data "aws_iam_policy_document" "s3_kms" {
   statement {
     effect = "Allow"
 
-    # TODO - reduce to Encrypt, Decrypt?
     actions = [
       "kms:Decrypt",
       "kms:Encrypt",
-      # "kms:ReEncryptTo",
-      # "kms:ReEncryptFrom",
-      # "kms:DescribeKey",
-      # "kms:GenerateDataKey"
+      "kms:GenerateDataKey"
     ]
 
     resources = [
@@ -222,6 +218,12 @@ resource "aws_iam_role_policy" "grant_custom_s3_batch" {
   name   = "custom_s3"
   role   = aws_iam_role.batch_s3_task_role.name
   policy = data.aws_iam_policy_document.custom_s3_batch.json
+}
+
+resource "aws_iam_role_policy" "grant_s3_kms" {
+  name   = "s3_kms"
+  role   = aws_iam_role.batch_s3_task_role.name
+  policy = data.aws_iam_policy_document.s3_kms.json
 }
 
 resource "aws_iam_role_policy" "grant_deny_presigned_batch" {
