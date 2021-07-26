@@ -134,7 +134,7 @@ resource "aws_api_gateway_method_response" "db" {
 
 resource "aws_api_gateway_deployment" "this" {
   rest_api_id = aws_api_gateway_rest_api.this.id
-  stage_name  = local.api_gateway_stage_name
+
   # explicit depends_on required to ensure module stands up on first `apply`
   # otherwise a second followup `apply` would be required
   # can read more here: https://stackoverflow.com/a/42783769
@@ -146,9 +146,19 @@ resource "aws_api_gateway_deployment" "this" {
   }
 }
 
+resource "aws_api_gateway_stage" "this" {
+  deployment_id = aws_api_gateway_deployment.this.id
+  rest_api_id   = aws_api_gateway_rest_api.this.id
+  stage_name    = local.api_gateway_stage_name
+
+  tags = var.standard_tags
+}
+
 resource "aws_api_gateway_api_key" "this" {
   count = var.api_basic_auth ? 1 : 0
   name  = local.api_gateway_key_name
+
+  tags = var.standard_tags
 }
 
 resource "aws_api_gateway_usage_plan" "this" {
@@ -157,8 +167,10 @@ resource "aws_api_gateway_usage_plan" "this" {
 
   api_stages {
     api_id = aws_api_gateway_rest_api.this.id
-    stage  = local.api_gateway_stage_name
+    stage  = aws_api_gateway_deployment.this.stage_name
   }
+
+  tags = var.standard_tags
 }
 
 resource "aws_api_gateway_usage_plan_key" "this" {
