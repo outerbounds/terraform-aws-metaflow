@@ -245,6 +245,7 @@ resource "aws_iam_role_policy" "grant_iam_pass_role" {
 }
 
 resource "aws_iam_role_policy" "grant_dynamodb" {
+  count  = var.enable_step_functions ? 1 : 0
   name   = "dynamodb"
   role   = aws_iam_role.batch_s3_task_role.name
   policy = data.aws_iam_policy_document.dynamodb.json
