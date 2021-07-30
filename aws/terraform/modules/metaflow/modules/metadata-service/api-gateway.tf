@@ -167,7 +167,7 @@ resource "aws_api_gateway_usage_plan" "this" {
 
   api_stages {
     api_id = aws_api_gateway_rest_api.this.id
-    stage  = aws_api_gateway_deployment.this.stage_name
+    stage  = aws_api_gateway_stage.this.stage_name
   }
 
   tags = var.standard_tags
