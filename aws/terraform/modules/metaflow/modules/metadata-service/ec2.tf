@@ -54,7 +54,7 @@ resource "aws_lb" "this" {
 }
 
 resource "aws_lb_target_group" "this" {
-  name        = "${var.resource_prefix}trgtgrp${var.resource_suffix}"
+  name        = "${var.resource_prefix}mdtg${var.resource_suffix}"
   port        = 8080
   protocol    = "TCP"
   target_type = "ip"
@@ -71,7 +71,7 @@ resource "aws_lb_target_group" "this" {
 }
 
 resource "aws_lb_target_group" "db_migrate" {
-  name        = "${var.resource_prefix}dbtrgtgrp${var.resource_suffix}"
+  name        = "${var.resource_prefix}dbtg${var.resource_suffix}"
   port        = 8082
   protocol    = "TCP"
   target_type = "ip"
