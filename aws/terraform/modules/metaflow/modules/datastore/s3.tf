@@ -16,10 +16,6 @@ resource "aws_s3_bucket" "this" {
       Metaflow = "true"
     }
   )
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {
