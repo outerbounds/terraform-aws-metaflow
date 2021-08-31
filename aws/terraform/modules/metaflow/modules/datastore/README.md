@@ -10,6 +10,38 @@ Stores Metaflow state, acting as Metaflow's remote Datastore. The data stored in
     - input
     - output
 
-No duplicate data is stored thanks to deduplication.
+No duplicate data is stored thanks to automatic deduplication built into Metaflow.
 
 To read more, see [the Metaflow docs](https://docs.metaflow.org/metaflow-on-aws/metaflow-on-aws#datastore)
+
+<!-- BEGIN_TF_DOCS -->
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_db_instance_type"></a> [db\_instance\_type](#input\_db\_instance\_type) | RDS instance type to launch for PostgresQL database. | `string` | `"db.t2.small"` | no |
+| <a name="input_db_name"></a> [db\_name](#input\_db\_name) | Name of PostgresQL database for Metaflow service. | `string` | `"metaflow"` | no |
+| <a name="input_db_username"></a> [db\_username](#input\_db\_username) | PostgresQL username; defaults to 'metaflow' | `string` | `"metaflow"` | no |
+| <a name="input_ecs_execution_role_arn"></a> [ecs\_execution\_role\_arn](#input\_ecs\_execution\_role\_arn) | This role will be granted access to our S3 Bucket which acts as our blob storage. | `string` | n/a | yes |
+| <a name="input_ecs_instance_role_arn"></a> [ecs\_instance\_role\_arn](#input\_ecs\_instance\_role\_arn) | This role will be granted access to our S3 Bucket which acts as our blob storage. | `string` | n/a | yes |
+| <a name="input_metadata_service_security_group_id"></a> [metadata\_service\_security\_group\_id](#input\_metadata\_service\_security\_group\_id) | The security group ID used by the MetaData service. We'll grant this access to our DB. | `string` | n/a | yes |
+| <a name="input_metaflow_vpc_id"></a> [metaflow\_vpc\_id](#input\_metaflow\_vpc\_id) | ID of the Metaflow VPC this SageMaker notebook instance is to be deployed in | `string` | n/a | yes |
+| <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | Prefix given to all AWS resources to differentiate between applications | `string` | n/a | yes |
+| <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | Suffix given to all AWS resources to differentiate between environment and workspace | `string` | n/a | yes |
+| <a name="input_standard_tags"></a> [standard\_tags](#input\_standard\_tags) | The standard tags to apply to every AWS resource. | `map(string)` | n/a | yes |
+| <a name="input_subnet1_id"></a> [subnet1\_id](#input\_subnet1\_id) | First subnet used for availability zone redundancy | `string` | n/a | yes |
+| <a name="input_subnet2_id"></a> [subnet2\_id](#input\_subnet2\_id) | Second subnet used for availability zone redundancy | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_METAFLOW_DATASTORE_SYSROOT_S3"></a> [METAFLOW\_DATASTORE\_SYSROOT\_S3](#output\_METAFLOW\_DATASTORE\_SYSROOT\_S3) | Amazon S3 URL for Metaflow DataStore |
+| <a name="output_METAFLOW_DATATOOLS_S3ROOT"></a> [METAFLOW\_DATATOOLS\_S3ROOT](#output\_METAFLOW\_DATATOOLS\_S3ROOT) | Amazon S3 URL for Metaflow DataTools |
+| <a name="output_database_password"></a> [database\_password](#output\_database\_password) | The database password |
+| <a name="output_database_username"></a> [database\_username](#output\_database\_username) | The database username |
+| <a name="output_datastore_s3_bucket_kms_key_arn"></a> [datastore\_s3\_bucket\_kms\_key\_arn](#output\_datastore\_s3\_bucket\_kms\_key\_arn) | The ARN of the KMS key used to encrypt the Metaflow datastore S3 bucket |
+| <a name="output_rds_master_instance_endpoint"></a> [rds\_master\_instance\_endpoint](#output\_rds\_master\_instance\_endpoint) | The database connection endpoint in address:port format |
+| <a name="output_s3_bucket_arn"></a> [s3\_bucket\_arn](#output\_s3\_bucket\_arn) | The ARN of the bucket we'll be using as blob storage |
+| <a name="output_s3_bucket_name"></a> [s3\_bucket\_name](#output\_s3\_bucket\_name) | The name of the bucket we'll be using as blob storage |
+<!-- END_TF_DOCS -->
