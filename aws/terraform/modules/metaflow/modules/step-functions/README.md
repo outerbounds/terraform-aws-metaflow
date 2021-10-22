@@ -1,6 +1,6 @@
 # Step Functions configuration for Metaflow
 
-This module sets up the infrastructure to use AWS Step Functions with Metaflow. 
+This module sets up the infrastructure to use AWS Step Functions with Metaflow.
 
 This builds on top of the functionality provided by the `computation` module, which allows to execute Metaflow step code on AWS Batch. If you use `computation` module alone, the orchestration is done by the Metaflow task scheduler that itself needs to runs somewhere (often, your laptop, or a dedicated server). Step Functions support in Metaflow allows you to replace that scheduler by compiling your Flows to a AWS Step Functions State Machine, and deploying it to AWS.
 

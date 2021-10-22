@@ -113,3 +113,8 @@ output "migration_function_arn" {
   value       = module.metaflow-metadata-service.migration_function_arn
   description = "ARN of DB Migration Function"
 }
+
+output "ui_alb_dns_name" {
+  value = module.metaflow-ui.alb_dns_name
+  description = "UI ALB DNS name"
+}

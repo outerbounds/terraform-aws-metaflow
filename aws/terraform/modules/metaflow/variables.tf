@@ -93,3 +93,20 @@ variable "vpc_id" {
   type        = string
   description = "The id of the single VPC we stood up for all Metaflow resources to exist in."
 }
+
+variable "ui_certificate_arn" {
+  type        = string
+  description = "SSL certificate for UI"
+}
+
+variable "extra_ui_backend_env_vars" {
+  type = map(string)
+  default = {}
+  description = "Additional environment variables for UI backend container"
+}
+
+variable "extra_ui_static_env_vars" {
+  type = map(string)
+  default = {}
+  description = "Additional environment variables for UI static app"
+}
