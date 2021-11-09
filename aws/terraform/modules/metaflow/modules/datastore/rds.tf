@@ -63,7 +63,7 @@ resource "aws_db_instance" "this" {
   storage_encrypted         = true
   kms_key_id                = aws_kms_key.rds.arn
   engine                    = "postgres"
-  engine_version            = "11.10"
+  engine_version            = "11"
   instance_class            = var.db_instance_type                                         # Hardware configuration
   identifier                = "${var.resource_prefix}${var.db_name}${var.resource_suffix}" # used for dns hostname needs to be customer unique in region
   name                      = var.db_name                                                  # unique id for CLI commands (name of DB table which is why we're not adding the prefix as no conflicts will occur and the API expects this table name)
