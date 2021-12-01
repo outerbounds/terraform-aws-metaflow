@@ -1,0 +1,24 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: "v0.15.0"
+    hooks:
+      - id: terraform-docs-go
+        name: "Main terraform module docs"
+        args: ["-c", ".terraform-docs.yml", "markdown", "."]
+      - id: terraform-docs-go
+        name: "Computation terraform module docs"
+        args: ["-c", "modules/.terraform-docs.yml", "markdown", "modules/computation"]
+      - id: terraform-docs-go
+        name: "Datastore terraform module docs"
+        args: ["-c", "modules/.terraform-docs.yml", "markdown", "modules/datastore"]
+      - id: terraform-docs-go
+        name: "Metadata Service terraform module docs"
+        args: ["-c", "modules/.terraform-docs.yml", "markdown", "modules/metadata-service"]
+      - id: terraform-docs-go
+        name: "Step Functions terraform module docs"
+        args: ["-c", "modules/.terraform-docs.yml", "markdown", "modules/step-functions"]

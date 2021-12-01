@@ -103,13 +103,13 @@ variable "extra_ui_static_env_vars" {
   description = "Additional environment variables for UI static app"
 }
 
-variable "ui_backend_container_image" { 
+variable "ui_backend_container_image" {
   type = string
   default = "netflixoss/metaflow_metadata_service:2.1.0"
   description = "Container image for UI backend"
 }
 
-variable "ui_static_container_image" { 
+variable "ui_static_container_image" {
   type = string
   default = "public.ecr.aws/outerbounds/metaflow_ui:v1.0.1"
   description = "Container image for UI static app"

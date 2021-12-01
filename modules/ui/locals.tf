@@ -28,4 +28,3 @@ locals {
 
   default_ui_static_env_vars = {}
 }
-
