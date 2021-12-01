@@ -1,6 +1,6 @@
 # Metadata Service
 
-The Metadata Service is a central store for the Metaflow metadata. Namely, it contains information about past runs, and pointers to data artifacts they produced. Metaflow client talks to the Metadata service over an HTTP API endpoint. Metadata service is not strictly required to use Metaflow, especially in the local mode, but it enables a lot of useful functionality, especially if there is more than person using Metaflow in your team.
+The Metadata Service is a central store for the Metaflow metadata. Namely, it contains information about past runs, and pointers to data artifacts they produced. Metaflow client talks to the Metadata service over an HTTP API endpoint. Metadata service is not strictly required to use Metaflow (you can use Metaflow in the "local" mode without it), but it enables a lot of useful functionality, especially if there is more than person using Metaflow in your team.
 
 This terraform module provisions infrastructure to run Metadata service on AWS Fargate.
 

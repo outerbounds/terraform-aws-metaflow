@@ -1,14 +1,15 @@
 # Metaflow Terraform module
 
-Provides the core functionality for Metaflow which includes:
+Terraform module that provisions AWS resources to run [Metaflow](https://metaflow.org/) in production.
 
-- on demand processing (`computation`)
-- blob and tabular storage (`datastore`)
-- an API to record and query past executions (`metadata-service`)
-- orchestrated processing (`step-functions`)
-- other bits of infra like Amazon Elastic Container Registry (ECR) to hold the Docker image we wish to use with Metaflow.
+This module consists of submodules that can be used separately as well:
 
-This module is composed of submodules which break up the responsibility into logical parts listed above.
+- AWS Batch cluster to run Metaflow steps ([`metaflow-computation`](./modules/computation))
+- blob storage and metadata database ([`metaflow-datastore`](./modules/datastore))
+- a service providing API to record and query past executions ([`metaflow-metadata-service`](./modules/metadata-service))
+- resources to deploy Metaflow flows on Step Functions processing ([`metaflow-step-functions`](./modules/step-functions))
+- Metaflow UI([`metaflow-ui`](./modules/ui))
+
 You can either use this high-level module, or submodules individually. See each module's corresponding `README.md` for more details.
 
 This module requires an Amazon VPC to be set up by the module user beforehand. The output of the project `infra` is an example configuration of an Amazon VPC that can be passed to this module.

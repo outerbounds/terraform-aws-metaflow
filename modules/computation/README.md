@@ -3,7 +3,7 @@
 This module sets up the resources to run Metaflow steps on AWS Batch. One can modify how many resources
 we want to have available, as well as configure autoscaling
 
-This module is not required to use Metaflow, as you can also run steps locally and leverage the Datastore
+This module is not required to use Metaflow, as you can also run steps locally, or in a Kubernetes cluster instead.
 
 To read more, see [the Metaflow docs](https://docs.metaflow.org/metaflow-on-aws/metaflow-on-aws#compute)
 
