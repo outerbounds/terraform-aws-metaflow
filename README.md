@@ -10,6 +10,8 @@ This module consists of submodules that can be used separately as well:
 - resources to deploy Metaflow flows on Step Functions processing ([`metaflow-step-functions`](./modules/step-functions))
 - Metaflow UI([`metaflow-ui`](./modules/ui))
 
+![modules diagram](./docs/terraform_modules.png)
+
 You can either use this high-level module, or submodules individually. See each module's corresponding `README.md` for more details.
 
 This module requires an Amazon VPC to be set up by the module user beforehand. The output of the project `infra` is an example configuration of an Amazon VPC that can be passed to this module.

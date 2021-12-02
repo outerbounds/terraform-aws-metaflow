@@ -1,6 +1,8 @@
 # UI
 
-Metaflow operational UI
+Metaflow operational UI. This module deploys the UI as a set of Fargate tasks. It connects to an existing RDS instance, that can be created by Metaflow [`datastore`](../datastore) module.
+
+The services are deployed behind an AWS ALB, and the module will output the ALB DNS name. Note that the UI is deployed with no auth by default, you can limit the users by IP by using `ui_cidr_allow_list` parameter.
 
 <!-- BEGIN_TF_DOCS -->
 ## Inputs
@@ -26,9 +28,9 @@ Metaflow operational UI
 | <a name="input_standard_tags"></a> [standard\_tags](#input\_standard\_tags) | The standard tags to apply to every AWS resource. | `map(string)` | n/a | yes |
 | <a name="input_subnet1_id"></a> [subnet1\_id](#input\_subnet1\_id) | First private subnet used for availability zone redundancy | `string` | n/a | yes |
 | <a name="input_subnet2_id"></a> [subnet2\_id](#input\_subnet2\_id) | Second private subnet used for availability zone redundancy | `string` | n/a | yes |
+| <a name="input_ui_allow_list"></a> [ui\_allow\_list](#input\_ui\_allow\_list) | A list of CIDRs the UI will be available to | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | <a name="input_ui_backend_container_image"></a> [ui\_backend\_container\_image](#input\_ui\_backend\_container\_image) | Container image for UI backend | `string` | `"netflixoss/metaflow_metadata_service:2.1.0"` | no |
-| <a name="input_ui_static_container_image"></a> [ui\_static\_container\_image](#input\_ui\_static\_container\_image) | Container image for UI static app | `string` | `"public.ecr.aws/outerbounds/metaflow_ui:v1.0.1"` | no |
-| <a name="input_vpc_cidr_block"></a> [vpc\_cidr\_block](#input\_vpc\_cidr\_block) | The VPC CIDR block that we'll access list on our Metadata Service API to allow all internal communications | `string` | n/a | yes |
+| <a name="input_ui_static_container_image"></a> [ui\_static\_container\_image](#input\_ui\_static\_container\_image) | Container image for the UI frontend app | `string` | `"public.ecr.aws/outerbounds/metaflow_ui:v1.0.1"` | no |
 
 ## Outputs
 

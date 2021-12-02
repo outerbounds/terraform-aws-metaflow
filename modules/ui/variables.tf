@@ -76,11 +76,6 @@ variable "subnet2_id" {
   description = "Second private subnet used for availability zone redundancy"
 }
 
-variable "vpc_cidr_block" {
-  type        = string
-  description = "The VPC CIDR block that we'll access list on our Metadata Service API to allow all internal communications"
-}
-
 variable "certificate_arn" {
   type        = string
   description = "SSL certificate ARN"
@@ -112,5 +107,11 @@ variable "ui_backend_container_image" {
 variable "ui_static_container_image" {
   type = string
   default = "public.ecr.aws/outerbounds/metaflow_ui:v1.0.1"
-  description = "Container image for UI static app"
+  description = "Container image for the UI frontend app"
+}
+
+variable "ui_allow_list" {
+  type        = list(string)
+  description = "A list of CIDRs the UI will be available to"
+  default     = ["0.0.0.0/0"]
 }

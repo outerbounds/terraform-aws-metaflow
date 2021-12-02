@@ -22,3 +22,6 @@ repos:
       - id: terraform-docs-go
         name: "Step Functions terraform module docs"
         args: ["-c", "modules/.terraform-docs.yml", "markdown", "modules/step-functions"]
+      - id: terraform-docs-go
+        name: "UI terraform module docs"
+        args: ["-c", "modules/.terraform-docs.yml", "markdown", "modules/ui"]
