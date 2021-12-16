@@ -14,7 +14,7 @@ This module consists of submodules that can be used separately as well:
 
 You can either use this high-level module, or submodules individually. See each module's corresponding `README.md` for more details.
 
-This module requires an Amazon VPC to be set up by the module user beforehand. The output of the project `infra` is an example configuration of an Amazon VPC that can be passed to this module.
+You can find a complete example that uses this module but also includes setting up VPC and other non-Metaflow-specific parts of infra [in this repo](https://github.com/outerbounds/metaflow-tools/tree/master/aws/terraform).
 
 <!-- BEGIN_TF_DOCS -->
 ## Modules
