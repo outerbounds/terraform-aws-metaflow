@@ -181,14 +181,6 @@ data "aws_iam_policy_document" "dynamodb" {
     resources = [
       module.metaflow-step-functions.metaflow_step_functions_dynamodb_table_arn
     ]
-
-    condition {
-      test = "StringEquals"
-      values = [
-        "sagemaker.amazonaws.com"
-      ]
-      variable = "iam:PassedToService"
-    }
   }
 }
 
