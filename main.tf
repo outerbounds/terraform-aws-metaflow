@@ -53,7 +53,6 @@ module "metaflow-ui" {
   s3_bucket_arn                   = module.metaflow-datastore.s3_bucket_arn
   subnet1_id                      = var.subnet1_id
   subnet2_id                      = var.subnet2_id
-  vpc_cidr_block                  = var.vpc_cidr_block
 
   METAFLOW_DATASTORE_SYSROOT_S3   = module.metaflow-datastore.METAFLOW_DATASTORE_SYSROOT_S3
   certificate_arn = var.ui_certificate_arn
