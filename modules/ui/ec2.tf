@@ -86,7 +86,7 @@ resource "aws_lb" "this" {
 }
 
 resource "aws_lb_target_group" "ui_backend" {
-  name        = "${var.resource_prefix}ui-backend${var.resource_suffix}"
+  name        = format("%.32s", "${var.resource_prefix}ui-backend${var.resource_suffix}")
   port        = 8083
   protocol    = "HTTP"
   target_type = "ip"
@@ -105,7 +105,7 @@ resource "aws_lb_target_group" "ui_backend" {
 }
 
 resource "aws_lb_target_group" "ui_static" {
-  name        = "${var.resource_prefix}ui-static${var.resource_suffix}"
+  name        = format("%.32s", "${var.resource_prefix}ui-static${var.resource_suffix}")
   port        = 3000
   protocol    = "HTTP"
   target_type = "ip"
