@@ -1,3 +1,5 @@
+[![](https://img.shields.io/badge/slack-@outerbounds-purple.svg?logo=slack )](http://slack.outerbounds.co/)
+
 # Metaflow Terraform module
 
 Terraform module that provisions AWS resources to run [Metaflow](https://metaflow.org/) in production.
