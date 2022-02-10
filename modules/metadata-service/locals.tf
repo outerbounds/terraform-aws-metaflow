@@ -1,3 +1,7 @@
+module "metaflow-common" {
+  source = "../common"
+}
+
 locals {
   # Name of ECS cluster.
   # replace() ensures names that are composed of just prefix + suffix do not have duplicate dashes
@@ -7,6 +11,11 @@ locals {
 
   # Name of Fargate security group used by the Metadata Service
   metadata_service_security_group_name = "${var.resource_prefix}metadata-service-security-group${var.resource_suffix}"
+  metadata_service_container_image  = (
+    var.metadata_service_container_image == "" ?
+    module.metaflow-common.default_metadata_service_container_image :
+    var.metadata_service_container_image
+  )
 
   api_gateway_endpoint_configuration_type = local.is_gov ? "REGIONAL" : "EDGE"
   api_gateway_key_name                    = "${var.resource_prefix}key${var.resource_suffix}"
