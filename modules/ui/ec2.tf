@@ -44,7 +44,7 @@ resource "aws_security_group" "ui_lb_security_group" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = var.cidr_allow_list
+    cidr_blocks = var.ui_allow_list
     description = "Allow public HTTPS"
   }
 
