@@ -25,8 +25,8 @@ resource "aws_ecs_task_definition" "ui_backend" {
         }
       }
       command = [
-        "/opt/latest/bin/python3", 
-        "-m", 
+        "/opt/latest/bin/python3",
+        "-m",
         "services.ui_backend_service.ui_server"
       ]
     }
