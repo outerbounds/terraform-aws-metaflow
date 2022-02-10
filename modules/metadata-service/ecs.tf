@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "this" {
 [
   {
     "name": "${var.resource_prefix}service${var.resource_suffix}",
-    "image": "netflixoss/metaflow_metadata_service",
+    "image": "${var.metadata_service_container_image}",
     "essential": true,
     "cpu": 512,
     "memory": 1024,
