@@ -43,7 +43,7 @@ variable "is_gov" {
 
 variable "metadata_service_container_image" {
   type = string
-  default = "netflixoss/metaflow_metadata_service:2.2.2"
+  default = ""
   description = "Container image for metadata service"
 }
 

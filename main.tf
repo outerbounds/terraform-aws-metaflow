@@ -27,7 +27,7 @@ module "metaflow-metadata-service" {
   datastore_s3_bucket_kms_key_arn   = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
   fargate_execution_role_arn        = module.metaflow-computation.ecs_execution_role_arn
   iam_partition                     = var.iam_partition
-  metadata_service_container_image  = var.metadata_service_container_image
+  metadata_service_container_image  = local.metadata_service_container_image
   metaflow_vpc_id                   = var.vpc_id
   rds_master_instance_endpoint      = module.metaflow-datastore.rds_master_instance_endpoint
   s3_bucket_arn                     = module.metaflow-datastore.s3_bucket_arn
@@ -54,7 +54,7 @@ module "metaflow-ui" {
   s3_bucket_arn                   = module.metaflow-datastore.s3_bucket_arn
   subnet1_id                      = var.subnet1_id
   subnet2_id                      = var.subnet2_id
-  ui_backend_container_image      = var.metadata_service_container_image
+  ui_backend_container_image      = local.metadata_service_container_image
 
   METAFLOW_DATASTORE_SYSROOT_S3   = module.metaflow-datastore.METAFLOW_DATASTORE_SYSROOT_S3
   certificate_arn = var.ui_certificate_arn

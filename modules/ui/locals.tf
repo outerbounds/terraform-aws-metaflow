@@ -1,3 +1,7 @@
+module "metaflow-common" {
+  source = "../common"
+}
+
 locals {
   # Name of ECS cluster.
   # replace() ensures names that are composed of just prefix + suffix do not have duplicate dashes
@@ -27,4 +31,10 @@ locals {
   }
 
   default_ui_static_env_vars = {}
+
+  metadata_service_container_image  = (
+    var.ui_backend_container_image == "" ?
+    module.metaflow-common.default_metadata_service_container_image :
+    var.ui_backend_container_image
+  )
 }
