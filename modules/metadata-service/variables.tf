@@ -41,6 +41,12 @@ variable "is_gov" {
   description = "Set to true if IAM partition is 'aws-us-gov'"
 }
 
+variable "metadata_service_container_image" {
+  type = string
+  default = "netflixoss/metaflow_metadata_service:2.2.2"
+  description = "Container image for metadata service"
+}
+
 variable "metaflow_vpc_id" {
   type        = string
   description = "ID of the Metaflow VPC this SageMaker notebook instance is to be deployed in"

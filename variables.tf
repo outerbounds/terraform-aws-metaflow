@@ -67,6 +67,12 @@ variable "iam_partition" {
   description = "IAM Partition (Select aws-us-gov for AWS GovCloud, otherwise leave as is)"
 }
 
+variable "metadata_service_container_image" {
+  type = string
+  default = "netflixoss/metaflow_metadata_service:2.2.2"
+  description = "Container image for metadata service"
+}
+
 variable "tags" {
   description = "aws tags"
   type        = map(string)
