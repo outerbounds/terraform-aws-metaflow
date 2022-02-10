@@ -11,12 +11,6 @@ To read more, see [the Metaflow docs](https://docs.metaflow.org/metaflow-on-aws/
 If the `access_list_cidr_blocks` variable is set, only traffic originating from the specified IP addresses will be accepted. Services internal to AWS can directly access the load balancer used by the API.
 
 <!-- BEGIN_TF_DOCS -->
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_metaflow-common"></a> [metaflow-common](#module\_metaflow-common) | ../common | n/a |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
