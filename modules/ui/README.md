@@ -5,12 +5,6 @@ Metaflow operational UI. This module deploys the UI as a set of Fargate tasks. I
 The services are deployed behind an AWS ALB, and the module will output the ALB DNS name. Note that the UI is deployed with no auth by default, you can limit the users by IP by using `ui_cidr_allow_list` parameter.
 
 <!-- BEGIN_TF_DOCS -->
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_metaflow-common"></a> [metaflow-common](#module\_metaflow-common) | ../common | n/a |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
