@@ -55,6 +55,7 @@ module "metaflow-ui" {
   subnet1_id                      = var.subnet1_id
   subnet2_id                      = var.subnet2_id
   ui_backend_container_image      = local.metadata_service_container_image
+  ui_static_container_image = (var.ui_static_container_image == "" ? null : var.ui_static_container_image)
 
   METAFLOW_DATASTORE_SYSROOT_S3   = module.metaflow-datastore.METAFLOW_DATASTORE_SYSROOT_S3
   certificate_arn = var.ui_certificate_arn

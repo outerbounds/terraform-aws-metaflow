@@ -104,7 +104,11 @@ variable "ui_certificate_arn" {
   type        = string
   description = "SSL certificate for UI"
 }
-
+variable "ui_static_container_image" {
+  type = string
+  description = "UI container image"
+  default = ""
+}
 variable "extra_ui_backend_env_vars" {
   type = map(string)
   default = {}
