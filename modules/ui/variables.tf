@@ -100,7 +100,7 @@ variable "extra_ui_static_env_vars" {
 
 variable "ui_backend_container_image" {
   type = string
-  default = "netflixoss/metaflow_metadata_service:2.1.0"
+  default = ""
   description = "Container image for UI backend"
 }
 
