@@ -14,6 +14,18 @@ variable "database_password" {
   description = "The database password"
 }
 
+variable "task_cpu" {
+  type        = number
+  description = "Service task CPU"
+  default = 512
+}
+
+variable "task_memory" {
+  type = number
+  description = "Service task memory"
+  default = 2048
+}
+
 variable "database_username" {
   type        = string
   description = "The database username"

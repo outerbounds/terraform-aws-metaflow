@@ -4,6 +4,7 @@ module "metaflow-datastore" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
+  db_instance_type = var.db_instance_type
   ecs_execution_role_arn             = module.metaflow-computation.ecs_execution_role_arn
   ecs_instance_role_arn              = module.metaflow-computation.ecs_instance_role_arn
   metadata_service_security_group_id = module.metaflow-metadata-service.metadata_service_security_group_id
@@ -34,6 +35,9 @@ module "metaflow-metadata-service" {
   subnet1_id                        = var.subnet1_id
   subnet2_id                        = var.subnet2_id
   vpc_cidr_block                    = var.vpc_cidr_block
+
+  task_cpu =  var.service_task_cpu
+  task_memory = var.service_task_memory
 
   standard_tags = var.tags
 }

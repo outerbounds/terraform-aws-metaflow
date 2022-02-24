@@ -19,8 +19,8 @@ resource "aws_ecs_task_definition" "this" {
     "name": "${var.resource_prefix}service${var.resource_suffix}",
     "image": "${var.metadata_service_container_image}",
     "essential": true,
-    "cpu": 512,
-    "memory": 1024,
+    "cpu": ${var.task_cpu},
+    "memory": ${var.task_memory},
     "portMappings": [
       {
         "containerPort": 8080,
@@ -54,8 +54,8 @@ EOF
   requires_compatibilities = ["FARGATE"]
   task_role_arn            = aws_iam_role.metadata_svc_ecs_task_role.arn
   execution_role_arn       = var.fargate_execution_role_arn
-  cpu                      = 512
-  memory                   = 1024
+  cpu                      = var.task_cpu
+  memory                   = var.task_memory
 
   tags = merge(
     var.standard_tags,

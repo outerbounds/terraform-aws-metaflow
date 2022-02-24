@@ -134,3 +134,21 @@ variable "cognito_user_pool_domain" {
   description = "Cognito user pool domain"
   default = ""
 }
+
+variable "db_instance_type" {
+  type        = string
+  description = "RDS instance type to launch for PostgresQL database."
+  default     = "db.t2.small"
+}
+
+variable "service_task_cpu" {
+  type        = number
+  description = "CPU units for metadata service task"
+  default     = 512
+}
+
+variable "service_task_memory" {
+  type        = number
+  description = "CPU units for metadata service memory"
+  default     = 2048
+}
