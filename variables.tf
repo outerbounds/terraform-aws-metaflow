@@ -116,3 +116,21 @@ variable "extra_ui_static_env_vars" {
   default = {}
   description = "Additional environment variables for UI static app"
 }
+
+variable "cognito_user_pool_arn" {
+  type = string
+  description = "Cognito user pool ARN"
+  default = ""
+}
+
+variable "cognito_user_pool_client_id" {
+  type = string
+  description = "Cognito user pool client id"
+  default = ""
+}
+
+variable "cognito_user_pool_domain" {
+  type = string
+  description = "Cognito user pool domain"
+  default = ""
+}

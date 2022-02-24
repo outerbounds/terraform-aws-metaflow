@@ -113,12 +113,28 @@ resource "aws_lb_target_group" "ui_static" {
   tags = var.standard_tags
 }
 
+
 resource "aws_lb_listener" "this" {
   load_balancer_arn = aws_lb.this.arn
   port              = "443"
   protocol          = "HTTPS"
 
   certificate_arn = var.certificate_arn
+
+  dynamic default_action {
+    for_each = (var.cognito_user_pool_arn != "") ? [""] : []
+    content {
+      type = "authenticate-cognito"
+
+      authenticate_cognito {
+        on_unauthenticated_request = "authenticate"
+        scope = "openid"
+        user_pool_arn       = var.cognito_user_pool_arn
+        user_pool_client_id = var.cognito_user_pool_client_id
+        user_pool_domain    = var.cognito_user_pool_domain
+      }
+    }
+  }
 
   default_action {
     type             = "forward"
@@ -130,6 +146,22 @@ resource "aws_lb_listener" "this" {
 resource "aws_lb_listener_rule" "ui_backend" {
   listener_arn = aws_lb_listener.this.arn
   priority     = 1
+
+  dynamic action {
+    for_each = (var.cognito_user_pool_arn != "") ? [""] : []
+    content {
+      type = "authenticate-cognito"
+
+      authenticate_cognito {
+        on_unauthenticated_request = "authenticate"
+        scope = "openid"
+
+        user_pool_arn       = var.cognito_user_pool_arn
+        user_pool_client_id = var.cognito_user_pool_client_id
+        user_pool_domain    = var.cognito_user_pool_domain
+      }
+    }
+  }
 
   action {
     type             = "forward"

@@ -115,3 +115,21 @@ variable "ui_allow_list" {
   description = "A list of CIDRs the UI will be available to"
   default     = ["0.0.0.0/0"]
 }
+
+variable "cognito_user_pool_arn" {
+  type = string
+  description = "Cognito user pool ARN"
+  default = ""
+}
+
+variable "cognito_user_pool_client_id" {
+  type = string
+  description = "Cognito user pool client id"
+  default = ""
+}
+
+variable "cognito_user_pool_domain" {
+  type = string
+  description = "Cognito user pool domain"
+  default = ""
+}

@@ -63,6 +63,11 @@ module "metaflow-ui" {
   extra_ui_static_env_vars = var.extra_ui_static_env_vars
   extra_ui_backend_env_vars = var.extra_ui_backend_env_vars
   standard_tags = var.tags
+
+  cognito_user_pool_arn = var.cognito_user_pool_arn
+  cognito_user_pool_client_id = var.cognito_user_pool_client_id
+  cognito_user_pool_domain = var.cognito_user_pool_domain
+
 }
 
 module "metaflow-computation" {
