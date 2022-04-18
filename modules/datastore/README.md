@@ -22,8 +22,6 @@ To read more, see [the Metaflow docs](https://docs.metaflow.org/metaflow-on-aws/
 | <a name="input_db_instance_type"></a> [db\_instance\_type](#input\_db\_instance\_type) | RDS instance type to launch for PostgresQL database. | `string` | `"db.t2.small"` | no |
 | <a name="input_db_name"></a> [db\_name](#input\_db\_name) | Name of PostgresQL database for Metaflow service. | `string` | `"metaflow"` | no |
 | <a name="input_db_username"></a> [db\_username](#input\_db\_username) | PostgresQL username; defaults to 'metaflow' | `string` | `"metaflow"` | no |
-| <a name="input_ecs_execution_role_arn"></a> [ecs\_execution\_role\_arn](#input\_ecs\_execution\_role\_arn) | This role will be granted access to our S3 Bucket which acts as our blob storage. | `string` | n/a | yes |
-| <a name="input_ecs_instance_role_arn"></a> [ecs\_instance\_role\_arn](#input\_ecs\_instance\_role\_arn) | This role will be granted access to our S3 Bucket which acts as our blob storage. | `string` | n/a | yes |
 | <a name="input_metadata_service_security_group_id"></a> [metadata\_service\_security\_group\_id](#input\_metadata\_service\_security\_group\_id) | The security group ID used by the MetaData service. We'll grant this access to our DB. | `string` | n/a | yes |
 | <a name="input_metaflow_vpc_id"></a> [metaflow\_vpc\_id](#input\_metaflow\_vpc\_id) | ID of the Metaflow VPC this SageMaker notebook instance is to be deployed in | `string` | n/a | yes |
 | <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | Prefix given to all AWS resources to differentiate between applications | `string` | n/a | yes |
