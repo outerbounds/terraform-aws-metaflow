@@ -16,16 +16,6 @@ variable "db_username" {
   default     = "metaflow"
 }
 
-variable "ecs_execution_role_arn" {
-  type        = string
-  description = "This role will be granted access to our S3 Bucket which acts as our blob storage."
-}
-
-variable "ecs_instance_role_arn" {
-  type        = string
-  description = "This role will be granted access to our S3 Bucket which acts as our blob storage."
-}
-
 variable "metadata_service_security_group_id" {
   type        = string
   description = "The security group ID used by the MetaData service. We'll grant this access to our DB."

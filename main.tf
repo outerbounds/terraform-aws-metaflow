@@ -4,8 +4,6 @@ module "metaflow-datastore" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
-  ecs_execution_role_arn             = module.metaflow-computation.ecs_execution_role_arn
-  ecs_instance_role_arn              = module.metaflow-computation.ecs_instance_role_arn
   metadata_service_security_group_id = module.metaflow-metadata-service.metadata_service_security_group_id
   metaflow_vpc_id                    = var.vpc_id
   subnet1_id                         = var.subnet1_id
