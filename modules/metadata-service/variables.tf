@@ -42,8 +42,8 @@ variable "is_gov" {
 }
 
 variable "metadata_service_container_image" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Container image for metadata service"
 }
 

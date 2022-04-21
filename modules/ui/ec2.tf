@@ -4,10 +4,10 @@ resource "aws_security_group" "fargate_security_group" {
   vpc_id      = var.metaflow_vpc_id
 
   ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = -1
-    security_groups = [ aws_security_group.ui_lb_security_group.id ]
+    from_port       = 0
+    to_port         = 0
+    protocol        = -1
+    security_groups = [aws_security_group.ui_lb_security_group.id]
   }
 
   ingress {
@@ -78,7 +78,7 @@ resource "aws_lb" "this" {
   internal           = false
   load_balancer_type = "application"
   subnets            = [var.subnet1_id, var.subnet2_id]
-  security_groups =  [
+  security_groups = [
     aws_security_group.ui_lb_security_group.id
   ]
 
@@ -95,7 +95,7 @@ resource "aws_lb_target_group" "ui_backend" {
   health_check {
     protocol            = "HTTP"
     port                = 8083
-    path = "/api/ping"
+    path                = "/api/ping"
     interval            = 10
     healthy_threshold   = 2
     unhealthy_threshold = 2
@@ -110,7 +110,7 @@ resource "aws_lb_target_group" "ui_static" {
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.metaflow_vpc_id
-  tags = var.standard_tags
+  tags        = var.standard_tags
 }
 
 resource "aws_lb_listener" "this" {
@@ -123,7 +123,7 @@ resource "aws_lb_listener" "this" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.ui_static.id
-    order = 100
+    order            = 100
   }
 }
 

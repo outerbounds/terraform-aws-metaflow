@@ -7,7 +7,7 @@
 resource "random_string" "suffix" {
   length  = 8
   special = false
-  upper = false
+  upper   = false
 }
 
 locals {
@@ -20,7 +20,7 @@ data "aws_availability_zones" "available" {
 
 # VPC infra using https://github.com/terraform-aws-modules/terraform-aws-vpc
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
   version = "3.13.0"
 
   name = "${local.resource_prefix}-${local.resource_suffix}"
@@ -37,7 +37,7 @@ module "vpc" {
 
 
 module "metaflow" {
-  source = "outerbounds/metaflow/aws"
+  source  = "outerbounds/metaflow/aws"
   version = "0.3.0"
 
   resource_prefix = local.resource_prefix
@@ -50,7 +50,7 @@ module "metaflow" {
   vpc_id                = module.vpc.vpc_id
 
   tags = {
-      "managedBy" = "terraform"
+    "managedBy" = "terraform"
   }
 }
 

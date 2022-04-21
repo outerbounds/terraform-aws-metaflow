@@ -1,7 +1,7 @@
 
 # VPC infra using https://github.com/terraform-aws-modules/terraform-aws-vpc
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
   version = "3.13.0"
 
   name = "${local.resource_prefix}-${local.resource_suffix}"

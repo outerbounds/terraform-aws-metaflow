@@ -16,7 +16,7 @@ resource "aws_ecs_task_definition" "ui_static" {
           hostPort      = 3000
         }
       ]
-      environment = [for k, v in merge(local.default_ui_static_env_vars, var.extra_ui_static_env_vars): {name = k, value=v}]
+      environment = [for k, v in merge(local.default_ui_static_env_vars, var.extra_ui_static_env_vars) : { name = k, value = v }]
       logConfiguration = {
         logDriver = "awslogs"
         options = {

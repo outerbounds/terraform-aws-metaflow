@@ -68,8 +68,8 @@ variable "iam_partition" {
 }
 
 variable "metadata_service_container_image" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Container image for metadata service"
 }
 
@@ -107,13 +107,13 @@ variable "ui_certificate_arn" {
 }
 
 variable "extra_ui_backend_env_vars" {
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
   description = "Additional environment variables for UI backend container"
 }
 
 variable "extra_ui_static_env_vars" {
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
   description = "Additional environment variables for UI static app"
 }

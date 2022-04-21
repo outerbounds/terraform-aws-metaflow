@@ -11,7 +11,7 @@ locals {
 
   # Name of Fargate security group used by the Metadata Service
   metadata_service_security_group_name = "${var.resource_prefix}metadata-service-security-group${var.resource_suffix}"
-  metadata_service_container_image  = (
+  metadata_service_container_image = (
     var.metadata_service_container_image == "" ?
     module.metaflow-common.default_metadata_service_container_image :
     var.metadata_service_container_image
