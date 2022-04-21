@@ -16,4 +16,9 @@ locals {
     module.metaflow-common.default_metadata_service_container_image :
     var.metadata_service_container_image
   )
+  ui_static_container_image = (
+    var.ui_static_container_image == "" ?
+    module.metaflow-common.default_ui_static_container_image :
+    var.ui_static_container_image
+  )
 }
