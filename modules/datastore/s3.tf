@@ -1,6 +1,7 @@
 resource "aws_s3_bucket" "this" {
   bucket = local.s3_bucket_name
   acl    = "private"
+  force_destroy = var.force_destroy_s3_bucket
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
