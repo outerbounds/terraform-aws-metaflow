@@ -10,6 +10,11 @@ variable "db_name" {
   default     = "metaflow"
 }
 
+variable "force_destroy_s3_bucket" {
+  type = bool
+  description = "Empty S3 bucket before destroying via terraform destroy"
+  default = false
+}
 variable "db_username" {
   type        = string
   description = "PostgresQL username; defaults to 'metaflow'"
