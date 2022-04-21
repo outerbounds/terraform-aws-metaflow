@@ -15,7 +15,7 @@ resource "aws_ecs_task_definition" "ui_backend" {
           hostPort      = 8083
         }
       ]
-      environment = [for k, v in merge(local.default_ui_backend_env_vars, var.extra_ui_backend_env_vars): {name = k, value=v}]
+      environment = [for k, v in merge(local.default_ui_backend_env_vars, var.extra_ui_backend_env_vars) : { name = k, value = v }]
       logConfiguration = {
         logDriver = "awslogs"
         options = {

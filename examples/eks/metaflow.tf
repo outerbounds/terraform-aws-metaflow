@@ -1,15 +1,15 @@
 resource "random_string" "suffix" {
   length  = 8
   special = false
-  upper = false
+  upper   = false
 }
 
 locals {
   resource_prefix = "metaflow"
   resource_suffix = random_string.suffix.result
   tags = {
-      "managedBy" = "terraform"
-      "application" = "metaflow-eks-example"
+    "managedBy"   = "terraform"
+    "application" = "metaflow-eks-example"
   }
   cluster_name = "mf-${local.resource_suffix}"
 }
@@ -19,7 +19,7 @@ data "aws_availability_zones" "available" {
 
 
 module "metaflow-datastore" {
-  source = "outerbounds/metaflow/aws//modules/datastore"
+  source  = "outerbounds/metaflow/aws//modules/datastore"
   version = "0.3.1"
 
   resource_prefix = local.resource_prefix
@@ -34,7 +34,7 @@ module "metaflow-datastore" {
 }
 
 module "metaflow-common" {
-  source = "outerbounds/metaflow/aws//modules/common"
+  source  = "outerbounds/metaflow/aws//modules/common"
   version = "0.3.1"
 }
 
@@ -46,19 +46,19 @@ module "metaflow-metadata-service" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
-  access_list_cidr_blocks           = []
-  api_basic_auth                    = true
-  database_password                 = module.metaflow-datastore.database_password
-  database_username                 = module.metaflow-datastore.database_username
-  datastore_s3_bucket_kms_key_arn   = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
-  fargate_execution_role_arn        = aws_iam_role.ecs_execution_role.arn
-  metaflow_vpc_id                   = module.vpc.vpc_id
+  access_list_cidr_blocks          = []
+  api_basic_auth                   = true
+  database_password                = module.metaflow-datastore.database_password
+  database_username                = module.metaflow-datastore.database_username
+  datastore_s3_bucket_kms_key_arn  = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
+  fargate_execution_role_arn       = aws_iam_role.ecs_execution_role.arn
+  metaflow_vpc_id                  = module.vpc.vpc_id
   metadata_service_container_image = module.metaflow-common.default_metadata_service_container_image
-  rds_master_instance_endpoint      = module.metaflow-datastore.rds_master_instance_endpoint
-  s3_bucket_arn                     = module.metaflow-datastore.s3_bucket_arn
-  subnet1_id                        = module.vpc.private_subnets[0]
-  subnet2_id                        = module.vpc.private_subnets[1]
-  vpc_cidr_block                    = module.vpc.vpc_cidr_block
+  rds_master_instance_endpoint     = module.metaflow-datastore.rds_master_instance_endpoint
+  s3_bucket_arn                    = module.metaflow-datastore.s3_bucket_arn
+  subnet1_id                       = module.vpc.private_subnets[0]
+  subnet2_id                       = module.vpc.private_subnets[1]
+  vpc_cidr_block                   = module.vpc.vpc_cidr_block
 
   standard_tags = local.tags
 }

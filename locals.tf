@@ -11,7 +11,7 @@ locals {
 
   batch_s3_task_role_name   = "${local.resource_prefix}batch_s3_task_role${local.resource_suffix}"
   metaflow_batch_image_name = "${local.resource_prefix}batch${local.resource_suffix}"
-  metadata_service_container_image  = (
+  metadata_service_container_image = (
     var.metadata_service_container_image == "" ?
     module.metaflow-common.default_metadata_service_container_image :
     var.metadata_service_container_image

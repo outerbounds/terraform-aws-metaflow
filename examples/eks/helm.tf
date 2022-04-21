@@ -55,15 +55,15 @@ locals {
       "containerRuntimeExecutor" = "emissary"
     }
     "useDefaultArtifactRepo" = true
-    "useStaticCredentials" = false
+    "useStaticCredentials"   = false
     "artifactRepository" = {
       "s3" = {
-        "bucket" = module.metaflow-datastore.s3_bucket_name
-        "keyFormat" = "argo-artifacts/{{workflow.creationTimestamp.Y}}/{{workflow.creationTimestamp.m}}/{{workflow.creationTimestamp.d}}/{{workflow.name}}/{{pod.name}}"
-        "region" = data.aws_region.current.name
-        "endpoint" = "s3.amazonaws.com"
+        "bucket"      = module.metaflow-datastore.s3_bucket_name
+        "keyFormat"   = "argo-artifacts/{{workflow.creationTimestamp.Y}}/{{workflow.creationTimestamp.m}}/{{workflow.creationTimestamp.d}}/{{workflow.name}}/{{pod.name}}"
+        "region"      = data.aws_region.current.name
+        "endpoint"    = "s3.amazonaws.com"
         "useSDKCreds" = true
-        "insecure" = false
+        "insecure"    = false
       }
     }
   }
@@ -74,9 +74,9 @@ resource "helm_release" "argo" {
 
   depends_on = [module.eks]
 
-  repository = "https://argoproj.github.io/argo-helm"
-  chart      = "argo-workflows"
-  namespace  = kubernetes_namespace.argo.metadata[0].name
+  repository   = "https://argoproj.github.io/argo-helm"
+  chart        = "argo-workflows"
+  namespace    = kubernetes_namespace.argo.metadata[0].name
   force_update = true
 
   values = [

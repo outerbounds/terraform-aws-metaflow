@@ -11,9 +11,9 @@ variable "db_name" {
 }
 
 variable "force_destroy_s3_bucket" {
-  type = bool
+  type        = bool
   description = "Empty S3 bucket before destroying via terraform destroy"
-  default = false
+  default     = false
 }
 variable "db_username" {
   type        = string

@@ -4,6 +4,10 @@ repos:
     hooks:
     - id: end-of-file-fixer
     - id: trailing-whitespace
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.62.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+    hooks:
+      - id: terraform_fmt
   - repo: https://github.com/terraform-docs/terraform-docs
     rev: "v0.15.0"
     hooks:
