@@ -40,6 +40,8 @@ kubectl port-forward -n argo service/argo-argo-workflows-server 2746:2746
 
 ## Destroying the infrastructure
 
+Note that this will destroy everything including the S3 bucket with artifacts!
+
 Run `terraform destroy`
 
 # What's missing
