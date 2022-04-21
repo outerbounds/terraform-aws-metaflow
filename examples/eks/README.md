@@ -6,7 +6,8 @@ To run Metaflow jobs, it provisions a EKS cluster using [this popular open sourc
 
 ## Instructions
 
-1. Run `terraform apply` to create infrastructure
+0. Run `terraform init`
+1. Run `terraform apply` to create infrastructure. Note that this command will take up to 20 minutes to execute!
 2. Make note of the EKS cluster name (it is a short string that starts with `mf-`). Use AWS CLI to generate cluster configuration:
     ```bash
     aws eks update-kubeconfig --name <CLUSTER NAME>
@@ -24,3 +25,5 @@ kubectl port-forward -n argo service/argo-argo-workflows-server 2746:2746
 ## What's missing
 
 ⚠️ This is meant as a reference example, with many things omitted for simplicity, such as proper RBAC setup, production-grade autoscaling and UI. We do not recommend using this as a production deployment of Metaflow on Kubernetes.
+
+For guidance on production-grade deployments, join [the Metaflow slack](http://slack.outerbounds.co) and describe your use case on `#ask-metaflow`. We are happy to help you there!
