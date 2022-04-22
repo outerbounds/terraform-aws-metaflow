@@ -75,7 +75,16 @@ data "aws_iam_policy_document" "custom_access_policy" {
       "autoscaling:DescribeAutoScalingGroups",
       "autoscaling:DescribeLaunchConfigurations",
       "autoscaling:DescribeAutoScalingInstances",
+      "autoscaling:CreateLaunchConfiguration",
+      "autoscaling:CreateAutoScalingGroup",
+      "autoscaling:UpdateAutoScalingGroup",
+      "autoscaling:SetDesiredCapacity",
+      "autoscaling:DeleteLaunchConfiguration",
+      "autoscaling:DeleteAutoScalingGroup",
       "autoscaling:CreateOrUpdateTags",
+      "autoscaling:SuspendProcesses",
+      "autoscaling:PutNotificationConfiguration",
+      "autoscaling:TerminateInstanceInAutoScalingGroup",
       "ecs:DescribeClusters",
       "ecs:DescribeContainerInstances",
       "ecs:DescribeTaskDefinition",
@@ -106,37 +115,6 @@ data "aws_iam_policy_document" "custom_access_policy" {
 
     resources = [
       "*"
-    ]
-  }
-
-  statement {
-    actions = [
-      "autoscaling:CreateLaunchConfiguration",
-      "autoscaling:DeleteLaunchConfiguration",
-    ]
-
-    effect = "Allow"
-
-    resources = [
-      "arn:aws:autoscaling:*:*:launchConfiguration:*:launchConfigurationName/AWSBatch*"
-    ]
-  }
-
-  statement {
-    actions = [
-      "autoscaling:CreateAutoScalingGroup",
-      "autoscaling:UpdateAutoScalingGroup",
-      "autoscaling:SetDesiredCapacity",
-      "autoscaling:DeleteAutoScalingGroup",
-      "autoscaling:SuspendProcesses",
-      "autoscaling:PutNotificationConfiguration",
-      "autoscaling:TerminateInstanceInAutoScalingGroup",
-    ]
-
-    effect = "Allow"
-
-    resources = [
-      "arn:aws:autoscaling:*:*:autoScalingGroup:*:autoScalingGroupName/AWSBatch*"
     ]
   }
 }
