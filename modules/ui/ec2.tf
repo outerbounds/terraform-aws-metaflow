@@ -75,7 +75,7 @@ resource "aws_security_group" "ui_lb_security_group" {
 
 resource "aws_lb" "this" {
   name               = "${var.resource_prefix}alb${var.resource_suffix}"
-  internal           = false
+  internal           = var.alb_internal
   load_balancer_type = "application"
   subnets            = [var.subnet1_id, var.subnet2_id]
   security_groups = [
