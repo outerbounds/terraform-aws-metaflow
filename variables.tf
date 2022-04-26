@@ -84,6 +84,12 @@ variable "tags" {
   type        = map(string)
 }
 
+variable "ui_alb_internal" {
+  type        = bool
+  description = "Defines whether the ALB for the UI is internal"
+  default     = false
+}
+
 # variables from infra project that defines the VPC we will deploy to
 
 variable "subnet1_id" {
