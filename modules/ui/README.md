@@ -37,5 +37,6 @@ The services are deployed behind an AWS ALB, and the module will output the ALB 
 
 | Name | Description |
 |------|-------------|
+| <a name="output_alb_arn"></a> [alb\_arn](#output\_alb\_arn) | UI ALB ARN |
 | <a name="output_alb_dns_name"></a> [alb\_dns\_name](#output\_alb\_dns\_name) | UI ALB DNS name |
 <!-- END_TF_DOCS -->
