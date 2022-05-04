@@ -29,7 +29,7 @@ The services are deployed behind an AWS ALB, and the module will output the ALB 
 | <a name="input_standard_tags"></a> [standard\_tags](#input\_standard\_tags) | The standard tags to apply to every AWS resource. | `map(string)` | n/a | yes |
 | <a name="input_subnet1_id"></a> [subnet1\_id](#input\_subnet1\_id) | First private subnet used for availability zone redundancy | `string` | n/a | yes |
 | <a name="input_subnet2_id"></a> [subnet2\_id](#input\_subnet2\_id) | Second private subnet used for availability zone redundancy | `string` | n/a | yes |
-| <a name="input_ui_allow_list"></a> [ui\_allow\_list](#input\_ui\_allow\_list) | A list of CIDRs the UI will be available to | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
+| <a name="input_ui_allow_list"></a> [ui\_allow\_list](#input\_ui\_allow\_list) | A list of CIDRs the UI will be available to | `list(string)` | `[]` | no |
 | <a name="input_ui_backend_container_image"></a> [ui\_backend\_container\_image](#input\_ui\_backend\_container\_image) | Container image for UI backend | `string` | `""` | no |
 | <a name="input_ui_static_container_image"></a> [ui\_static\_container\_image](#input\_ui\_static\_container\_image) | Container image for the UI frontend app | `string` | `""` | no |
 

@@ -113,7 +113,7 @@ variable "ui_static_container_image" {
 variable "ui_allow_list" {
   type        = list(string)
   description = "A list of CIDRs the UI will be available to"
-  default     = ["0.0.0.0/0"]
+  default     = []
 }
 
 variable "alb_internal" {

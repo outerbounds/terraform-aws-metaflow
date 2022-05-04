@@ -118,6 +118,12 @@ variable "ui_certificate_arn" {
   description = "SSL certificate for UI. If set to empty string, UI is disabled. "
 }
 
+variable "ui_allow_list" {
+  type        = list(string)
+  default     = []
+  description = "List of CIDRs we want to grant access to our Metaflow UI Service. Usually this is our VPN's CIDR blocks."
+}
+
 variable "extra_ui_backend_env_vars" {
   type        = map(string)
   default     = {}
