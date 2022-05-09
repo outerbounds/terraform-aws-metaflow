@@ -24,6 +24,12 @@ variable "compute_environment_min_vcpus" {
   description = "Minimum VCPUs for Batch Compute Environment [0-16] for EC2 Batch Compute Environment (ignored for Fargate)"
 }
 
+variable "compute_environment_egress_cidr_blocks" {
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+  description = "CIDR blocks to which egress is allowed from the Batch Compute environment's security group"
+}
+
 variable "enable_step_functions" {
   default     = false
   description = "If true, apply policies required for step functions"

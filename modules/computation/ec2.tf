@@ -46,11 +46,10 @@ resource "aws_security_group" "this" {
   name   = local.batch_security_group_name
   vpc_id = var.metaflow_vpc_id
 
-  # egress to anywhere
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.compute_environment_egress_cidr_blocks
   }
 }

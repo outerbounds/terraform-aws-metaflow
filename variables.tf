@@ -61,6 +61,12 @@ variable "compute_environment_max_vcpus" {
   default     = 64
 }
 
+variable "compute_environment_egress_cidr_blocks" {
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+  description = "CIDR blocks to which egress is allowed from the Batch Compute environment's security group"
+}
+
 variable "iam_partition" {
   type        = string
   default     = "aws"
