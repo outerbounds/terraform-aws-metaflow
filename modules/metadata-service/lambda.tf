@@ -132,6 +132,6 @@ resource "aws_lambda_function" "db_migrate_lambda" {
 
   vpc_config {
     subnet_ids         = [var.subnet1_id, var.subnet2_id]
-    security_group_ids = [data.aws_security_group.vpc_default.id]
+    security_group_ids = [aws_security_group.metadata_service_security_group.id]
   }
 }
