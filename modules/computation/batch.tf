@@ -49,7 +49,7 @@ resource "aws_batch_compute_environment" "this" {
 
     # Security group to apply to the instances launched.
     security_group_ids = [
-      data.aws_security_group.vpc_default.id,
+      aws_security_group.this.id,
     ]
 
     # Which subnet to launch the instances into.

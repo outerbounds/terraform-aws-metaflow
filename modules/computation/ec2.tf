@@ -41,3 +41,8 @@ resource "aws_iam_instance_profile" "ecs_instance_role" {
   name = local.ecs_instance_role_name
   role = aws_iam_role.ecs_instance_role.name
 }
+
+resource "aws_security_group" "this" {
+  name   = local.batch_security_group_name
+  vpc_id = var.metaflow_vpc_id
+}

@@ -123,3 +123,8 @@ output "ui_alb_arn" {
   value       = (length(module.metaflow-ui) > 0) ? module.metaflow-ui[0].alb_arn : ""
   description = "UI ALB ARN"
 }
+
+output "batch_compute_environment_security_group_id" {
+  value       = module.metaflow-computation.batch_compute_environment_security_group_id
+  description = "The ID of the security group attached to the Batch Compute environment."
+}
