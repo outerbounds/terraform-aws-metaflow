@@ -30,21 +30,10 @@ variable "compute_environment_egress_cidr_blocks" {
   description = "CIDR blocks to which egress is allowed from the Batch Compute environment's security group"
 }
 
-variable "enable_step_functions" {
-  default     = false
-  description = "If true, apply policies required for step functions"
-  type        = bool
-}
-
 variable "iam_partition" {
   type        = string
   default     = "aws"
   description = "IAM Partition (Select aws-us-gov for AWS GovCloud, otherwise leave as is)"
-}
-
-variable "metaflow_step_functions_dynamodb_policy" {
-  type        = string
-  description = "IAM policy allowing access to the step functions dynamodb policy"
 }
 
 variable "resource_prefix" {

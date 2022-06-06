@@ -73,18 +73,16 @@ module "metaflow-computation" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
-  batch_type                              = var.batch_type
-  compute_environment_desired_vcpus       = var.compute_environment_desired_vcpus
-  compute_environment_instance_types      = var.compute_environment_instance_types
-  compute_environment_max_vcpus           = var.compute_environment_max_vcpus
-  compute_environment_min_vcpus           = var.compute_environment_min_vcpus
-  compute_environment_egress_cidr_blocks  = var.compute_environment_egress_cidr_blocks
-  enable_step_functions                   = var.enable_step_functions
-  iam_partition                           = var.iam_partition
-  metaflow_step_functions_dynamodb_policy = module.metaflow-step-functions.metaflow_step_functions_dynamodb_policy
-  metaflow_vpc_id                         = var.vpc_id
-  subnet1_id                              = var.subnet1_id
-  subnet2_id                              = var.subnet2_id
+  batch_type                             = var.batch_type
+  compute_environment_desired_vcpus      = var.compute_environment_desired_vcpus
+  compute_environment_instance_types     = var.compute_environment_instance_types
+  compute_environment_max_vcpus          = var.compute_environment_max_vcpus
+  compute_environment_min_vcpus          = var.compute_environment_min_vcpus
+  compute_environment_egress_cidr_blocks = var.compute_environment_egress_cidr_blocks
+  iam_partition                          = var.iam_partition
+  metaflow_vpc_id                        = var.vpc_id
+  subnet1_id                             = var.subnet1_id
+  subnet2_id                             = var.subnet2_id
 
   standard_tags = var.tags
 }
