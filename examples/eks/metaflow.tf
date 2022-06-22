@@ -20,7 +20,7 @@ data "aws_availability_zones" "available" {
 
 module "metaflow-datastore" {
   source  = "outerbounds/metaflow/aws//modules/datastore"
-  version = "0.3.2"
+  version = "0.5.2"
 
   force_destroy_s3_bucket = true
 

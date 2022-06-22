@@ -38,7 +38,7 @@ module "vpc" {
 
 module "metaflow" {
   source  = "outerbounds/metaflow/aws"
-  version = "0.3.0"
+  version = "0.5.2"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
