@@ -2,7 +2,7 @@
 
 Metaflow operational UI. This module deploys the UI as a set of Fargate tasks. It connects to an existing RDS instance, that can be created by Metaflow [`datastore`](../datastore) module.
 
-The services are deployed behind an AWS ALB, and the module will output the ALB DNS name. Note that the UI is deployed with no auth by default, you can limit the users by IP by using `ui_cidr_allow_list` parameter.
+The services are deployed behind an AWS ALB, and the module will output the ALB DNS name. This module only comes with rudimentary IP-based auth: only users with IPs matching `ui_allow_list` will be able to access the UI.
 
 <!-- BEGIN_TF_DOCS -->
 ## Inputs
