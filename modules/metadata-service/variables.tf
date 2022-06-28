@@ -47,6 +47,18 @@ variable "metadata_service_container_image" {
   description = "Container image for metadata service"
 }
 
+variable "metadata_service_cpu" {
+  type        = number
+  default     = 512
+  description = "ECS task CPU unit for metadata service"
+}
+
+variable "metadata_service_memory" {
+  type        = number
+  default     = 1024
+  description = "ECS task memory in MiB for metadata service"
+}
+
 variable "metaflow_vpc_id" {
   type        = string
   description = "ID of the Metaflow VPC this SageMaker notebook instance is to be deployed in"
