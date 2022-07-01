@@ -9,6 +9,12 @@ variable "api_basic_auth" {
   description = "Enable basic auth for API Gateway? (requires key export)"
 }
 
+variable "database_name" {
+  type        = string
+  default     = "metaflow"
+  description = "The database name"
+}
+
 variable "database_password" {
   type        = string
   description = "The database password"

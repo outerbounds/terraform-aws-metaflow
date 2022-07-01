@@ -1,3 +1,8 @@
+variable "database_name" {
+  type        = string
+  default     = "metaflow"
+  description = "The database name"
+}
 
 variable "database_password" {
   type        = string
