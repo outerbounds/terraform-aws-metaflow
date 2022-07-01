@@ -17,7 +17,7 @@ locals {
 
   default_ui_backend_env_vars = {
     "MF_METADATA_DB_HOST"           = "${replace(var.rds_master_instance_endpoint, ":5432", "")}"
-    "MF_METADATA_DB_NAME"           = "metaflow"
+    "MF_METADATA_DB_NAME"           = "${var.database_name}"
     "MF_METADATA_DB_PORT"           = "5432"
     "MF_METADATA_DB_PSWD"           = "${var.database_password}"
     "MF_METADATA_DB_USER"           = "${var.database_username}"

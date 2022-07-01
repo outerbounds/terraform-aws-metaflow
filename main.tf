@@ -20,6 +20,7 @@ module "metaflow-metadata-service" {
 
   access_list_cidr_blocks          = var.access_list_cidr_blocks
   api_basic_auth                   = var.api_basic_auth
+  database_name                    = module.metaflow-datastore.database_name
   database_password                = module.metaflow-datastore.database_password
   database_username                = module.metaflow-datastore.database_username
   datastore_s3_bucket_kms_key_arn  = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
@@ -43,6 +44,7 @@ module "metaflow-ui" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
+  database_name                   = module.metaflow-datastore.database_name
   database_password               = module.metaflow-datastore.database_password
   database_username               = module.metaflow-datastore.database_username
   datastore_s3_bucket_kms_key_arn = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
