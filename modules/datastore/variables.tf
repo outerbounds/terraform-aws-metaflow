@@ -6,7 +6,7 @@ variable "db_instance_type" {
 
 variable "db_engine" {
   type    = string
-  default = "postgresql"
+  default = "postgres"
 }
 
 variable "db_engine_version" {
