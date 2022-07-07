@@ -29,7 +29,7 @@ output "datastore_s3_bucket_kms_key_arn" {
 }
 
 output "rds_master_instance_endpoint" {
-  value       = aws_db_instance.this.endpoint
+  value       = local.use_aurora ? aws_rds_cluster.this[0].endpoint : aws_db_instance.this[0].endpoint
   description = "The database connection endpoint in address:port format"
 }
 

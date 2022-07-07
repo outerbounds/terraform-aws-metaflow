@@ -53,17 +53,57 @@ resource "random_password" "this" {
 
 resource "random_pet" "final_snapshot_id" {}
 
+locals {
+  use_aurora = length(regexall("^aurora-", var.db_engine)) > 0
+}
+
+resource "aws_rds_cluster" "this" {
+  count              = local.use_aurora ? 1 : 0
+  cluster_identifier = "${var.resource_prefix}${var.db_name}${var.resource_suffix}"
+  kms_key_id         = aws_kms_key.rds.arn
+  engine             = var.db_engine
+
+  database_name        = var.db_name
+  master_username      = var.db_username
+  master_password      = random_password.this.result
+  db_subnet_group_name = aws_db_subnet_group.this.id
+
+  engine_version    = var.db_engine_version
+  storage_encrypted = true
+
+  final_snapshot_identifier = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
+  vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
+
+  tags = merge(
+    var.standard_tags,
+    {
+      Name     = "${var.resource_prefix}${var.db_name}${var.resource_suffix}"
+      Metaflow = "true"
+    }
+  )
+}
+
+resource "aws_rds_cluster_instance" "cluster_instances" {
+  count              = local.use_aurora ? 1 : 0
+  identifier         = "${var.resource_prefix}${var.db_name}${var.resource_suffix}-${count.index}"
+  cluster_identifier = aws_rds_cluster.this[0].id
+  instance_class     = var.db_instance_type
+  engine             = aws_rds_cluster.this[0].engine
+  engine_version     = aws_rds_cluster.this[0].engine_version
+}
+
 /*
  Define rds db instance.
 */
 resource "aws_db_instance" "this" {
+  count                     = local.use_aurora ? 0 : 1
   publicly_accessible       = false
   allocated_storage         = 20    # Allocate 20GB
   storage_type              = "gp2" # general purpose SSD
   storage_encrypted         = true
   kms_key_id                = aws_kms_key.rds.arn
-  engine                    = "postgres"
-  engine_version            = "11"
+  engine                    = var.db_engine
+  engine_version            = var.db_engine_version
   instance_class            = var.db_instance_type                                         # Hardware configuration
   identifier                = "${var.resource_prefix}${var.db_name}${var.resource_suffix}" # used for dns hostname needs to be customer unique in region
   name                      = var.db_name                                                  # unique id for CLI commands (name of DB table which is why we're not adding the prefix as no conflicts will occur and the API expects this table name)

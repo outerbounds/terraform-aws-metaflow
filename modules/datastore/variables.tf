@@ -4,6 +4,16 @@ variable "db_instance_type" {
   default     = "db.t2.small"
 }
 
+variable "db_engine" {
+  type    = string
+  default = "postgresql"
+}
+
+variable "db_engine_version" {
+  type    = string
+  default = "11"
+}
+
 variable "db_name" {
   type        = string
   description = "Name of PostgresQL database for Metaflow service."
