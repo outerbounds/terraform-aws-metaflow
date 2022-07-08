@@ -54,8 +54,8 @@ EOF
   requires_compatibilities = ["FARGATE"]
   task_role_arn            = aws_iam_role.metadata_svc_ecs_task_role.arn
   execution_role_arn       = var.fargate_execution_role_arn
-  cpu                      = 512
-  memory                   = 1024
+  cpu                      = var.metadata_service_cpu
+  memory                   = var.metadata_service_memory
 
   tags = merge(
     var.standard_tags,
