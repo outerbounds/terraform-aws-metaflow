@@ -32,7 +32,7 @@ module "metaflow-metadata-service" {
   s3_bucket_arn                    = module.metaflow-datastore.s3_bucket_arn
   subnet1_id                       = var.subnet1_id
   subnet2_id                       = var.subnet2_id
-  vpc_cidr_block                   = var.vpc_cidr_block
+  vpc_cidr_blocks                  = var.vpc_cidr_blocks
 
   standard_tags = var.tags
 }

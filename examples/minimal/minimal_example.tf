@@ -46,7 +46,7 @@ module "metaflow" {
   enable_step_functions = false
   subnet1_id            = module.vpc.public_subnets[0]
   subnet2_id            = module.vpc.public_subnets[1]
-  vpc_cidr_block        = module.vpc.vpc_cidr_block
+  vpc_cidr_blocks       = module.vpc.vpc_cidr_blocks
   vpc_id                = module.vpc.vpc_id
 
   tags = {
