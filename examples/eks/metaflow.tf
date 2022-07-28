@@ -42,7 +42,7 @@ module "metaflow-common" {
 
 module "metaflow-metadata-service" {
   source  = "outerbounds/metaflow/aws//modules/metadata-service"
-  version = "0.3.2"
+  version = "0.7.0"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
