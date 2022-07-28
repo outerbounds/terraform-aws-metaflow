@@ -42,7 +42,7 @@ module "metaflow-common" {
 
 module "metaflow-metadata-service" {
   source  = "outerbounds/metaflow/aws//modules/metadata-service"
-  version = "0.3.2"
+  version = "0.7.0"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
@@ -60,7 +60,7 @@ module "metaflow-metadata-service" {
   s3_bucket_arn                    = module.metaflow-datastore.s3_bucket_arn
   subnet1_id                       = module.vpc.private_subnets[0]
   subnet2_id                       = module.vpc.private_subnets[1]
-  vpc_cidr_block                   = module.vpc.vpc_cidr_block
+  vpc_cidr_blocks                  = [module.vpc.vpc_cidr_block]
 
   standard_tags = local.tags
 }

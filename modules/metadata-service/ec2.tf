@@ -7,7 +7,7 @@ resource "aws_security_group" "metadata_service_security_group" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = [var.vpc_cidr_block]
+    cidr_blocks = var.vpc_cidr_blocks
     description = "Allow API calls internally"
   }
 
@@ -15,7 +15,7 @@ resource "aws_security_group" "metadata_service_security_group" {
     from_port   = 8082
     to_port     = 8082
     protocol    = "tcp"
-    cidr_blocks = [var.vpc_cidr_block]
+    cidr_blocks = var.vpc_cidr_blocks
     description = "Allow API calls internally"
   }
 

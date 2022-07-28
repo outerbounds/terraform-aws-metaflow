@@ -108,9 +108,9 @@ variable "subnet2_id" {
   description = "Second subnet used for availability zone redundancy"
 }
 
-variable "vpc_cidr_block" {
-  type        = string
-  description = "The VPC CIDR block that we'll access list on our Metadata Service API to allow all internal communications"
+variable "vpc_cidr_blocks" {
+  type        = list(string)
+  description = "The VPC CIDR blocks that we'll access list on our Metadata Service API to allow all internal communications"
 }
 
 variable "vpc_id" {
