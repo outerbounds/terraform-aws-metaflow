@@ -109,3 +109,9 @@ variable "vpc_cidr_blocks" {
   type        = list(string)
   description = "The VPC CIDR blocks that we'll access list on our Metadata Service API to allow all internal communications"
 }
+
+variable "with_public_ip" {
+  type        = bool
+  default     = false
+  description = "Enable private IP by default"
+}
