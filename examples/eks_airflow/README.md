@@ -1,4 +1,4 @@
-# An example of deploying Metaflow with a EKS cluster with Airflow
+# An example of deploying Metaflow with Airflow on an EKS cluster 
 
 This example will create Metaflow infrastructure from scratch, with a Kubernetes cluster using Amazon EKS. It uses [`datastore`](../../modules/datastore/) and [`metadata-service`](../../modules/metadata-service/) submodules to provision S3 bucket, RDS database and Metaflow Metadata service running on AWS Fargate.
 
@@ -34,7 +34,7 @@ and be able to deploy them to Airflow.
 
 Airflow UI is not accessible from outside the cluster, but you can use port forwarding to see it. Run
 ```bash
-kubectl port-forward -n airflow service/airflow-webserver 8080:8080
+kubectl port-forward -n airflow deployment/airflow-deployment-webserver 8080:8080
 ```
 ..and you should be able to access it at `localhost:8080`.
 

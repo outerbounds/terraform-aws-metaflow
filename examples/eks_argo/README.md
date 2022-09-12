@@ -1,4 +1,4 @@
-# An example of deploying Metaflow with a EKS cluster
+# An example of deploying Metaflow with Argo on an EKS cluster
 
 This example will create Metaflow infrastructure from scratch, with a Kubernetes cluster using Amazon EKS. It uses [`datastore`](../../modules/datastore/) and [`metadata-service`](../../modules/metadata-service/) submodules to provision S3 bucket, RDS database and Metaflow Metadata service running on AWS Fargate.
 
