@@ -9,7 +9,6 @@ resource "local_file" "foo" {
     "METAFLOW_DATATOOLS_S3ROOT"           = module.metaflow-datastore.METAFLOW_DATATOOLS_S3ROOT,
     "METAFLOW_SERVICE_URL"                = module.metaflow-metadata-service.METAFLOW_SERVICE_URL,
     "METAFLOW_KUBERNETES_NAMESPACE"       = "airflow",
-    "METAFLOW_KUBERNETES_SERVICE_ACCOUNT" = "airflow-scheduler",
     "METAFLOW_DEFAULT_DATASTORE"          = "s3",
     "METAFLOW_DEFAULT_METADATA"           = "service"
   })
