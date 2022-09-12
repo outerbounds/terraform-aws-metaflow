@@ -38,47 +38,47 @@ data "aws_region" "current" {}
 
 locals {
   airflow_values = {
-    "executor" = "LocalExecutor"
-    "defaultAirflowTag" = "2.3.3"
-    "airflowVersion" = "2.3.3"
-    "webserverSecretKey" =  "mysupersecr3tv0lue"
+    "executor"           = "LocalExecutor"
+    "defaultAirflowTag"  = "2.3.3"
+    "airflowVersion"     = "2.3.3"
+    "webserverSecretKey" = "mysupersecr3tv0lue"
     "env" = [
       {
-        "name" =  "AIRFLOW_CONN_AWS_DEFAULT"
+        "name"  = "AIRFLOW_CONN_AWS_DEFAULT"
         "value" = "aws://"
       },
       {
-        "name"= "AIRFLOW__LOGGING__REMOTE_LOGGING"
-        "value"= "True"
+        "name"  = "AIRFLOW__LOGGING__REMOTE_LOGGING"
+        "value" = "True"
       },
-      { 
-        "name" = "AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER"
+      {
+        "name"  = "AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER"
         "value" = "s3://${module.metaflow-datastore.s3_bucket_name}/airflow-logs"
       },
-      { 
-        "name"= "AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID"
-        "value"= "aws_default"
+      {
+        "name"  = "AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID"
+        "value" = "aws_default"
       }
     ]
   }
 }
 
 resource "helm_release" "airflow" {
-  
+
   depends_on = [module.eks]
-  
-  name       = "airflow-deployment"
+
+  name = "airflow-deployment"
 
   repository = "https://airflow.apache.org"
   chart      = "airflow"
-  
+
   namespace = kubernetes_namespace.airflow.metadata[0].name
 
   timeout = 1200
 
   wait = false # Why set `wait=false` 
-              #: Read this (https://github.com/hashicorp/terraform-provider-helm/issues/683#issuecomment-830872443)
-              # Short summary : If this is not set then airflow doesn't end up running migrations on the database. That makes the scheduler and other containers to keep waiting for migrations. 
+  #: Read this (https://github.com/hashicorp/terraform-provider-helm/issues/683#issuecomment-830872443)
+  # Short summary : If this is not set then airflow doesn't end up running migrations on the database. That makes the scheduler and other containers to keep waiting for migrations. 
 
   values = [
     yamlencode(local.airflow_values)
