@@ -35,13 +35,31 @@ resource "kubernetes_namespace" "airflow" {
 
 data "aws_region" "current" {}
 
+variable "airflow_webserver_secret" {
+  type    = string
+  default = "mysupersecr3tv0lue"
+}
+
+# This secret is that the airflow webserver used to sign session cookies.
+# https://airflow.apache.org/docs/helm-chart/stable/production-guide.html#webserver-secret-key
+resource "kubernetes_secret" "airflow-webserver-secret" {
+  metadata {
+    name      = "airflow-webserver-secret"
+    namespace = kubernetes_namespace.airflow.metadata[0].name
+  }
+  type = "Opaque"
+  data = {
+    webserver-secret-key = var.airflow_webserver_secret
+  }
+}
+
 
 locals {
   airflow_values = {
-    "executor"           = "LocalExecutor"
-    "defaultAirflowTag"  = "2.3.3"
-    "airflowVersion"     = "2.3.3"
-    "webserverSecretKey" = "mysupersecr3tv0lue"
+    "executor"                     = "LocalExecutor"
+    "defaultAirflowTag"            = "2.3.3"
+    "airflowVersion"               = "2.3.3"
+    "webserverSecretKeySecretName" = kubernetes_secret.airflow-webserver-secret.metadata[0].name
     "env" = [
       {
         "name"  = "AIRFLOW_CONN_AWS_DEFAULT"
@@ -76,9 +94,9 @@ resource "helm_release" "airflow" {
 
   timeout = 1200
 
-  wait = false # Why set `wait=false` 
+  wait = false # Why set `wait=false`
   #: Read this (https://github.com/hashicorp/terraform-provider-helm/issues/683#issuecomment-830872443)
-  # Short summary : If this is not set then airflow doesn't end up running migrations on the database. That makes the scheduler and other containers to keep waiting for migrations. 
+  # Short summary : If this is not set then airflow doesn't end up running migrations on the database. That makes the scheduler and other containers to keep waiting for migrations.
 
   values = [
     yamlencode(local.airflow_values)

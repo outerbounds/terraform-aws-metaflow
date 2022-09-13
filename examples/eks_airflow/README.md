@@ -1,8 +1,8 @@
-# An example of deploying Metaflow with Airflow on an EKS cluster 
+# An example of deploying Metaflow with Airflow on an EKS cluster
 
 This example will create Metaflow infrastructure from scratch, with a Kubernetes cluster using Amazon EKS. It uses [`datastore`](../../modules/datastore/) and [`metadata-service`](../../modules/metadata-service/) submodules to provision S3 bucket, RDS database and Metaflow Metadata service running on AWS Fargate.
 
-To run Metaflow jobs, it provisions a EKS cluster using [this popular open source terraform module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest). In that cluster, it also installs [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) and [Airflow](https://argoproj.github.io/argo-workflows/) using Helm.
+To run Metaflow jobs, it provisions a EKS cluster using [this popular open source terraform module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest). In that cluster, it also installs [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) and [Airflow](https://airflow.apache.org/) using Helm.
 
 Specifically, it'll create following resources in your AWS account:
 * General networking infra:
