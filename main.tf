@@ -19,11 +19,12 @@ module "metaflow-metadata-service" {
   resource_suffix = local.resource_suffix
 
   access_list_cidr_blocks          = var.access_list_cidr_blocks
-  api_basic_auth                   = var.api_basic_auth
   database_name                    = module.metaflow-datastore.database_name
   database_password                = module.metaflow-datastore.database_password
   database_username                = module.metaflow-datastore.database_username
   datastore_s3_bucket_kms_key_arn  = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
+  enable_api_basic_auth            = var.metadata_service_enable_api_basic_auth
+  enable_api_gateway               = var.metadata_service_enable_api_gateway
   fargate_execution_role_arn       = module.metaflow-computation.ecs_execution_role_arn
   iam_partition                    = var.iam_partition
   metadata_service_container_image = local.metadata_service_container_image

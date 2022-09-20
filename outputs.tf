@@ -74,7 +74,7 @@ output "metaflow_profile_json" {
         "METAFLOW_BATCH_CONTAINER_REGISTRY" = element(split("/", aws_ecr_repository.metaflow_batch_image[0].repository_url), 0),
         "METAFLOW_BATCH_CONTAINER_IMAGE"    = element(split("/", aws_ecr_repository.metaflow_batch_image[0].repository_url), 1)
       } : {},
-      var.api_basic_auth ? {
+      var.enable_api_basic_auth ? {
         "METAFLOW_SERVICE_AUTH_KEY" = "## Replace with output from 'aws apigateway get-api-key --api-key ${module.metaflow-metadata-service.api_gateway_rest_api_id_key_id} --include-value | grep value' ##"
       } : {},
       var.batch_type == "fargate" ? {
