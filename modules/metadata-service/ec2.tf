@@ -79,7 +79,7 @@ resource "aws_lb_target_group" "db_migrate" {
 
   health_check {
     protocol            = "TCP"
-    port                = 8080
+    port                = 8082
     interval            = 10
     healthy_threshold   = 2
     unhealthy_threshold = 2
