@@ -62,7 +62,7 @@ resource "aws_api_gateway_vpc_link" "this" {
 }
 
 resource "aws_api_gateway_method" "this" {
-  count       = var.enable_api_gateway ? 1 : 0
+  count            = var.enable_api_gateway ? 1 : 0
   http_method      = "ANY"
   resource_id      = aws_api_gateway_resource.this[0].id
   rest_api_id      = aws_api_gateway_rest_api.this[0].id
@@ -75,7 +75,7 @@ resource "aws_api_gateway_method" "this" {
 }
 
 resource "aws_api_gateway_method" "db" {
-  count       = var.enable_api_gateway ? 1 : 0
+  count            = var.enable_api_gateway ? 1 : 0
   http_method      = "GET"
   resource_id      = aws_api_gateway_resource.db[0].id
   rest_api_id      = aws_api_gateway_rest_api.this[0].id
@@ -159,7 +159,7 @@ resource "aws_api_gateway_deployment" "this" {
 }
 
 resource "aws_api_gateway_stage" "this" {
-  count       = var.enable_api_gateway ? 1 : 0
+  count         = var.enable_api_gateway ? 1 : 0
   deployment_id = aws_api_gateway_deployment.this[0].id
   rest_api_id   = aws_api_gateway_rest_api.this[0].id
   stage_name    = local.api_gateway_stage_name
