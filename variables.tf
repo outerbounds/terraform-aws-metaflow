@@ -141,3 +141,9 @@ variable "extra_ui_static_env_vars" {
   default     = {}
   description = "Additional environment variables for UI static app"
 }
+
+variable "with_public_ip" {
+  type        = bool
+  default     = false
+  description = "Enable private IP by default"
+}
