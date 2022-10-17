@@ -119,6 +119,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_ui_static_container_image"></a> [ui\_static\_container\_image](#input\_ui\_static\_container\_image) | Container image for the UI frontend app | `string` | `""` | no |
 | <a name="input_vpc_cidr_blocks"></a> [vpc\_cidr\_blocks](#input\_vpc\_cidr\_blocks) | The VPC CIDR blocks that we'll access list on our Metadata Service API to allow all internal communications | `list(string)` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the single VPC we stood up for all Metaflow resources to exist in. | `string` | n/a | yes |
+| <a name="with_public_ip"></a> [with\_public\_ip](#input\_with\_public\_ip) | Use public IP in case if Metadata Service uses public subnets (by defualt private subnets are used). | `bool` | `false` | no |
 
 ## Outputs
 
