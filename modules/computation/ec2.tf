@@ -25,6 +25,11 @@ resource "aws_launch_template" "cpu" {
     }
   }
 
+  metadata_options {
+    http_tokens                 = var.launch_template_http_tokens
+    http_put_response_hop_limit = var.launch_template_http_put_response_hop_limit
+  }
+
   tags = var.standard_tags
 }
 
