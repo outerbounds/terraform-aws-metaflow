@@ -70,7 +70,7 @@ variable "compute_environment_egress_cidr_blocks" {
 variable "launch_template_http_endpoint" {
   type        = string
   description = "Whether the metadata service is available. Can be 'enabled' or 'disabled'"
-  default     = "disabled"
+  default     = "enabled"
 }
 
 variable "launch_template_http_tokens" {
