@@ -82,7 +82,7 @@ variable "launch_template_http_tokens" {
 variable "launch_template_http_put_response_hop_limit" {
   type        = number
   description = "The desired HTTP PUT response hop limit for instance metadata requests. Can be an integer from 1 to 64"
-  default     = 1
+  default     = 2
 }
 
 variable "iam_partition" {
