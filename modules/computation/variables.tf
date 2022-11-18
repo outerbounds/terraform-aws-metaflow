@@ -65,3 +65,21 @@ variable "subnet2_id" {
   type        = string
   description = "The second private subnet used for redundancy"
 }
+
+variable "launch_template_http_endpoint" {
+  type        = string
+  description = "Whether the metadata service is available. Can be 'enabled' or 'disabled'"
+  default     = "enabled"
+}
+
+variable "launch_template_http_tokens" {
+  type        = string
+  description = "Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be 'optional' or 'required'"
+  default     = "optional"
+}
+
+variable "launch_template_http_put_response_hop_limit" {
+  type        = number
+  description = "The desired HTTP PUT response hop limit for instance metadata requests. Can be an integer from 1 to 64"
+  default     = 2
+}
