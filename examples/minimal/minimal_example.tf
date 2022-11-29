@@ -38,7 +38,7 @@ module "vpc" {
 
 module "metaflow" {
   source  = "outerbounds/metaflow/aws"
-  version = "0.7.0"
+  version = "0.8.0"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
@@ -48,6 +48,7 @@ module "metaflow" {
   subnet2_id            = module.vpc.public_subnets[1]
   vpc_cidr_blocks       = [module.vpc.vpc_cidr_block]
   vpc_id                = module.vpc.vpc_id
+  with_public_ip        = var.with_public_ip
 
   tags = {
     "managedBy" = "terraform"

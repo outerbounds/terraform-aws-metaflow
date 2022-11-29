@@ -20,7 +20,7 @@ data "aws_availability_zones" "available" {
 
 module "metaflow-datastore" {
   source  = "outerbounds/metaflow/aws//modules/datastore"
-  version = "0.7.1"
+  version = "0.8.0"
 
   force_destroy_s3_bucket = true
 
@@ -37,12 +37,12 @@ module "metaflow-datastore" {
 
 module "metaflow-common" {
   source  = "outerbounds/metaflow/aws//modules/common"
-  version = "0.7.1"
+  version = "0.8.0"
 }
 
 module "metaflow-metadata-service" {
   source  = "outerbounds/metaflow/aws//modules/metadata-service"
-  version = "0.7.1"
+  version = "0.8.0"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
@@ -61,6 +61,7 @@ module "metaflow-metadata-service" {
   subnet1_id                       = module.vpc.private_subnets[0]
   subnet2_id                       = module.vpc.private_subnets[1]
   vpc_cidr_blocks                  = [module.vpc.vpc_cidr_block]
+  with_public_ip                   = var.with_public_ip
 
   standard_tags = local.tags
 }
