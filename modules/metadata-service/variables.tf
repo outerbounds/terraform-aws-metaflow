@@ -113,5 +113,5 @@ variable "vpc_cidr_blocks" {
 variable "with_public_ip" {
   type        = bool
   default     = false
-  description = "Enable private IP by default"
+  description = "Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1_id and subnet2_id, and false otherwise"
 }
