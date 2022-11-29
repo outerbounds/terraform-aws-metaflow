@@ -61,6 +61,7 @@ module "metaflow-metadata-service" {
   subnet1_id                       = module.vpc.private_subnets[0]
   subnet2_id                       = module.vpc.private_subnets[1]
   vpc_cidr_blocks                  = [module.vpc.vpc_cidr_block]
+  with_public_ip                   = var.with_public_ip
 
   standard_tags = local.tags
 }
