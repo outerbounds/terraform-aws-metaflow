@@ -10,6 +10,12 @@ variable "batch_type" {
   default     = "ec2"
 }
 
+variable "db_migrate_lambda_zip_file" {
+  type        = string
+  description = "Output path for the zip file containing the DB migrate lambda"
+  default     = null
+}
+
 variable "enable_custom_batch_container_registry" {
   type        = bool
   default     = false
