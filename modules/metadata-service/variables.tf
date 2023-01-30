@@ -30,6 +30,12 @@ variable "datastore_s3_bucket_kms_key_arn" {
   description = "The ARN of the KMS key used to encrypt the Metaflow datastore S3 bucket"
 }
 
+variable "db_migrate_lambda_zip_file" {
+  type        = string
+  description = "Output path for the zip file containing the DB migrate lambda"
+  default     = null
+}
+
 variable "fargate_execution_role_arn" {
   type        = string
   description = "The IAM role that grants access to ECS and Batch services which we'll use as our Metadata Service API's execution_role for our Fargate instance"

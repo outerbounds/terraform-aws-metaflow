@@ -23,6 +23,7 @@ module "metaflow-metadata-service" {
   database_name                    = module.metaflow-datastore.database_name
   database_password                = module.metaflow-datastore.database_password
   database_username                = module.metaflow-datastore.database_username
+  db_migrate_lambda_zip_file       = var.db_migrate_lambda_zip_file
   datastore_s3_bucket_kms_key_arn  = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
   fargate_execution_role_arn       = module.metaflow-computation.ecs_execution_role_arn
   iam_partition                    = var.iam_partition
