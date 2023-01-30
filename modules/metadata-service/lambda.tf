@@ -78,8 +78,13 @@ resource "aws_iam_role_policy" "grant_lambda_ecs_vpc" {
   policy = data.aws_iam_policy_document.lambda_ecs_task_execute_policy_vpc.json
 }
 
-resource "local_file" "db_migrate_lambda" {
-  content  = <<EOF
+data "archive_file" "db_migrate_lambda" {
+  type             = "zip"
+  output_file_mode = "0666"
+  output_path      = local.db_migrate_lambda_zip_file
+
+  source {
+    content  = <<EOF
 import os, json
 from urllib import request
 
@@ -101,15 +106,8 @@ def handler(event, context):
   print(response)
   return(response)
 EOF
-  filename = local.db_migrate_lambda_source_file
-}
-
-data "archive_file" "db_migrate_lambda" {
-  type             = "zip"
-  source_file      = local.db_migrate_lambda_source_file
-  output_file_mode = "0666"
-  output_path      = local.db_migrate_lambda_zip_file
-  depends_on       = [local_file.db_migrate_lambda]
+    filename = "index.py"
+  }
 }
 
 resource "aws_lambda_function" "db_migrate_lambda" {
