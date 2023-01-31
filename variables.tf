@@ -16,6 +16,12 @@ variable "batch_type" {
   default     = "ec2"
 }
 
+variable "db_engine_version" {
+  type        = string
+  default     = "11"
+  description = "engine version for metaflow module data-store"
+}
+
 variable "enable_custom_batch_container_registry" {
   type        = bool
   default     = false

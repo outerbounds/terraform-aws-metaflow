@@ -4,6 +4,7 @@ module "metaflow-datastore" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
+  db_engine_version                  = var.db_engine_version
   metadata_service_security_group_id = module.metaflow-metadata-service.metadata_service_security_group_id
   metaflow_vpc_id                    = var.vpc_id
   subnet1_id                         = var.subnet1_id
