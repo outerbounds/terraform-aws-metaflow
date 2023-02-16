@@ -3,11 +3,6 @@ variable "access_list_cidr_blocks" {
   description = "List of CIDRs we want to grant access to our Metaflow Metadata Service. Usually this is our VPN's CIDR blocks."
 }
 
-variable "api_basic_auth" {
-  type        = bool
-  default     = true
-  description = "Enable basic auth for API Gateway? (requires key export)"
-}
 
 variable "database_name" {
   type        = string
@@ -28,6 +23,18 @@ variable "database_username" {
 variable "datastore_s3_bucket_kms_key_arn" {
   type        = string
   description = "The ARN of the KMS key used to encrypt the Metaflow datastore S3 bucket"
+}
+
+variable "enable_api_basic_auth" {
+  type        = bool
+  default     = true
+  description = "Enable basic auth for API Gateway? (requires key export)"
+}
+
+variable "enable_api_gateway" {
+  type        = bool
+  default     = true
+  description = "Enable API Gateway for public metadata service endpoint"
 }
 
 variable "fargate_execution_role_arn" {
@@ -104,7 +111,6 @@ variable "subnet2_id" {
   type        = string
   description = "Second private subnet used for availability zone redundancy"
 }
-
 variable "vpc_cidr_blocks" {
   type        = list(string)
   description = "The VPC CIDR blocks that we'll access list on our Metadata Service API to allow all internal communications"

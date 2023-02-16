@@ -4,12 +4,12 @@ output "METAFLOW_SERVICE_INTERNAL_URL" {
 }
 
 output "METAFLOW_SERVICE_URL" {
-  value       = "https://${aws_api_gateway_rest_api.this.id}.execute-api.${data.aws_region.current.name}.amazonaws.com/api/"
+  value       = var.enable_api_gateway ? "https://${aws_api_gateway_rest_api.this[0].id}.execute-api.${data.aws_region.current.name}.amazonaws.com/api/" : ""
   description = "URL for Metadata Service (Open to Public Access)"
 }
 
 output "api_gateway_rest_api_id" {
-  value       = aws_api_gateway_rest_api.this.id
+  value       = var.enable_api_gateway ? aws_api_gateway_rest_api.this[0].id : ""
   description = "The ID of the API Gateway REST API we'll use to accept MetaData service requests to forward to the Fargate API instance"
 }
 

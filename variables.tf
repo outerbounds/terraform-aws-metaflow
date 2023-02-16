@@ -4,12 +4,6 @@ variable "access_list_cidr_blocks" {
   default     = []
 }
 
-variable "api_basic_auth" {
-  type        = bool
-  default     = true
-  description = "Enable basic auth for API Gateway? (requires key export)"
-}
-
 variable "batch_type" {
   type        = string
   description = "AWS Batch Compute Type ('ec2', 'fargate')"
@@ -95,6 +89,18 @@ variable "metadata_service_container_image" {
   type        = string
   default     = ""
   description = "Container image for metadata service"
+}
+
+variable "metadata_service_enable_api_basic_auth" {
+  type        = bool
+  default     = true
+  description = "Enable basic auth for API Gateway? (requires key export)"
+}
+
+variable "metadata_service_enable_api_gateway" {
+  type        = bool
+  default     = true
+  description = "Enable API Gateway for public metadata service endpoint"
 }
 
 variable "ui_static_container_image" {
