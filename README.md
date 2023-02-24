@@ -125,6 +125,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_vpc_cidr_blocks"></a> [vpc\_cidr\_blocks](#input\_vpc\_cidr\_blocks) | The VPC CIDR blocks that we'll access list on our Metadata Service API to allow all internal communications | `list(string)` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the single VPC we stood up for all Metaflow resources to exist in. | `string` | n/a | yes |
 | <a name="input_with_public_ip"></a> [with\_public\_ip](#input\_with\_public\_ip) | Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1\_id and subnet2\_id, and false otherwise | `bool` | n/a | yes |
+| <a name="input_force_destroy_s3_bucket"></a> [force\_destroy\_s3\_bucket](#input\_force\_destroy\_s3\_bucket) | Empty S3 bucket before destroying via terraform destroy | `bool` | n/a | no |
 
 ## Outputs
 
