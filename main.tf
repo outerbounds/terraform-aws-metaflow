@@ -1,5 +1,7 @@
 module "metaflow-datastore" {
   source = "./modules/datastore"
+  
+  force_destroy_s3_bucket = var.force_destroy_s3_bucket
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
