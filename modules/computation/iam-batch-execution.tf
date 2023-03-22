@@ -182,3 +182,29 @@ resource "aws_iam_role_policy" "grant_ec2_custom_policies" {
   role   = aws_iam_role.batch_execution_role.name
   policy = data.aws_iam_policy_document.ec2_custom_policies.json
 }
+
+data "aws_iam_policy_document" "spotfleet-assume" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type = "Service"
+
+      identifiers = ["spotfleet.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_policy_attachment" "spotfleet" {
+  count      = local.is_spot ? 1 : 0
+  name       = "${var.resource_prefix}-spotfleet"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole"
+  roles      = [aws_iam_role.spotfleet[0].name]
+}
+
+resource "aws_iam_role" "spotfleet" {
+  count              = local.is_spot ? 1 : 0
+  name               = "${var.resource_prefix}-spotfleet"
+  assume_role_policy = data.aws_iam_policy_document.spotfleet-assume.json
+}

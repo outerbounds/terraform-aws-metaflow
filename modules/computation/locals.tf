@@ -19,4 +19,13 @@ locals {
   ecs_instance_role_name = "${var.resource_prefix}ecs-iam-role${var.resource_suffix}"
 
   enable_fargate_on_batch = var.batch_type == "fargate"
+
+  compute_type_map = {
+    "ec2"          = "EC2"
+    "ec2_spot"     = "SPOT"
+    "fargate"      = "FARGATE"
+    "fargate_spot" = "FARGATE_SPOT"
+  }
+  compute_type = local.compute_type_map[var.batch_type]
+  is_spot      = contains(["ec2_spot", "fargate_spot"], var.batch_type)
 }
