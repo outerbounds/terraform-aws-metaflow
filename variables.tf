@@ -61,6 +61,17 @@ variable "compute_environment_egress_cidr_blocks" {
   description = "CIDR blocks to which egress is allowed from the Batch Compute environment's security group"
 }
 
+variable "db_instance_type" {
+  type        = string
+  description = "RDS instance type to launch for PostgresQL database."
+  default     = "db.t2.small"
+}
+
+variable "db_engine_version" {
+  type    = string
+  default = "11"
+}
+
 variable "launch_template_http_endpoint" {
   type        = string
   description = "Whether the metadata service is available. Can be 'enabled' or 'disabled'"
