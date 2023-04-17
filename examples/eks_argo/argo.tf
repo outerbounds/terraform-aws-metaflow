@@ -253,6 +253,12 @@ resource "helm_release" "argo_events" {
 
 
 resource "helm_release" "argo_events_helper_chart" {
+  # We define an EventBus and EventSource in this helper chart. This is one
+  # of the cleaner workarounds for the chicken-egg problem with CR and CRD definitions
+  # in "terraform plan". E.g. Terraform tries to validate the kind "EventBus" before it
+  # has been created in the cluster, causing the validation to fail.
+  #
+  # Mega-thread here: https://github.com/hashicorp/terraform-provider-kubernetes/issues/1367
   name = "argo-events-helper-chart"
 
   depends_on = [helm_release.argo_events]
