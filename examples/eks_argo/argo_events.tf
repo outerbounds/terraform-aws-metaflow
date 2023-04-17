@@ -4,18 +4,18 @@ locals {
       "jetstream" = {
         "versions" = [
           {
-            "configReloaderImage" = "natsio/nats-server-config-reloader:latest"
+            "configReloaderImage"  = "natsio/nats-server-config-reloader:latest"
             "metricsExporterImage" = "natsio/prometheus-nats-exporter:latest"
-            "natsImage" = "nats:latest"
-            "startCommand" = "/nats-server"
-            "version" = "latest"
+            "natsImage"            = "nats:latest"
+            "startCommand"         = "/nats-server"
+            "version"              = "latest"
           },
           {
-            "configReloaderImage" = "natsio/nats-server-config-reloader:latest"
+            "configReloaderImage"  = "natsio/nats-server-config-reloader:latest"
             "metricsExporterImage" = "natsio/prometheus-nats-exporter:latest"
-            "natsImage" = "nats:2.9.15"
-            "startCommand" = "/nats-server"
-            "version" = "2.9.15"
+            "natsImage"            = "nats:2.9.15"
+            "startCommand"         = "/nats-server"
+            "version"              = "2.9.15"
           },
         ]
       }
@@ -23,22 +23,22 @@ locals {
     "controller" = {
       "name" = "controller-manager"
       "rbac" = {
-        "enabled" = true
+        "enabled"    = true
         "namespaced" = false
       }
       "resources" = {
         "limits" = {
-          "cpu" = "200m"
+          "cpu"    = "200m"
           "memory" = "192Mi"
         }
         "requests" = {
-          "cpu" = "200m"
+          "cpu"    = "200m"
           "memory" = "192Mi"
         }
       }
       "serviceAccount" = {
         "create" = true
-        "name" = "argo-events-events-controller-sa"
+        "name"   = "argo-events-events-controller-sa"
       }
     }
     "crds" = {
@@ -47,17 +47,17 @@ locals {
     "extraObjects" = [
       {
         "apiVersion" = "v1"
-        "kind" = "ServiceAccount"
+        "kind"       = "ServiceAccount"
         "metadata" = {
-          "name" = "operate-workflow-sa"
+          "name"      = "operate-workflow-sa"
           "namespace" = "default"
         }
       },
       {
         "apiVersion" = "rbac.authorization.k8s.io/v1"
-        "kind" = "Role"
+        "kind"       = "Role"
         "metadata" = {
-          "name" = "operate-workflow-role"
+          "name"      = "operate-workflow-role"
           "namespace" = "default"
         }
         "rules" = [
@@ -79,15 +79,15 @@ locals {
       },
       {
         "apiVersion" = "rbac.authorization.k8s.io/v1"
-        "kind" = "RoleBinding"
+        "kind"       = "RoleBinding"
         "metadata" = {
-          "name" = "operate-workflow-role-binding"
+          "name"      = "operate-workflow-role-binding"
           "namespace" = "default"
         }
         "roleRef" = {
           "apiGroup" = "rbac.authorization.k8s.io"
-          "kind" = "Role"
-          "name" = "operate-workflow-role"
+          "kind"     = "Role"
+          "name"     = "operate-workflow-role"
         }
         "subjects" = [
           {
@@ -98,9 +98,9 @@ locals {
       },
       {
         "apiVersion" = "rbac.authorization.k8s.io/v1"
-        "kind" = "Role"
+        "kind"       = "Role"
         "metadata" = {
-          "name" = "view-events-role"
+          "name"      = "view-events-role"
           "namespace" = "default"
         }
         "rules" = [
@@ -123,20 +123,20 @@ locals {
       },
       {
         "apiVersion" = "rbac.authorization.k8s.io/v1"
-        "kind" = "RoleBinding"
+        "kind"       = "RoleBinding"
         "metadata" = {
-          "name" = "view-events-role-binding"
+          "name"      = "view-events-role-binding"
           "namespace" = "default"
         }
         "roleRef" = {
           "apiGroup" = "rbac.authorization.k8s.io"
-          "kind" = "Role"
-          "name" = "view-events-role"
+          "kind"     = "Role"
+          "name"     = "view-events-role"
         }
         "subjects" = [
           {
-            "kind" = "ServiceAccount"
-            "name" = "argo-workflows"
+            "kind"      = "ServiceAccount"
+            "name"      = "argo-workflows"
             "namespace" = "argo-workflows"
           },
         ]

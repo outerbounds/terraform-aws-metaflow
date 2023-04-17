@@ -83,5 +83,3 @@ resource "helm_release" "argo" {
     yamlencode(local.argo_values)
   ]
 }
-
-
