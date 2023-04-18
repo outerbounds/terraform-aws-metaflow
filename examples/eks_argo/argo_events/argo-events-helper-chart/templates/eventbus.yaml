@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: EventBus
 metadata:
   name: default
-  namespace: default
+  namespace: {{ .Values.jobsNamespace }}
 spec:
   jetstream:
     version: 2.9.15
