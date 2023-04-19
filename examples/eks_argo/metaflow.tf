@@ -65,3 +65,8 @@ module "metaflow-metadata-service" {
 
   standard_tags = local.tags
 }
+
+variable "with_public_ip" {
+  type    = bool
+  default = true
+}
