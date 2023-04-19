@@ -30,6 +30,12 @@ variable "compute_environment_egress_cidr_blocks" {
   description = "CIDR blocks to which egress is allowed from the Batch Compute environment's security group"
 }
 
+variable "compute_environment_additional_security_group_ids" {
+  type = list(string)
+  default = []
+  description = "Additional security group ids to apply to the Batch Compute environment"
+}
+
 variable "iam_partition" {
   type        = string
   default     = "aws"
