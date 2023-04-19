@@ -37,8 +37,8 @@ variable "compute_environment_additional_security_group_ids" {
 }
 
 variable "compute_environment_allocation_strategy" {
-  type = string
-  default = "BEST_FIT"
+  type        = string
+  default     = "BEST_FIT"
   description = "Allocation strategy for Batch Compute environment (BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED)"
 }
 
