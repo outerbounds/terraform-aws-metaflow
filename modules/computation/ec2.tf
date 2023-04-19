@@ -15,6 +15,9 @@ resource "aws_launch_template" "cpu" {
     arn = aws_iam_instance_profile.ecs_instance_role.arn
   }
 
+  # Null image_id allows AWS Batch to decide.
+  image_id = var.launch_template_image_id
+
   block_device_mappings {
     device_name = "/dev/xvda"
 

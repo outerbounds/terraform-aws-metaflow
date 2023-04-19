@@ -33,7 +33,7 @@ resource "aws_batch_compute_environment" "this" {
     desired_vcpus = !local.enable_fargate_on_batch ? var.compute_environment_desired_vcpus : null
 
     # Prefers cheap vCPU approaches
-    allocation_strategy = !local.enable_fargate_on_batch ? "BEST_FIT" : null
+    allocation_strategy = !local.enable_fargate_on_batch ? var.compute_environment_allocation_strategy : null
 
     /* Links to a launch template who has more than the standard 8GB of disk space. So we can download training data.
        Always uses the "default version", which means we can update the Launch Template to a smaller or larger disk size
