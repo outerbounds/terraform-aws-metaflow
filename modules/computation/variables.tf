@@ -1,7 +1,11 @@
 variable "batch_type" {
   type        = string
-  description = "AWS Batch Compute Type ('ec2', 'fargate')"
+  description = "AWS Batch Compute Type ('ec2', 'ec2_spot', 'fargate', 'fargate_spot')"
   default     = "ec2"
+  validation {
+    condition     = contains(["ec2", "ec2_spot", "fargate", "fargate_spot"], var.batch_type)
+    error_message = "Must be one of 'ec2', 'ec2_spot', 'fargate', 'fargate_spot'"
+  }
 }
 
 variable "compute_environment_desired_vcpus" {
