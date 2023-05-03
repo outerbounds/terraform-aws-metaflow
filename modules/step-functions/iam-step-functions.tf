@@ -22,7 +22,8 @@ data "aws_iam_policy_document" "step_functions_batch_policy" {
       "batch:DescribeJobs",
       "batch:DescribeJobDefinitions",
       "batch:DescribeJobQueues",
-      "batch:RegisterJobDefinition"
+      "batch:RegisterJobDefinition",
+      "batch:TagResource"
     ]
 
     resources = [
