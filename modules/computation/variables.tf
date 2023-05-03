@@ -30,6 +30,18 @@ variable "compute_environment_egress_cidr_blocks" {
   description = "CIDR blocks to which egress is allowed from the Batch Compute environment's security group"
 }
 
+variable "compute_environment_additional_security_group_ids" {
+  type        = list(string)
+  default     = []
+  description = "Additional security group ids to apply to the Batch Compute environment"
+}
+
+variable "compute_environment_allocation_strategy" {
+  type        = string
+  default     = "BEST_FIT"
+  description = "Allocation strategy for Batch Compute environment (BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED)"
+}
+
 variable "iam_partition" {
   type        = string
   default     = "aws"
@@ -82,4 +94,11 @@ variable "launch_template_http_put_response_hop_limit" {
   type        = number
   description = "The desired HTTP PUT response hop limit for instance metadata requests. Can be an integer from 1 to 64"
   default     = 2
+}
+
+variable "launch_template_image_id" {
+  type        = string
+  description = "AMI id for launch template, defaults to allow AWS Batch to decide"
+  nullable    = true
+  default     = null
 }
