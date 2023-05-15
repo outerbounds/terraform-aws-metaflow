@@ -4,7 +4,7 @@ module "eks" {
   version = "17.23.0"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.21"
+  cluster_version = "1.24"
   subnets         = module.vpc.private_subnets
   enable_irsa     = true
   tags            = local.tags
