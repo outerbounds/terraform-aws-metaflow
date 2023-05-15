@@ -49,3 +49,23 @@ Run `terraform destroy`
 ⚠️ This is meant as a reference example, with many things omitted for simplicity, such as proper RBAC setup, production-grade autoscaling and UI. For example, all workloads running in the cluster use the same AWS IAM role. We do not recommend using this as a production deployment of Metaflow on Kubernetes.
 
 For learn more about production-grade deployments, you can talk to us on [the Outerbounds slack](http://slack.outerbounds.co). We are happy to help you there!
+
+# Advanced topics
+
+Q: How to publish an Argo Event from outside the Kubernetes cluster?
+A:
+Establish port forward for Argo Events Webhook server:
+
+$ kubectl port-forward -n default service/argo-events-webhook-eventsource-svc 12000:12000
+
+Here is a snippet that publishes the event "foo" (consume this event with `@trigger(event="foo")`):
+```
+from metaflow.integrations import ArgoEvent
+
+def main():
+    evt = ArgoEvent('foo', url="http://localhost:12000/metaflow-event")
+    evt.publish(force=True)
+
+if __name__ == '__main__':
+    main()
+```
