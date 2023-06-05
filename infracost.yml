@@ -1,0 +1,14 @@
+version: 0.1
+projects:
+  - path: dev
+    name: development
+    usage_file: dev/infracost-usage.yml
+    terraform_var_files:
+      - dev.tfvars
+
+  - path: prod
+    name: production
+    usage_file: prod/infracost-usage.yml
+    terraform_vars:
+      instance_count: 5
+      artifact_version: foobar
