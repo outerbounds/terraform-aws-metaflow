@@ -126,3 +126,19 @@ variable "alb_internal" {
   description = "Defines whether the ALB is internal"
   default     = false
 }
+
+variable "cognito_user_pool_arn" {
+  type        = string
+  description = "The ARN of the Cognito user pool"
+  default     = ""
+}
+variable "cognito_user_pool_client_id" {
+  type        = string
+  description = "The ID of the Cognito user pool client"
+  default     = ""
+}
+variable "cognito_user_pool_domain" {
+  type        = string
+  description = "The domain of the Cognito user pool"
+  default     = ""
+}

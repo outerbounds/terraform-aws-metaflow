@@ -120,6 +120,23 @@ variable "ui_alb_internal" {
   default     = false
 }
 
+variable "ui_cognito_user_pool_arn" {
+  type        = string
+  description = "The ARN of the Cognito user pool"
+  default     = ""
+}
+variable "ui_cognito_user_pool_client_id" {
+  type        = string
+  description = "The ID of the Cognito user pool client"
+  default     = ""
+}
+variable "ui_cognito_user_pool_domain" {
+  type        = string
+  description = "The domain of the Cognito user pool"
+  default     = ""
+}
+
+
 # variables from infra project that defines the VPC we will deploy to
 
 variable "subnet1_id" {

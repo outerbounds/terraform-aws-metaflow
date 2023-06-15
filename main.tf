@@ -62,6 +62,10 @@ module "metaflow-ui" {
   alb_internal                    = var.ui_alb_internal
   ui_allow_list                   = var.ui_allow_list
 
+  cognito_user_pool_arn       = var.ui_cognito_user_pool_arn
+  cognito_user_pool_client_id = var.ui_cognito_user_pool_client_id
+  cognito_user_pool_domain    = var.ui_cognito_user_pool_domain
+
   METAFLOW_DATASTORE_SYSROOT_S3      = module.metaflow-datastore.METAFLOW_DATASTORE_SYSROOT_S3
   certificate_arn                    = var.ui_certificate_arn
   metadata_service_security_group_id = module.metaflow-metadata-service.metadata_service_security_group_id
