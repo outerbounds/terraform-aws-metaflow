@@ -168,7 +168,7 @@ variable "extra_ui_static_env_vars" {
 
 variable "with_public_ip" {
   type        = bool
-  description = "Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1_id and subnet2_id, and false otherwise"
+  description = "Enable public IP assignment for the Metadata Service. If the subnets specified for subnet1_id and subnet2_id are public subnets, you will NEED to set this to true to allow pulling container images from public registries. Otherwise this should be set to false."
 }
 
 variable "force_destroy_s3_bucket" {
