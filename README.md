@@ -14,9 +14,10 @@ This module consists of submodules that can be used separately as well:
 
 ![modules diagram](./docs/terraform_modules.png)
 
-You can either use this high-level module, or submodules individually. See each module's corresponding `README.md` for more details.
+You can either use this high-level module, or submodules individually. See each submodule's corresponding `README.md` for more details.
 
 Here's a minimal end-to-end example of using this module with VPC:
+
 ```terraform
 # Random suffix for this deployment
 resource "random_string" "suffix" {
@@ -70,6 +71,11 @@ module "metaflow" {
   }
 }
 
+# export all outputs from metaflow modules
+output "metaflow" {
+  value = module.metaflow
+}
+
 # The module will generate a Metaflow config in JSON format, write it to a file
 resource "local_file" "metaflow_config" {
   content  = module.metaflow.metaflow_profile_json
@@ -77,7 +83,7 @@ resource "local_file" "metaflow_config" {
 }
 ```
 
-You can find a more complete example that uses this module but also includes setting up sagemaker notebooks and other non-Metaflow-specific parts of infra [in this repo](https://github.com/outerbounds/metaflow-tools/tree/master/aws/terraform).
+**Note:** You can find a more complete example that uses this module but also includes setting up sagemaker notebooks and other non-Metaflow-specific parts of infra [in this repo](https://github.com/outerbounds/metaflow-tools/tree/master/aws/terraform).
 
 <!-- BEGIN_TF_DOCS -->
 ## Modules

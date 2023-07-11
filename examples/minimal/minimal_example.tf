@@ -55,6 +55,11 @@ module "metaflow" {
   }
 }
 
+# export all outputs from metaflow modules
+output "metaflow" {
+  value = module.metaflow
+}
+
 # The module will generate a Metaflow config in JSON format, write it to a file
 resource "local_file" "metaflow_config" {
   content  = module.metaflow.metaflow_profile_json
