@@ -14,9 +14,10 @@ This module consists of submodules that can be used separately as well:
 
 ![modules diagram](./docs/terraform_modules.png)
 
-You can either use this high-level module, or submodules individually. See each module's corresponding `README.md` for more details.
+You can either use this high-level module, or submodules individually. See each submodule's corresponding `README.md` for more details.
 
 Here's a minimal end-to-end example of using this module with VPC:
+
 ```terraform
 # Random suffix for this deployment
 resource "random_string" "suffix" {
@@ -63,11 +64,16 @@ module "metaflow" {
   subnet2_id            = module.vpc.public_subnets[1]
   vpc_cidr_blocks       = module.vpc.vpc_cidr_blocks
   vpc_id                = module.vpc.vpc_id
-  with_public_ip        = var.with_public_ip
+  with_public_ip        = true
 
   tags = {
       "managedBy" = "terraform"
   }
+}
+
+# export all outputs from metaflow modules
+output "metaflow" {
+  value = module.metaflow
 }
 
 # The module will generate a Metaflow config in JSON format, write it to a file
@@ -77,7 +83,7 @@ resource "local_file" "metaflow_config" {
 }
 ```
 
-You can find a more complete example that uses this module but also includes setting up sagemaker notebooks and other non-Metaflow-specific parts of infra [in this repo](https://github.com/outerbounds/metaflow-tools/tree/master/aws/terraform).
+**Note:** You can find a more complete example that uses this module but also includes setting up sagemaker notebooks and other non-Metaflow-specific parts of infra [in this repo](https://github.com/outerbounds/metaflow-tools/tree/master/aws/terraform).
 
 <!-- BEGIN_TF_DOCS -->
 ## Modules
@@ -125,7 +131,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_ui_static_container_image"></a> [ui\_static\_container\_image](#input\_ui\_static\_container\_image) | Container image for the UI frontend app | `string` | `""` | no |
 | <a name="input_vpc_cidr_blocks"></a> [vpc\_cidr\_blocks](#input\_vpc\_cidr\_blocks) | The VPC CIDR blocks that we'll access list on our Metadata Service API to allow all internal communications | `list(string)` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the single VPC we stood up for all Metaflow resources to exist in. | `string` | n/a | yes |
-| <a name="input_with_public_ip"></a> [with\_public\_ip](#input\_with\_public\_ip) | Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1\_id and subnet2\_id, and false otherwise | `bool` | n/a | yes |
+| <a name="input_with_public_ip"></a> [with\_public\_ip](#input\_with\_public\_ip) | Enable public IP assignment for the Metadata Service. If the subnets specified for subnet1\_id and subnet2\_id are public subnets, you will NEED to set this to true to allow pulling container images from public registries. Otherwise this should be set to false. | `bool` | n/a | yes |
 
 ## Outputs
 
