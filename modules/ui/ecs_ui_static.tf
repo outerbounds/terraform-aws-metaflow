@@ -66,5 +66,6 @@ resource "aws_ecs_service" "ui_static" {
     ignore_changes = [desired_count]
   }
 
+  propagate_tags = "SERVICE"
   tags = var.standard_tags
 }

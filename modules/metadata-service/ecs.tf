@@ -94,5 +94,6 @@ resource "aws_ecs_service" "this" {
     ignore_changes = [desired_count]
   }
 
+  propagate_tags = "SERVICE"
   tags = var.standard_tags
 }
