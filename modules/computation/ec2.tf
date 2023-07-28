@@ -19,7 +19,7 @@ resource "aws_launch_template" "cpu" {
     device_name = "/dev/xvda"
 
     ebs {
-      volume_size           = 100
+      volume_size           = 150
       delete_on_termination = true
       encrypted             = true
       iops                  = 1000
