@@ -22,8 +22,11 @@ resource "aws_launch_template" "cpu" {
       volume_size           = 100
       delete_on_termination = true
       encrypted             = true
+      iops                  = 1000
+      volume_type           = "gp3"
     }
   }
+  ebs_optimized = true
 
   metadata_options {
     http_endpoint               = var.launch_template_http_endpoint
