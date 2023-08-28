@@ -176,3 +176,9 @@ variable "force_destroy_s3_bucket" {
   description = "Empty S3 bucket before destroying via terraform destroy"
   default     = false
 }
+
+variable "db_instance_type" {
+  type        = string
+  description = "RDS instance type to launch for PostgresQL database."
+  default     = "db.t2.small"
+}
