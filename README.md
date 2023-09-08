@@ -37,7 +37,7 @@ data "aws_availability_zones" "available" {
 # VPC infra using https://github.com/terraform-aws-modules/terraform-aws-vpc
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = "3.13.0"
+  version = "5.1.1"
 
   name = "${local.resource_prefix}-${local.resource_suffix}"
   cidr = "10.10.0.0/16"
@@ -62,7 +62,7 @@ module "metaflow" {
   enable_step_functions = false
   subnet1_id            = module.vpc.public_subnets[0]
   subnet2_id            = module.vpc.public_subnets[1]
-  vpc_cidr_blocks       = module.vpc.vpc_cidr_blocks
+  vpc_cidr_blocks       = [module.vpc.vpc_cidr_block]
   vpc_id                = module.vpc.vpc_id
   with_public_ip        = true
 
