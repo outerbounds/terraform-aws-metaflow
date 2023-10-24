@@ -22,10 +22,9 @@ locals {
   api_gateway_stage_name                  = "api"
   api_gateway_usage_plan_name             = "${var.resource_prefix}usage-plan${var.resource_suffix}"
 
-  db_migrate_lambda_source_file = "${path.module}/index.py"
-  db_migrate_lambda_zip_file    = "${path.module}/db_migrate_lambda.zip"
-  db_migrate_lambda_name        = "${var.resource_prefix}db_migrate${var.resource_suffix}"
-  lambda_ecs_execute_role_name  = "${var.resource_prefix}lambda_ecs_execute${var.resource_suffix}"
+  db_migrate_lambda_zip_file   = coalesce(var.db_migrate_lambda_zip_file, "${path.module}/db_migrate_lambda.zip")
+  db_migrate_lambda_name       = "${var.resource_prefix}db_migrate${var.resource_suffix}"
+  lambda_ecs_execute_role_name = "${var.resource_prefix}lambda_ecs_execute${var.resource_suffix}"
 
   cloudwatch_logs_arn_prefix = "arn:${var.iam_partition}:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}"
 }
