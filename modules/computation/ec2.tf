@@ -1,3 +1,9 @@
+locals {
+  // if launch template security groups are specified, we can't set them
+  // at compute env level
+  network_interfaces_specify_subnet_id = anytrue([for n in var.network_interfaces: n.subnet_id != null])
+  network_interfaces_subnet_ids        = distinct([for n in var.network_interfaces: n.subnet_id])
+}
 resource "aws_launch_template" "cpu" {
   count = local.enable_fargate_on_batch ? 0 : 1
 
@@ -34,6 +40,26 @@ resource "aws_launch_template" "cpu" {
     http_put_response_hop_limit = var.launch_template_http_put_response_hop_limit
   }
 
+  user_data = var.user_data
+
+  dynamic "network_interfaces" {
+    for_each = var.network_interfaces
+    content {
+      associate_public_ip_address = network_interfaces.value.associate_public_ip_address
+      device_index                = network_interfaces.value.device_index
+      interface_type              = network_interfaces.value.interface_type
+      network_card_index          = network_interfaces.value.network_card_index
+      subnet_id                   = network_interfaces.value.subnet_id
+      security_groups             = concat([aws_security_group.this.id], network_interfaces.value.security_groups)
+    }
+  }
+
+  dynamic "placement" {
+    for_each = var.placement_group_name != "" ? [1] : []
+    content {
+      group_name = var.placement_group_name
+    }
+  }
   tags = var.standard_tags
 }
 
@@ -58,6 +84,17 @@ resource "aws_security_group" "this" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = var.compute_environment_egress_cidr_blocks
+  }
+
+  # This allows egress traffic for EFA. The rule above is not enough for EFA
+  # because EFA uses a different address format, so even if you set the rule
+  # above to allow 0.0.0.0/0 it won't work.
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    self        = true
+    description = "internal traffic"
   }
 
   ingress {

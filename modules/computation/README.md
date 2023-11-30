@@ -25,12 +25,15 @@ To read more, see [the Metaflow docs](https://docs.metaflow.org/metaflow-on-aws/
 | <a name="input_launch_template_http_put_response_hop_limit"></a> [launch\_template\_http\_put\_response\_hop\_limit](#input\_launch\_template\_http\_put\_response\_hop\_limit) | The desired HTTP PUT response hop limit for instance metadata requests. Can be an integer from 1 to 64 | `number` | `2` | no |
 | <a name="input_launch_template_http_tokens"></a> [launch\_template\_http\_tokens](#input\_launch\_template\_http\_tokens) | Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be 'optional' or 'required' | `string` | `"optional"` | no |
 | <a name="input_launch_template_image_id"></a> [launch\_template\_image\_id](#input\_launch\_template\_image\_id) | AMI id for launch template, defaults to allow AWS Batch to decide | `string` | `null` | no |
+| <a name="input_launch_template_placement_group_name"></a> [launch\_template\_placement\_group\_name](#input\_launch\_template\_placement\_group\_name) | Placement group name for launch template | `string` | `""` | no |
 | <a name="input_metaflow_vpc_id"></a> [metaflow\_vpc\_id](#input\_metaflow\_vpc\_id) | ID of the Metaflow VPC this SageMaker notebook instance is to be deployed in | `string` | n/a | yes |
+| <a name="input_network_interfaces"></a> [network\_interfaces](#input\_network\_interfaces) | Network interfaces to attach to the instance | <pre>list(object({<br>    associate_public_ip_address = bool<br>    device_index                = number<br>    interface_type              = string<br>    network_card_index          = number<br>    subnet_id                   = string<br>    security_groups             = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "associate_public_ip_address": true,<br>    "device_index": null,<br>    "interface_type": null,<br>    "network_card_index": 0,<br>    "security_groups": null,<br>    "subnet_id": null<br>  }<br>]</pre> | no |
 | <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | Prefix given to all AWS resources to differentiate between applications | `string` | n/a | yes |
 | <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | Suffix given to all AWS resources to differentiate between environment and workspace | `string` | n/a | yes |
 | <a name="input_standard_tags"></a> [standard\_tags](#input\_standard\_tags) | The standard tags to apply to every AWS resource. | `map(string)` | n/a | yes |
 | <a name="input_subnet1_id"></a> [subnet1\_id](#input\_subnet1\_id) | The first private subnet used for redundancy | `string` | n/a | yes |
 | <a name="input_subnet2_id"></a> [subnet2\_id](#input\_subnet2\_id) | The second private subnet used for redundancy | `string` | n/a | yes |
+| <a name="input_user_data"></a> [user\_data](#input\_user\_data) | User data to pass to the instance | `string` | `""` | no |
 
 ## Outputs
 

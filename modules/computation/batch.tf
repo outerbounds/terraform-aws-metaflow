@@ -48,12 +48,14 @@ resource "aws_batch_compute_environment" "this" {
     }
 
     # Security group to apply to the instances launched.
-    security_group_ids = concat([
+
+    // Security groups are set at the launch template level except for Fargate
+    security_group_ids = local.enable_fargate_on_batch ? concat([
       aws_security_group.this.id,
-    ], var.compute_environment_additional_security_group_ids)
+    ], var.compute_environment_additional_security_group_ids) : null
 
     # Which subnet to launch the instances into.
-    subnets = [
+    subnets = local.network_interfaces_specify_subnet_id ? local.network_interfaces_subnet_ids : [
       var.subnet1_id,
       var.subnet2_id
     ]

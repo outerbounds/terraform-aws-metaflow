@@ -102,3 +102,37 @@ variable "launch_template_image_id" {
   nullable    = true
   default     = null
 }
+
+variable "user_data" {
+  type        = string
+  description = "User data to pass to the instance"
+  default     = ""
+}
+
+variable "network_interfaces" {
+  type = list(object({
+    associate_public_ip_address = bool
+    device_index                = number
+    interface_type              = string
+    network_card_index          = number
+    subnet_id                   = string
+    security_groups             = list(string)
+  }))
+  description = "Network interfaces to attach to the instance"
+  default = [
+    {
+      associate_public_ip_address = true
+      device_index                = null
+      interface_type              = null
+      network_card_index          = 0
+      subnet_id                   = null
+      security_groups             = null
+    }
+  ]
+}
+
+variable "placement_group_name" {
+  type        = string
+  description = "Placement group name for launch template"
+  default     = ""
+}
