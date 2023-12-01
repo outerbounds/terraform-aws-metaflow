@@ -161,8 +161,7 @@ variable "vpc_id" {
 
 variable "ui_certificate_arn" {
   type        = string
-  default     = ""
-  description = "SSL certificate for UI. If set to empty string, UI is disabled. "
+  description = "SSL certificate for UI."
 }
 
 variable "ui_allow_list" {

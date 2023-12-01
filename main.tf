@@ -41,7 +41,6 @@ module "metaflow-metadata-service" {
 
 module "metaflow-ui" {
   source = "./modules/ui"
-  count  = var.ui_certificate_arn == "" ? 0 : 1
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
@@ -73,6 +72,11 @@ module "metaflow-ui" {
   extra_ui_static_env_vars  = var.extra_ui_static_env_vars
   extra_ui_backend_env_vars = var.extra_ui_backend_env_vars
   standard_tags             = var.tags
+}
+
+moved {
+  from = module.metaflow-ui[0]
+  to   = module.metaflow-ui
 }
 
 module "metaflow-computation" {

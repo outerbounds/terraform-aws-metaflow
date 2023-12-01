@@ -115,12 +115,12 @@ output "migration_function_arn" {
 }
 
 output "ui_alb_dns_name" {
-  value       = (length(module.metaflow-ui) > 0) ? module.metaflow-ui[0].alb_dns_name : ""
+  value       = module.metaflow-ui.alb_dns_name
   description = "UI ALB DNS name"
 }
 
 output "ui_alb_arn" {
-  value       = (length(module.metaflow-ui) > 0) ? module.metaflow-ui[0].alb_arn : ""
+  value       = module.metaflow-ui.alb_arn
   description = "UI ALB ARN"
 }
 
