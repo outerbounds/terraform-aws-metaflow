@@ -27,4 +27,12 @@ locals {
   lambda_ecs_execute_role_name = "${var.resource_prefix}lambda_ecs_execute${var.resource_suffix}"
 
   cloudwatch_logs_arn_prefix = "arn:${var.iam_partition}:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}"
+
+  default_metadata_service_env_vars = {
+    "MF_METADATA_DB_HOST" = "${replace(var.rds_master_instance_endpoint, ":5432", "")}"
+    "MF_METADATA_DB_NAME" = "${var.database_name}"
+    "MF_METADATA_DB_PORT" = "5432"
+    "MF_METADATA_DB_PSWD" = "${var.database_password}"
+    "MF_METADATA_DB_USER" = "${var.database_username}"
+  }
 }

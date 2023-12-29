@@ -171,6 +171,12 @@ variable "ui_allow_list" {
   description = "List of CIDRs we want to grant access to our Metaflow UI Service. Usually this is our VPN's CIDR blocks."
 }
 
+variable "extra_metadata_service_env_vars" {
+  type        = map(string)
+  default     = {}
+  description = "Additional environment variables for metadata service container"
+}
+
 variable "extra_ui_backend_env_vars" {
   type        = map(string)
   default     = {}

@@ -37,6 +37,12 @@ variable "enable_api_gateway" {
   description = "Enable API Gateway for public metadata service endpoint"
 }
 
+variable "extra_metadata_service_env_vars" {
+  type        = map(string)
+  default     = {}
+  description = "Additional environment variables for metadata service container"
+}
+
 variable "db_migrate_lambda_zip_file" {
   type        = string
   description = "Output path for the zip file containing the DB migrate lambda"
