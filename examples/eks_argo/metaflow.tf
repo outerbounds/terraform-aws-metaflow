@@ -20,7 +20,7 @@ data "aws_availability_zones" "available" {
 
 module "metaflow-datastore" {
   source  = "outerbounds/metaflow/aws//modules/datastore"
-  version = "0.8.0"
+  version = "0.10.0"
 
   force_destroy_s3_bucket = true
 
@@ -37,18 +37,18 @@ module "metaflow-datastore" {
 
 module "metaflow-common" {
   source  = "outerbounds/metaflow/aws//modules/common"
-  version = "0.8.0"
+  version = "0.10.0"
 }
 
 module "metaflow-metadata-service" {
   source  = "outerbounds/metaflow/aws//modules/metadata-service"
-  version = "0.8.0"
+  version = "0.10.0"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
   access_list_cidr_blocks          = []
-  api_basic_auth                   = true
+  enable_api_basic_auth            = true
   database_name                    = module.metaflow-datastore.database_name
   database_password                = module.metaflow-datastore.database_password
   database_username                = module.metaflow-datastore.database_username

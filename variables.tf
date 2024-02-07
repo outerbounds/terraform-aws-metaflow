@@ -10,6 +10,12 @@ variable "batch_type" {
   default     = "ec2"
 }
 
+variable "db_migrate_lambda_zip_file" {
+  type        = string
+  description = "Output path for the zip file containing the DB migrate lambda"
+  default     = null
+}
+
 variable "enable_custom_batch_container_registry" {
   type        = bool
   default     = false
@@ -59,6 +65,17 @@ variable "compute_environment_egress_cidr_blocks" {
   type        = list(string)
   default     = ["0.0.0.0/0"]
   description = "CIDR blocks to which egress is allowed from the Batch Compute environment's security group"
+}
+
+variable "db_instance_type" {
+  type        = string
+  description = "RDS instance type to launch for PostgresQL database."
+  default     = "db.t2.small"
+}
+
+variable "db_engine_version" {
+  type    = string
+  default = "11"
 }
 
 variable "launch_template_http_endpoint" {
