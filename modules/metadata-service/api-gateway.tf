@@ -103,7 +103,7 @@ resource "aws_api_gateway_integration" "this" {
   }
 
   type                    = "HTTP_PROXY"
-  uri                     = "http://${aws_lb.this.dns_name}/{proxy}"
+  uri                     = "http://${var.nlb_dns_name == "" ? aws_lb.this[0].dns_name : var.nlb_dns_name}/{proxy}"
   integration_http_method = "ANY"
   passthrough_behavior    = "WHEN_NO_MATCH"
   connection_type         = "VPC_LINK"
@@ -118,7 +118,7 @@ resource "aws_api_gateway_integration" "db" {
 
 
   type                    = "HTTP_PROXY"
-  uri                     = "http://${aws_lb.this.dns_name}:8082/db_schema_status"
+  uri                     = "http://${var.nlb_dns_name == "" ? aws_lb.this[0].dns_name : var.nlb_dns_name}:8082/db_schema_status"
   integration_http_method = "GET"
   passthrough_behavior    = "WHEN_NO_MATCH"
   connection_type         = "VPC_LINK"
