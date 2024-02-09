@@ -182,3 +182,9 @@ variable "db_instance_type" {
   description = "RDS instance type to launch for PostgresQL database."
   default     = "db.t2.small"
 }
+
+variable "nlb_arn" {
+  type        = string
+  description = "The ARN of the network load balancer to use for Metaflow. A new resource will be created if unfilled."
+  default     = ""
+}

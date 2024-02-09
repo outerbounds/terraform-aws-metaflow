@@ -39,6 +39,7 @@ module "metaflow-metadata-service" {
   subnet2_id                       = var.subnet2_id
   vpc_cidr_blocks                  = var.vpc_cidr_blocks
   with_public_ip                   = var.with_public_ip
+  nlb_arn                          = var.nlb_arn
 
   standard_tags = var.tags
 }

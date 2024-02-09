@@ -45,6 +45,16 @@ resource "aws_security_group" "metadata_service_security_group" {
 }
 
 resource "aws_lb" "this" {
+  count              = var.nlb_arn == "" ? 1 : 0
+  name               = "${var.resource_prefix}nlb${var.resource_suffix}"
+  internal           = true
+  load_balancer_type = "network"
+  subnets            = [var.subnet1_id, var.subnet2_id]
+
+  tags = var.standard_tags
+}
+
+resource "aws_lb" "this" {
   name               = "${var.resource_prefix}nlb${var.resource_suffix}"
   internal           = true
   load_balancer_type = "network"
@@ -89,7 +99,7 @@ resource "aws_lb_target_group" "db_migrate" {
 }
 
 resource "aws_lb_listener" "this" {
-  load_balancer_arn = aws_lb.this.arn
+  load_balancer_arn = var.nlb_arn == "" ? aws_lb.this.arn : var.nlb_arn
   port              = "80"
   protocol          = "TCP"
 
@@ -100,7 +110,7 @@ resource "aws_lb_listener" "this" {
 }
 
 resource "aws_lb_listener" "db_migrate" {
-  load_balancer_arn = aws_lb.this.arn
+  load_balancer_arn = var.nlb_arn == "" ? aws_lb.this.arn : var.nlb_arn
   port              = "8082"
   protocol          = "TCP"
 
