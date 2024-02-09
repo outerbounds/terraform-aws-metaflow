@@ -193,3 +193,9 @@ variable "force_destroy_s3_bucket" {
   description = "Empty S3 bucket before destroying via terraform destroy"
   default     = false
 }
+
+variable "enable_key_rotation" {
+  type        = bool
+  description = "Enable key rotation for KMS keys"
+  default     = false
+}

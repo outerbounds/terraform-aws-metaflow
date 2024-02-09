@@ -65,3 +65,9 @@ variable "subnet2_id" {
   type        = string
   description = "Second subnet used for availability zone redundancy"
 }
+
+variable "enable_key_rotation" {
+  type        = bool
+  description = "Enable key rotation for KMS keys"
+  default     = false
+}
