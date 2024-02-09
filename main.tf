@@ -40,6 +40,7 @@ module "metaflow-metadata-service" {
   vpc_cidr_blocks                  = var.vpc_cidr_blocks
   with_public_ip                   = var.with_public_ip
   nlb_arn                          = var.nlb_arn
+  nlb_dns_name                     = var.nlb_dns_name
 
   standard_tags = var.tags
 }

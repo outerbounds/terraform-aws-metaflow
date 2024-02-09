@@ -90,7 +90,7 @@ resource "aws_lb_target_group" "db_migrate" {
 }
 
 resource "aws_lb_listener" "this" {
-  load_balancer_arn = var.nlb_arn == "" ? aws_lb.this.arn : var.nlb_arn
+  load_balancer_arn = var.nlb_arn == "" ? aws_lb.this[0].arn : var.nlb_arn
   port              = "80"
   protocol          = "TCP"
 
@@ -101,7 +101,7 @@ resource "aws_lb_listener" "this" {
 }
 
 resource "aws_lb_listener" "db_migrate" {
-  load_balancer_arn = var.nlb_arn == "" ? aws_lb.this.arn : var.nlb_arn
+  load_balancer_arn = var.nlb_arn == "" ? aws_lb.this[0].arn : var.nlb_arn
   port              = "8082"
   protocol          = "TCP"
 

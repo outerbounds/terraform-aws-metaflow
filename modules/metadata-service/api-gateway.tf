@@ -56,7 +56,7 @@ resource "aws_api_gateway_resource" "db" {
 resource "aws_api_gateway_vpc_link" "this" {
   count       = var.enable_api_gateway ? 1 : 0
   name        = "${var.resource_prefix}vpclink${var.resource_suffix}"
-  target_arns = [aws_lb.this.arn]
+  target_arns = [var.nlb_arn == "" ? aws_lb.this[0].arn : var.nlb_arn]
 
   tags = var.standard_tags
 }
