@@ -111,7 +111,7 @@ resource "aws_db_instance" "this" {
   password                    = random_password.this.result
   db_subnet_group_name        = aws_db_subnet_group.this.id
   max_allocated_storage       = 1000                                                                                                           # Upper limit of automatic scaled storage
-  multi_az                    = true                                                                                                           # Multiple availability zone?
+  multi_az                    = false                                                                                                           # Multiple availability zone?
   final_snapshot_identifier   = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
   vpc_security_group_ids      = [aws_security_group.rds_security_group.id]
   allow_major_version_upgrade = true
