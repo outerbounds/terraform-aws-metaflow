@@ -96,24 +96,25 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
  Define rds db instance.
 */
 resource "aws_db_instance" "this" {
-  count                     = local.use_aurora ? 0 : 1
-  publicly_accessible       = false
-  allocated_storage         = 20    # Allocate 20GB
-  storage_type              = "gp2" # general purpose SSD
-  storage_encrypted         = true
-  kms_key_id                = aws_kms_key.rds.arn
-  engine                    = var.db_engine
-  engine_version            = var.db_engine_version
-  instance_class            = var.db_instance_type                                         # Hardware configuration
-  identifier                = "${var.resource_prefix}${var.db_name}${var.resource_suffix}" # used for dns hostname needs to be customer unique in region
-  db_name                   = var.db_name                                                  # unique id for CLI commands (name of DB table which is why we're not adding the prefix as no conflicts will occur and the API expects this table name)
-  username                  = var.db_username
-  password                  = random_password.this.result
-  db_subnet_group_name      = aws_db_subnet_group.this.id
-  max_allocated_storage     = 1000                                                                                                           # Upper limit of automatic scaled storage
-  multi_az                  = true                                                                                                           # Multiple availability zone?
-  final_snapshot_identifier = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
-  vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
+  count                       = local.use_aurora ? 0 : 1
+  publicly_accessible         = false
+  allocated_storage           = 20    # Allocate 20GB
+  storage_type                = "gp2" # general purpose SSD
+  storage_encrypted           = true
+  kms_key_id                  = aws_kms_key.rds.arn
+  engine                      = var.db_engine
+  engine_version              = var.db_engine_version
+  instance_class              = var.db_instance_type                                         # Hardware configuration
+  identifier                  = "${var.resource_prefix}${var.db_name}${var.resource_suffix}" # used for dns hostname needs to be customer unique in region
+  db_name                     = var.db_name                                                  # unique id for CLI commands (name of DB table which is why we're not adding the prefix as no conflicts will occur and the API expects this table name)
+  username                    = var.db_username
+  password                    = random_password.this.result
+  db_subnet_group_name        = aws_db_subnet_group.this.id
+  max_allocated_storage       = 1000                                                                                                           # Upper limit of automatic scaled storage
+  multi_az                    = true                                                                                                           # Multiple availability zone?
+  final_snapshot_identifier   = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
+  vpc_security_group_ids      = [aws_security_group.rds_security_group.id]
+  allow_major_version_upgrade = true
 
   tags = merge(
     var.standard_tags,
