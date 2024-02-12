@@ -108,6 +108,12 @@ variable "metadata_service_container_image" {
   description = "Container image for metadata service"
 }
 
+variable "metadata_service_ephemeral_storage" {
+  type        = number
+  default     = 21
+  description = "The Gb amount of disk storage to set for the ECS task [21-200]"
+}
+
 variable "metadata_service_enable_api_basic_auth" {
   type        = bool
   default     = true
