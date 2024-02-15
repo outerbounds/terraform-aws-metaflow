@@ -74,5 +74,6 @@ resource "aws_ecs_service" "ui_backend" {
     ignore_changes = [desired_count]
   }
 
+  propagate_tags = "SERVICE"
   tags = var.standard_tags
 }

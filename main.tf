@@ -1,6 +1,8 @@
 module "metaflow-datastore" {
   source = "./modules/datastore"
 
+  db_instance_type = var.db_instance_type
+
   force_destroy_s3_bucket = var.force_destroy_s3_bucket
 
   resource_prefix = local.resource_prefix
@@ -41,6 +43,8 @@ module "metaflow-metadata-service" {
   subnet2_id                       = var.subnet2_id
   vpc_cidr_blocks                  = var.vpc_cidr_blocks
   with_public_ip                   = var.with_public_ip
+  nlb_arn                          = var.nlb_arn
+  nlb_dns_name                     = var.nlb_dns_name
 
   standard_tags = var.tags
 }

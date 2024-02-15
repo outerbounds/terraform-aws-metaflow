@@ -193,3 +193,21 @@ variable "force_destroy_s3_bucket" {
   description = "Empty S3 bucket before destroying via terraform destroy"
   default     = false
 }
+
+variable "db_instance_type" {
+  type        = string
+  description = "RDS instance type to launch for PostgresQL database."
+  default     = "db.t2.small"
+}
+
+variable "nlb_arn" {
+  type        = string
+  description = "The ARN of the network load balancer to use for Metaflow. A new resource will be created if unfilled. Must be provided together with nlb_dns_name."
+  default     = ""
+}
+
+variable "nlb_dns_name" {
+  type        = string
+  description = "The DNS name of the network load balancer to use for Metaflow. Must be provided together with nlb_arn."
+  default     = ""
+}
