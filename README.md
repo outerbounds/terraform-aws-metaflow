@@ -124,6 +124,7 @@ resource "local_file" "metaflow_config" {
 | <a name="input_metadata_service_container_image"></a> [metadata\_service\_container\_image](#input\_metadata\_service\_container\_image) | Container image for metadata service | `string` | `""` | no |
 | <a name="input_metadata_service_enable_api_basic_auth"></a> [metadata\_service\_enable\_api\_basic\_auth](#input\_metadata\_service\_enable\_api\_basic\_auth) | Enable basic auth for API Gateway? (requires key export) | `bool` | `true` | no |
 | <a name="input_metadata_service_enable_api_gateway"></a> [metadata\_service\_enable\_api\_gateway](#input\_metadata\_service\_enable\_api\_gateway) | Enable API Gateway for public metadata service endpoint | `bool` | `true` | no |
+| <a name="input_metadata_service_ephemeral_storage"></a> [metadata\_service\_ephemeral\_storage](#input\_metadata\_service\_ephemeral\_storage) | The Gb amount of disk storage to set for the ECS task [21-200] | `number` | `21` | no |
 | <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | string prefix for all resources | `string` | `"metaflow"` | no |
 | <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | string suffix for all resources | `string` | `""` | no |
 | <a name="input_subnet1_id"></a> [subnet1\_id](#input\_subnet1\_id) | First subnet used for availability zone redundancy | `string` | n/a | yes |

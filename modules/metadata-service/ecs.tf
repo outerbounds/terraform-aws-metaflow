@@ -56,6 +56,9 @@ EOF
   execution_role_arn       = var.fargate_execution_role_arn
   cpu                      = var.metadata_service_cpu
   memory                   = var.metadata_service_memory
+  ephemeral_storage {
+    size_in_gib = var.metadata_service_ephemeral_storage
+  }
 
   tags = merge(
     var.standard_tags,

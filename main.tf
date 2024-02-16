@@ -24,24 +24,25 @@ module "metaflow-metadata-service" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
-  access_list_cidr_blocks          = var.access_list_cidr_blocks
-  database_name                    = module.metaflow-datastore.database_name
-  database_password                = module.metaflow-datastore.database_password
-  database_username                = module.metaflow-datastore.database_username
-  db_migrate_lambda_zip_file       = var.db_migrate_lambda_zip_file
-  datastore_s3_bucket_kms_key_arn  = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
-  enable_api_basic_auth            = var.metadata_service_enable_api_basic_auth
-  enable_api_gateway               = var.metadata_service_enable_api_gateway
-  fargate_execution_role_arn       = module.metaflow-computation.ecs_execution_role_arn
-  iam_partition                    = var.iam_partition
-  metadata_service_container_image = local.metadata_service_container_image
-  metaflow_vpc_id                  = var.vpc_id
-  rds_master_instance_endpoint     = module.metaflow-datastore.rds_master_instance_endpoint
-  s3_bucket_arn                    = module.metaflow-datastore.s3_bucket_arn
-  subnet1_id                       = var.subnet1_id
-  subnet2_id                       = var.subnet2_id
-  vpc_cidr_blocks                  = var.vpc_cidr_blocks
-  with_public_ip                   = var.with_public_ip
+  access_list_cidr_blocks            = var.access_list_cidr_blocks
+  database_name                      = module.metaflow-datastore.database_name
+  database_password                  = module.metaflow-datastore.database_password
+  database_username                  = module.metaflow-datastore.database_username
+  db_migrate_lambda_zip_file         = var.db_migrate_lambda_zip_file
+  datastore_s3_bucket_kms_key_arn    = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
+  enable_api_basic_auth              = var.metadata_service_enable_api_basic_auth
+  enable_api_gateway                 = var.metadata_service_enable_api_gateway
+  fargate_execution_role_arn         = module.metaflow-computation.ecs_execution_role_arn
+  iam_partition                      = var.iam_partition
+  metadata_service_container_image   = local.metadata_service_container_image
+  metadata_service_ephemeral_storage = var.metadata_service_ephemeral_storage
+  metaflow_vpc_id                    = var.vpc_id
+  rds_master_instance_endpoint       = module.metaflow-datastore.rds_master_instance_endpoint
+  s3_bucket_arn                      = module.metaflow-datastore.s3_bucket_arn
+  subnet1_id                         = var.subnet1_id
+  subnet2_id                         = var.subnet2_id
+  vpc_cidr_blocks                    = var.vpc_cidr_blocks
+  with_public_ip                     = var.with_public_ip
 
   standard_tags = var.tags
 }
