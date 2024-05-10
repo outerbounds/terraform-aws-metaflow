@@ -8,6 +8,7 @@ module "metaflow-datastore" {
   metaflow_vpc_id                    = var.vpc_id
   subnet1_id                         = var.subnet1_id
   subnet2_id                         = var.subnet2_id
+  db_instance_type                   = var.db_instance_type
 
   standard_tags = var.tags
 }
@@ -24,6 +25,7 @@ module "metaflow-metadata-service" {
   database_password                = module.metaflow-datastore.database_password
   database_username                = module.metaflow-datastore.database_username
   db_migrate_lambda_zip_file       = var.db_migrate_lambda_zip_file
+  db_migrate_lambda_runtime        = var.db_migrate_lambda_runtime
   datastore_s3_bucket_kms_key_arn  = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
   fargate_execution_role_arn       = module.metaflow-computation.ecs_execution_role_arn
   iam_partition                    = var.iam_partition

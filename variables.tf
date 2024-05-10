@@ -16,10 +16,22 @@ variable "batch_type" {
   default     = "ec2"
 }
 
+variable "db_instance_type" {
+  type        = string
+  description = "RDS instance type to launch for PostgresQL database."
+  default     = "db.t2.small"
+}
+
 variable "db_migrate_lambda_zip_file" {
   type        = string
   description = "Output path for the zip file containing the DB migrate lambda"
   default     = null
+}
+
+variable "db_migrate_lambda_runtime" {
+  type        = string
+  description = "Runtime version for the DB migrate lambda"
+  default     = "python3.7"
 }
 
 variable "enable_custom_batch_container_registry" {

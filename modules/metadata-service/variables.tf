@@ -36,6 +36,12 @@ variable "db_migrate_lambda_zip_file" {
   default     = null
 }
 
+variable "db_migrate_lambda_runtime" {
+  type        = string
+  description = "Runtime version for the DB migrate lambda"
+  default     = "python3.7"
+}
+
 variable "fargate_execution_role_arn" {
   type        = string
   description = "The IAM role that grants access to ECS and Batch services which we'll use as our Metadata Service API's execution_role for our Fargate instance"
