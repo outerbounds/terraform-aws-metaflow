@@ -56,6 +56,12 @@ variable "standard_tags" {
   description = "The standard tags to apply to every AWS resource."
 }
 
+variable "db_instance_tags" {
+  description = "A map of additional tags for the DB instance"
+  type        = map(string)
+  default     = {}
+}
+
 variable "subnet1_id" {
   type        = string
   description = "First subnet used for availability zone redundancy"

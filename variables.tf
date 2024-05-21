@@ -126,6 +126,12 @@ variable "tags" {
   type        = map(string)
 }
 
+variable "db_instance_tags" {
+  description = "A map of additional tags for the DB instance"
+  type        = map(string)
+  default     = {}
+}
+
 variable "ui_alb_internal" {
   type        = bool
   description = "Defines whether the ALB for the UI is internal"

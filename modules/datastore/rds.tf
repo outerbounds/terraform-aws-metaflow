@@ -76,6 +76,7 @@ resource "aws_rds_cluster" "this" {
 
   tags = merge(
     var.standard_tags,
+    var.db_instance_tags,
     {
       Name     = "${var.resource_prefix}${var.db_name}${var.resource_suffix}"
       Metaflow = "true"
@@ -117,6 +118,7 @@ resource "aws_db_instance" "this" {
 
   tags = merge(
     var.standard_tags,
+    var.db_instance_tags,
     {
       Name     = "${var.resource_prefix}${var.db_name}${var.resource_suffix}"
       Metaflow = "true"

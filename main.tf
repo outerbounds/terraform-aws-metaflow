@@ -10,7 +10,8 @@ module "metaflow-datastore" {
   subnet2_id                         = var.subnet2_id
   db_instance_type                   = var.db_instance_type
 
-  standard_tags = var.tags
+  standard_tags    = var.tags
+  db_instance_tags = var.db_instance_tags
 }
 
 module "metaflow-metadata-service" {
