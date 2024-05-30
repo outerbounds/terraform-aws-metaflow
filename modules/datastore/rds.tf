@@ -94,7 +94,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   instance_class     = var.db_instance_type
   engine             = aws_rds_cluster.this[0].engine
   engine_version     = aws_rds_cluster.this[0].engine_version
-  ca_cert_identifier = var.ca_cert_identifier
+  ca_cert_identifier = length(var.ca_cert_identifier) > 0 ? var.ca_cert_identifier : null
 
   apply_immediately            = var.apply_immediately
   preferred_maintenance_window = length(var.maintenance_window) > 0 ? var.maintenance_window : null

@@ -208,8 +208,8 @@ variable "with_public_ip" {
 
 variable "ca_cert_identifier" {
   type        = string
-  description = "RDS CA cert identifier for the DB Instances"
-  default     = "rds-ca-2019"
+  description = "RDS CA cert identifier for the DB Instances, or leave blank for RDS default"
+  default     = ""
 }
 
 variable "apply_immediately" {
