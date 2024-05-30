@@ -10,6 +10,10 @@ module "metaflow-datastore" {
   subnet2_id                         = var.subnet2_id
   db_instance_type                   = var.db_instance_type
 
+  apply_immediately  = var.apply_immediately
+  maintenance_window = var.maintenance_window
+  ca_cert_identifier = var.ca_cert_identifier
+
   standard_tags    = var.tags
   db_instance_tags = var.db_instance_tags
 }

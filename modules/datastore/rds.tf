@@ -74,6 +74,9 @@ resource "aws_rds_cluster" "this" {
   final_snapshot_identifier = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
   vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
 
+  apply_immediately            = var.apply_immediately
+  preferred_maintenance_window = length(var.maintenance_window) > 0 ? var.maintenance_window : null
+
   tags = merge(
     var.standard_tags,
     var.db_instance_tags,
@@ -91,6 +94,10 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   instance_class     = var.db_instance_type
   engine             = aws_rds_cluster.this[0].engine
   engine_version     = aws_rds_cluster.this[0].engine_version
+  ca_cert_identifier = var.ca_cert_identifier
+
+  apply_immediately            = var.apply_immediately
+  preferred_maintenance_window = length(var.maintenance_window) > 0 ? var.maintenance_window : null
 }
 
 /*
@@ -115,6 +122,10 @@ resource "aws_db_instance" "this" {
   multi_az                  = true                                                                                                           # Multiple availability zone?
   final_snapshot_identifier = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
   vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
+  ca_cert_identifier        = var.ca_cert_identifier
+
+  apply_immediately  = var.apply_immediately
+  maintenance_window = length(var.maintenance_window) > 0 ? var.maintenance_window : null
 
   tags = merge(
     var.standard_tags,

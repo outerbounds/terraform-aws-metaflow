@@ -205,3 +205,22 @@ variable "with_public_ip" {
   default     = false
   description = "Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1_id and subnet2_id, and false otherwise"
 }
+
+variable "ca_cert_identifier" {
+  type        = string
+  description = "RDS CA cert identifier for the DB Instances"
+  default     = "rds-ca-2019"
+}
+
+variable "apply_immediately" {
+  type        = bool
+  description = "Apply RDS modifications immediately, or wait for Maintenance Window"
+  default     = false
+}
+
+variable "maintenance_window" {
+  type        = string
+  description = "Maintenance Window in format \"ddd:hh24:mi-ddd:hh24:mi\" eg. \"Mon:00:00-Mon:03:00\", or leave blank to randomise"
+  default     = ""
+}
+
