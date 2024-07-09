@@ -264,11 +264,14 @@ data "aws_iam_policy_document" "custom_s3_batch" {
     effect = "Allow"
 
     # Needs other buckets besides what specified in the batch, ecs execution, and ecs instance permissions
-    resources = [
+    resources = setunion([
       "${module.metaflow-datastore.s3_bucket_arn}/*",
       "${module.metaflow-datastore.s3_bucket_arn}",
-        "*"
-      ]
+      ],[for bucket in s3_access_buckets :
+      "arn:aws:s3:::${bucket}"
+      ], [for bucket in s3_access_buckets :
+      "arn:aws:s3:::${bucket}/*"
+      ])
   }
 }
 
@@ -401,7 +404,6 @@ data "aws_iam_policy_document" "metaflow_athena_permissions" {
       "arn:aws:glue:us-east-2:${aws_account_id}:catalog",
       "arn:aws:glue:us-east-2:${aws_account_id}:database/${glue_database}",
       "arn:aws:glue:us-east-2:${aws_account_id}:table/${glue_database}/*"    
-
     ]
   }
 
