@@ -263,15 +263,14 @@ data "aws_iam_policy_document" "custom_s3_batch" {
 
     effect = "Allow"
 
-    # Needs other buckets besides what specified in the batch, ecs execution, and ecs instance permissions
     resources = setunion([
       "${module.metaflow-datastore.s3_bucket_arn}/*",
       "${module.metaflow-datastore.s3_bucket_arn}",
-      ],[for bucket in s3_access_buckets :
+      ], [for bucket in s3_access_buckets :
       "arn:aws:s3:::${bucket}"
       ], [for bucket in s3_access_buckets :
       "arn:aws:s3:::${bucket}/*"
-      ])
+    ])
   }
 }
 
@@ -282,7 +281,7 @@ data "aws_iam_policy_document" "custom_s3_batch" {
 resource "aws_iam_role_policy_attachment" "batch_metaflow_secrets_access" {
   role       = aws_iam_role.batch_execution_role.name
   policy_arn = aws_iam_policy.batch_metaflow_access_secrets.arn
-  }
+}
 
 resource "aws_iam_policy" "batch_metaflow_access_secrets" {
   name        = "batch-metaflow-secrets-access"
@@ -334,7 +333,7 @@ data "aws_iam_policy_document" "batch_metaflow_access_secrets" {
 resource "aws_iam_role_policy_attachment" "metaflow_athena_permissions" {
   role       = aws_iam_role.batch_s3_task_role.name
   policy_arn = aws_iam_policy.metaflow_athena_permissions.arn
-  }
+}
 
 
 resource "aws_iam_policy" "metaflow_athena_permissions" {
@@ -346,7 +345,7 @@ resource "aws_iam_policy" "metaflow_athena_permissions" {
 data "aws_iam_policy_document" "metaflow_athena_permissions" {
 
   statement {
-    sid = "AthenaStartGetStopQuery"
+    sid    = "AthenaStartGetStopQuery"
     effect = "Allow"
     actions = [
       "athena:StartQueryExecution",
@@ -357,22 +356,22 @@ data "aws_iam_policy_document" "metaflow_athena_permissions" {
     ]
     resources = [
       "arn:aws:athena:${local.aws_region}:${local.aws_account_id}:workgroup/*"
-      ]
+    ]
   }
 
   statement {
-    sid = "AthenaGetDataCatalog"
+    sid    = "AthenaGetDataCatalog"
     effect = "Allow"
     actions = [
       "athena:GetDataCatalog"
     ]
     resources = [
       "arn:aws:athena:${local.aws_region}:${local.aws_account_id}:datacatalog/AwsDataCatalog"
-      ]
+    ]
   }
 
   statement {
-    sid = "GlueBatch"
+    sid    = "GlueBatch"
     effect = "Allow"
     actions = [
       "glue:GetDatabase",
@@ -390,12 +389,12 @@ data "aws_iam_policy_document" "metaflow_athena_permissions" {
   }
 
   statement {
-    sid = "CreateGlueTables"
+    sid    = "CreateGlueTables"
     effect = "Allow"
     actions = [
       "glue:CreateTable",
       "glue:UpdateTable",
-      "glue:DeleteTable"    
+      "glue:DeleteTable"
     ]
     resources = [
       # "arn:aws:glue:us-east-2:334308037886:catalog",
@@ -403,7 +402,7 @@ data "aws_iam_policy_document" "metaflow_athena_permissions" {
       # "arn:aws:glue:us-east-2:334308037886:table/*-ds-*/*"    
       "arn:aws:glue:us-east-2:${aws_account_id}:catalog",
       "arn:aws:glue:us-east-2:${aws_account_id}:database/${glue_database}",
-      "arn:aws:glue:us-east-2:${aws_account_id}:table/${glue_database}/*"    
+      "arn:aws:glue:us-east-2:${aws_account_id}:table/${glue_database}/*"
     ]
   }
 
@@ -428,7 +427,7 @@ data "aws_iam_policy_document" "metaflow_athena_permissions" {
   # }
 
   statement {
-    sid = "AthenaGetResultsBucket"
+    sid    = "AthenaGetResultsBucket"
     effect = "Allow"
     actions = [
       "s3:GetBucketLocation",
@@ -440,7 +439,7 @@ data "aws_iam_policy_document" "metaflow_athena_permissions" {
   }
 
   statement {
-    sid = "AthenaReadWriteResultsBucket"
+    sid    = "AthenaReadWriteResultsBucket"
     effect = "Allow"
     actions = [
       "s3:GetBucketLocation",

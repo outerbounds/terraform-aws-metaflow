@@ -22,6 +22,6 @@ locals {
     var.ui_static_container_image
   )
   athena_query_bucket = var.athena_query_bucket
-  glue_database = var.glue_database
+  glue_database       = var.glue_database
 
 }

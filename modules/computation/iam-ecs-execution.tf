@@ -51,22 +51,22 @@ data "aws_iam_policy_document" "ecs_task_execution_policy" {
   # SYSO Custom S3 Access #
   #########################
   statement {
-      sid = "MetaflowECSS3Permissions"
+    sid = "MetaflowECSS3Permissions"
 
-      effect = "Allow"
+    effect = "Allow"
 
-      actions = [
-        "s3:*"
-      ]
+    actions = [
+      "s3:*"
+    ]
 
     resources = [
-        # "arn:aws:s3:::s3://dev-ercot*",
-        # "arn:aws:s3:::s3://dev-metaflow*",
-        # "arn:aws:s3:::s3://dev-ds*"
-        for bucket in s3_access_buckets :
+      # "arn:aws:s3:::s3://dev-ercot*",
+      # "arn:aws:s3:::s3://dev-metaflow*",
+      # "arn:aws:s3:::s3://dev-ds*"
+      for bucket in s3_access_buckets :
       "arn:aws:s3:::${bucket}"
-      ]
-    }
+    ]
+  }
 
 }
 
@@ -83,7 +83,7 @@ resource "aws_iam_role_policy" "grant_ecs_access" {
 resource "aws_iam_role_policy_attachment" "batch_metaflow_secrets_access" {
   role       = aws_iam_role.batch_execution_role.name
   policy_arn = aws_iam_policy.batch_metaflow_access_secrets.arn
-  }
+}
 
 resource "aws_iam_policy" "batch_metaflow_access_secrets" {
   name        = "batch-metaflow-secrets-access"

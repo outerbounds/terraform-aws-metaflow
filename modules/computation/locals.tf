@@ -20,9 +20,9 @@ locals {
 
   enable_fargate_on_batch = var.batch_type == "fargate"
 
-##################
-# SYSO Additions #
-##################
+  ##################
+  # SYSO Additions #
+  ##################
 
   # SYSO s3 access buckets  
   s3_access_buckets = var.syso_s3_access_buckets
