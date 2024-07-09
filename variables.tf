@@ -199,3 +199,15 @@ variable "enable_key_rotation" {
   description = "Enable key rotation for KMS keys"
   default     = false
 }
+
+variable "athena_query_bucket" {
+  type        = string
+  description = "SYSO bucket for athena queries"
+  default     = ""
+}
+
+variable "glue_database" {
+  type        = string
+  description = "Glue database that Metaflow should have access to"
+  default     = ""
+}

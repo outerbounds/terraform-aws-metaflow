@@ -1,7 +1,7 @@
 variable "db_instance_type" {
   type        = string
   description = "RDS instance type to launch for PostgresQL database."
-  default     = "db.t3.small"
+  default     = "db.t2.small"
 }
 
 variable "db_engine" {
@@ -11,7 +11,7 @@ variable "db_engine" {
 
 variable "db_engine_version" {
   type    = string
-  default = "11"
+  default = "15"
 }
 
 variable "db_name" {

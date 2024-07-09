@@ -35,3 +35,90 @@ resource "aws_iam_role_policy_attachment" "ecs_instance_role" {
   role       = aws_iam_role.ecs_instance_role.name
   policy_arn = "arn:${var.iam_partition}:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
+
+####################
+# Custom S3 Access #
+####################
+
+resource "aws_iam_role_policy_attachment" "ecs_instance_role_for_s3" {
+  role       = aws_iam_role.ecs_instance_role.name
+  policy_arn = "arn:${var.iam_partition}:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+}
+
+resource "aws_iam_policy" "metaflow_ecs_instance_s3_policy" {
+   name        = "Metaflow-ECS-instance-s3-policy"
+   description = "S3 policy for Metaflow ECS Instance"
+   policy = data.aws_iam_policy_document.custom_s3_policy_for_ecs_instance.json
+ }
+
+ data "aws_iam_policy_document" "custom_s3_policy_for_ecs_instance" {
+  statement {
+      sid = "MetaflowBatchS3Permissions"
+
+      effect = "Allow"
+
+      actions = [
+        "s3:*"
+      ]
+
+    resources = [
+        # "arn:aws:s3:::s3://dev-ercot*",
+        # "arn:aws:s3:::s3://dev-metaflow*",
+        # "arn:aws:s3:::s3://dev-ds*"
+        for bucket in s3_access_buckets :
+      "arn:aws:s3:::${bucket}"
+      ]
+    }
+  }
+
+##############################
+# SYSO Custom Secrets Access #
+##############################
+
+resource "aws_iam_role_policy_attachment" "batch_metaflow_secrets_access" {
+  role       = aws_iam_role.batch_execution_role.name
+  policy_arn = aws_iam_policy.batch_metaflow_access_secrets.arn
+  }
+
+resource "aws_iam_policy" "batch_metaflow_access_secrets" {
+  name        = "batch-metaflow-secrets-access"
+  description = "Policy to allow metaflow to access secrets in Secrets Manager through Batch."
+  policy      = data.aws_iam_policy_document.batch_metaflow_access_secrets.json
+}
+
+data "aws_secretsmanager_secret" "batch_metaflow_secret_name" {
+  name = "morningstar"
+}
+
+# data "aws_secretsmanager_secrets" "metaflow_secrets_access" {
+#   filter {
+#     name   = "name"
+#     values = [for secret_name in secrets_access :
+#       "${secret_name}"
+#       ]
+#   }
+# }
+
+data "aws_iam_policy_document" "batch_metaflow_access_secrets" {
+
+  statement {
+    sid    = "ReadAWSSecrets"
+    effect = "Allow"
+    actions = [
+      "secretsmanager:*"
+    ]
+    resources = [
+      #data.aws_secretsmanager_secret.batch_metaflow_access_secrets[0].arn
+      data.aws_secretsmanager_secret.batch_metaflow_secret_name.arn
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "secretsmanager:ListSecrets"
+    ]
+    resources = [
+      "*"
+    ]
+  }
+}

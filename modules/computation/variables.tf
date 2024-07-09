@@ -102,3 +102,16 @@ variable "launch_template_image_id" {
   nullable    = true
   default     = null
 }
+
+
+variable "syso_s3_access_buckets" {
+  description = "A set of s3 buckets to which Metaflow should have access"
+  type        = set(string)
+  default     = []
+  }
+
+variable "syso_secrets" {
+  description = "A set of secrets to which Metaflow should have access"
+  type        = set(string)
+  default     = []
+  }
