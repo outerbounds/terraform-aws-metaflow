@@ -86,18 +86,14 @@ resource "aws_iam_policy" "batch_metaflow_access_secrets" {
   policy      = data.aws_iam_policy_document.batch_metaflow_access_secrets.json
 }
 
-data "aws_secretsmanager_secret" "batch_metaflow_secret_name" {
-  name = "morningstar"
+data "aws_secretsmanager_secrets" "metaflow_secrets_access" {
+  filter {
+    name   = "name"
+    values = [for secret_name in secrets_access :
+      "${secret_name}"
+      ]
+  }
 }
-
-# data "aws_secretsmanager_secrets" "metaflow_secrets_access" {
-#   filter {
-#     name   = "name"
-#     values = [for secret_name in secrets_access :
-#       "${secret_name}"
-#       ]
-#   }
-# }
 
 data "aws_iam_policy_document" "batch_metaflow_access_secrets" {
 
@@ -108,8 +104,7 @@ data "aws_iam_policy_document" "batch_metaflow_access_secrets" {
       "secretsmanager:*"
     ]
     resources = [
-      #data.aws_secretsmanager_secret.batch_metaflow_access_secrets[0].arn
-      data.aws_secretsmanager_secret.batch_metaflow_secret_name.arn
+      data.aws_secretsmanager_secret.metaflow_access_secrets.arns
     ]
   }
   statement {
