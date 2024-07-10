@@ -62,9 +62,6 @@ data "aws_iam_policy_document" "custom_s3_policy_for_ecs_instance" {
     ]
 
     resources = [
-      # "arn:aws:s3:::s3://dev-ercot*",
-      # "arn:aws:s3:::s3://dev-metaflow*",
-      # "arn:aws:s3:::s3://dev-ds*"
       for bucket in s3_access_buckets :
       "arn:aws:s3:::${bucket}"
     ]
