@@ -46,13 +46,16 @@ data "aws_iam_policy_document" "iam_pass_role" {
   }
 }
 
+# IAM Policies attached to 'aws_iam_role.batch_execution_role' are based on
+# Version 13 (previously 12) of AWSBatchServiceRole AWS Managed Policy -
+# arn:aws:iam::aws:policy/service-role/AWSBatchServiceRole
 data "aws_iam_policy_document" "custom_access_policy" {
   statement {
     actions = [
       "ec2:DescribeAccountAttributes",
       "ec2:DescribeInstances",
-      "ec2:DescribeInstanceAttribute",
       "ec2:DescribeInstanceStatus",
+      "ec2:DescribeInstanceAttribute",
       "ec2:DescribeSubnets",
       "ec2:DescribeSecurityGroups",
       "ec2:DescribeKeyPairs",
@@ -62,6 +65,7 @@ data "aws_iam_policy_document" "custom_access_policy" {
       "ec2:DescribeSpotFleetInstances",
       "ec2:DescribeSpotFleetRequests",
       "ec2:DescribeSpotPriceHistory",
+      "ec2:DescribeSpotFleetRequestHistory",
       "ec2:DescribeVpcClassicLink",
       "ec2:DescribeLaunchTemplateVersions",
       "ec2:CreateLaunchTemplate",
@@ -75,6 +79,7 @@ data "aws_iam_policy_document" "custom_access_policy" {
       "autoscaling:DescribeAutoScalingGroups",
       "autoscaling:DescribeLaunchConfigurations",
       "autoscaling:DescribeAutoScalingInstances",
+      "autoscaling:DescribeScalingActivities",
       "autoscaling:CreateLaunchConfiguration",
       "autoscaling:CreateAutoScalingGroup",
       "autoscaling:UpdateAutoScalingGroup",
@@ -89,6 +94,7 @@ data "aws_iam_policy_document" "custom_access_policy" {
       "ecs:DescribeContainerInstances",
       "ecs:DescribeTaskDefinition",
       "ecs:DescribeTasks",
+      "ecs:ListAccountSettings",
       "ecs:ListClusters",
       "ecs:ListContainerInstances",
       "ecs:ListTaskDefinitionFamilies",
@@ -117,9 +123,43 @@ data "aws_iam_policy_document" "custom_access_policy" {
       "*"
     ]
   }
+
+  statement {
+    actions = [
+      "ecs:TagResource"
+    ]
+
+    effect = "Allow"
+
+    resources = [
+      "arn:aws:ecs:*:*:task/*_Batch_*"
+    ]
+  }
 }
 
 data "aws_iam_policy_document" "iam_custom_policies" {
+  statement {
+    actions = [
+      "iam:PassRole"
+    ]
+
+    effect = "Allow"
+
+    resources = [
+      "*",
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "iam:PassedToService"
+      values = [
+        "ec2.amazonaws.com",
+        "ec2.amazonaws.com.cn",
+        "ecs-tasks.amazonaws.com"
+      ]
+    }
+  }
+
   statement {
     actions = [
       "iam:CreateServiceLinkedRole"
@@ -134,7 +174,12 @@ data "aws_iam_policy_document" "iam_custom_policies" {
     condition {
       test     = "StringEquals"
       variable = "iam:AWSServiceName"
-      values   = ["autoscaling.amazonaws.com", "ecs.amazonaws.com"]
+      values = [
+        "spot.amazonaws.com",
+        "spotfleet.amazonaws.com",
+        "autoscaling.amazonaws.com",
+        "ecs.amazonaws.com"
+      ]
     }
   }
 }
