@@ -75,7 +75,17 @@ variable "db_instance_type" {
 
 variable "db_engine_version" {
   type    = string
-  default = "11"
+  default = "12.17"
+}
+
+variable "db_allow_major_version_upgrade" {
+  type    = bool
+  default = false
+}
+
+variable "db_apply_immediately" {
+  type    = bool
+  default = false
 }
 
 variable "launch_template_http_endpoint" {
