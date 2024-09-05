@@ -1,9 +1,8 @@
 module "metaflow-datastore" {
   source = "./modules/datastore"
 
-  db_instance_type = var.db_instance_type
-
   force_destroy_s3_bucket = var.force_destroy_s3_bucket
+  enable_key_rotation     = var.enable_key_rotation
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
@@ -12,6 +11,9 @@ module "metaflow-datastore" {
   metaflow_vpc_id                    = var.vpc_id
   subnet1_id                         = var.subnet1_id
   subnet2_id                         = var.subnet2_id
+
+  db_instance_type  = var.db_instance_type
+  db_engine_version = var.db_engine_version
 
   standard_tags = var.tags
 }
@@ -26,6 +28,7 @@ module "metaflow-metadata-service" {
   database_name                    = module.metaflow-datastore.database_name
   database_password                = module.metaflow-datastore.database_password
   database_username                = module.metaflow-datastore.database_username
+  db_migrate_lambda_zip_file       = var.db_migrate_lambda_zip_file
   datastore_s3_bucket_kms_key_arn  = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
   enable_api_basic_auth            = var.metadata_service_enable_api_basic_auth
   enable_api_gateway               = var.metadata_service_enable_api_gateway
