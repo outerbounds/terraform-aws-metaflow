@@ -37,6 +37,12 @@ variable "enable_api_gateway" {
   description = "Enable API Gateway for public metadata service endpoint"
 }
 
+variable "db_migrate_lambda_zip_file" {
+  type        = string
+  description = "Output path for the zip file containing the DB migrate lambda"
+  default     = null
+}
+
 variable "fargate_execution_role_arn" {
   type        = string
   description = "The IAM role that grants access to ECS and Batch services which we'll use as our Metadata Service API's execution_role for our Fargate instance"

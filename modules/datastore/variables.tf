@@ -1,7 +1,7 @@
 variable "db_instance_type" {
   type        = string
   description = "RDS instance type to launch for PostgresQL database."
-  default     = "db.t2.small"
+  default     = "db.t3.small"
 }
 
 variable "db_engine" {
@@ -64,4 +64,10 @@ variable "subnet1_id" {
 variable "subnet2_id" {
   type        = string
   description = "Second subnet used for availability zone redundancy"
+}
+
+variable "enable_key_rotation" {
+  type        = bool
+  description = "Enable key rotation for KMS keys"
+  default     = false
 }
