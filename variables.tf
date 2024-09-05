@@ -70,12 +70,12 @@ variable "compute_environment_egress_cidr_blocks" {
 variable "db_instance_type" {
   type        = string
   description = "RDS instance type to launch for PostgresQL database."
-  default     = "db.t2.small"
+  default     = "db.t3.small"
 }
 
 variable "db_engine_version" {
   type    = string
-  default = "11"
+  default = "13"
 }
 
 variable "launch_template_http_endpoint" {
