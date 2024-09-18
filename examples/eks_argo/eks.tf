@@ -4,7 +4,7 @@ module "eks" {
   version = "17.23.0"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.24"
+  cluster_version = "1.30"
   subnets         = module.vpc.private_subnets
   enable_irsa     = true
   tags            = local.tags
@@ -23,7 +23,7 @@ module "eks" {
       max_capacity     = 5
       min_capacity     = 1
 
-      instance_types = ["r5.large"]
+      instance_types = ["r5.large", "g4dn.xlarge"]
       update_config = {
         max_unavailable_percentage = 50
       }
