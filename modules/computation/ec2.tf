@@ -34,6 +34,9 @@ resource "aws_launch_template" "cpu" {
     http_put_response_hop_limit = var.launch_template_http_put_response_hop_limit
   }
 
+  # Supply custom user data as a base64 encoded string.
+  user_data = var.launch_template_custom_user_data
+
   tags = var.standard_tags
 }
 

@@ -102,3 +102,10 @@ variable "launch_template_image_id" {
   nullable    = true
   default     = null
 }
+
+variable "launch_template_custom_user_data" {
+  type        = string
+  description = "Custom user data script for the launch template provided as a base64-encoded string."
+  nullable    = true
+  default     = null
+}
