@@ -90,3 +90,8 @@ variable "maintenance_window" {
   default     = ""
 }
 
+variable "bucket_key_enabled" {
+  type = bool
+  description = "Whether or not to use Amazon S3 Bucket Keys for SSE-KMS"
+  default = false
+}

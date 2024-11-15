@@ -16,6 +16,8 @@ module "metaflow-datastore" {
 
   standard_tags    = var.tags
   db_instance_tags = var.db_instance_tags
+
+  bucket_key_enabled = var.bucket_key_enabled
 }
 
 module "metaflow-metadata-service" {
