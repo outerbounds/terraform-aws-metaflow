@@ -1,5 +1,4 @@
 resource "aws_dynamodb_table" "step_functions_state_table" {
-  count        = var.active ? 1 : 0
   name         = local.dynamodb_step_functions_state_db_name
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "pathspec"

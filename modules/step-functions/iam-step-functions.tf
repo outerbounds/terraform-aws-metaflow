@@ -138,7 +138,6 @@ data "aws_iam_policy_document" "step_functions_dynamodb" {
 }
 
 resource "aws_iam_role" "step_functions_role" {
-  count              = var.active ? 1 : 0
   name               = "${var.resource_prefix}step_functions_role${var.resource_suffix}"
   description        = "IAM role for AWS Step Functions to access AWS resources (AWS Batch, AWS DynamoDB)."
   assume_role_policy = data.aws_iam_policy_document.step_functions_assume_role_policy.json
@@ -147,36 +146,31 @@ resource "aws_iam_role" "step_functions_role" {
 }
 
 resource "aws_iam_role_policy" "step_functions_batch" {
-  count  = var.active ? 1 : 0
   name   = "aws_batch"
-  role   = aws_iam_role.step_functions_role[0].id
+  role   = aws_iam_role.step_functions_role.id
   policy = data.aws_iam_policy_document.step_functions_batch_policy.json
 }
 
 resource "aws_iam_role_policy" "step_functions_s3" {
-  count  = var.active ? 1 : 0
   name   = "s3"
-  role   = aws_iam_role.step_functions_role[0].id
+  role   = aws_iam_role.step_functions_role.id
   policy = data.aws_iam_policy_document.step_functions_s3.json
 }
 
 resource "aws_iam_role_policy" "step_functions_cloudwatch" {
-  count  = var.active ? 1 : 0
   name   = "cloudwatch"
-  role   = aws_iam_role.step_functions_role[0].id
+  role   = aws_iam_role.step_functions_role.id
   policy = data.aws_iam_policy_document.step_functions_cloudwatch.json
 }
 
 resource "aws_iam_role_policy" "step_functions_eventbridge" {
-  count  = var.active ? 1 : 0
   name   = "event_bridge"
-  role   = aws_iam_role.step_functions_role[0].id
+  role   = aws_iam_role.step_functions_role.id
   policy = data.aws_iam_policy_document.step_functions_eventbridge.json
 }
 
 resource "aws_iam_role_policy" "step_functions_dynamodb" {
-  count  = var.active ? 1 : 0
   name   = "dynamodb"
-  role   = aws_iam_role.step_functions_role[0].id
+  role   = aws_iam_role.step_functions_role.id
   policy = data.aws_iam_policy_document.step_functions_dynamodb.json
 }

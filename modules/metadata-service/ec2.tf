@@ -48,7 +48,7 @@ resource "aws_lb" "this" {
   name               = "${var.resource_prefix}nlb${var.resource_suffix}"
   internal           = true
   load_balancer_type = "network"
-  subnets            = [var.subnet1_id, var.subnet2_id]
+  subnets            = var.subnet_ids
 
   tags = var.standard_tags
 }

@@ -68,14 +68,9 @@ variable "standard_tags" {
   description = "The standard tags to apply to every AWS resource."
 }
 
-variable "subnet1_id" {
-  type        = string
-  description = "The first private subnet used for redundancy"
-}
-
-variable "subnet2_id" {
-  type        = string
-  description = "The second private subnet used for redundancy"
+variable "subnet_ids" {
+  type        = list(string)
+  description = "A list of private subnets that will be used to create compute instances"
 }
 
 variable "launch_template_http_endpoint" {

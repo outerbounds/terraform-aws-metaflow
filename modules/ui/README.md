@@ -11,6 +11,7 @@ The services are deployed behind an AWS ALB, and the module will output the ALB 
 |------|-------------|------|---------|:--------:|
 | <a name="input_METAFLOW_DATASTORE_SYSROOT_S3"></a> [METAFLOW\_DATASTORE\_SYSROOT\_S3](#input\_METAFLOW\_DATASTORE\_SYSROOT\_S3) | METAFLOW\_DATASTORE\_SYSROOT\_S3 value | `string` | n/a | yes |
 | <a name="input_alb_internal"></a> [alb\_internal](#input\_alb\_internal) | Defines whether the ALB is internal | `bool` | `false` | no |
+| <a name="input_alb_subnet_ids"></a> [alb\_subnet\_ids](#input\_alb\_subnet\_ids) | A list of private or public subnet ids to be used for hosting the UI ALB. This is configured separately from other instances to allow users to specify a public subnet for the ALB while using private subnets for the rest of the components | `list(string)` | n/a | yes |
 | <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn) | SSL certificate ARN. The certificate will be used by the UI load balancer. | `string` | n/a | yes |
 | <a name="input_database_name"></a> [database\_name](#input\_database\_name) | The database name | `string` | `"metaflow"` | no |
 | <a name="input_database_password"></a> [database\_password](#input\_database\_password) | The database password | `string` | n/a | yes |
@@ -28,8 +29,7 @@ The services are deployed behind an AWS ALB, and the module will output the ALB 
 | <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | Suffix given to all AWS resources to differentiate between environment and workspace | `string` | n/a | yes |
 | <a name="input_s3_bucket_arn"></a> [s3\_bucket\_arn](#input\_s3\_bucket\_arn) | The ARN of the bucket used for Metaflow datastore | `string` | n/a | yes |
 | <a name="input_standard_tags"></a> [standard\_tags](#input\_standard\_tags) | The standard tags to apply to every AWS resource. | `map(string)` | n/a | yes |
-| <a name="input_subnet1_id"></a> [subnet1\_id](#input\_subnet1\_id) | First private subnet used for availability zone redundancy | `string` | n/a | yes |
-| <a name="input_subnet2_id"></a> [subnet2\_id](#input\_subnet2\_id) | Second private subnet used for availability zone redundancy | `string` | n/a | yes |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of private or public subnet ids used for creating Metaflow UI deployment | `list(string)` | n/a | yes |
 | <a name="input_ui_allow_list"></a> [ui\_allow\_list](#input\_ui\_allow\_list) | A list of CIDRs the UI will be available to | `list(string)` | `[]` | no |
 | <a name="input_ui_backend_container_image"></a> [ui\_backend\_container\_image](#input\_ui\_backend\_container\_image) | Container image for UI backend | `string` | `""` | no |
 | <a name="input_ui_static_container_image"></a> [ui\_static\_container\_image](#input\_ui\_static\_container\_image) | Container image for the UI frontend app | `string` | `""` | no |

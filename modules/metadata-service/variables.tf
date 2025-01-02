@@ -108,15 +108,11 @@ variable "standard_tags" {
   description = "The standard tags to apply to every AWS resource."
 }
 
-variable "subnet1_id" {
-  type        = string
-  description = "First private subnet used for availability zone redundancy"
+variable "subnet_ids" {
+  type        = list(string)
+  description = "A list of private subnets used for creating the metadata service "
 }
 
-variable "subnet2_id" {
-  type        = string
-  description = "Second private subnet used for availability zone redundancy"
-}
 variable "vpc_cidr_blocks" {
   type        = list(string)
   description = "The VPC CIDR blocks that we'll access list on our Metadata Service API to allow all internal communications"
@@ -124,5 +120,5 @@ variable "vpc_cidr_blocks" {
 
 variable "with_public_ip" {
   type        = bool
-  description = "Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1_id and subnet2_id, and false otherwise"
+  description = "Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if the list of subnets subnet_ids are public subnets, and false otherwise"
 }

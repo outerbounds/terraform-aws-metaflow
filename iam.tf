@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "custom_s3_list_batch" {
     effect = "Allow"
 
     resources = [
-      module.metaflow-datastore.s3_bucket_arn
+      local.s3_bucket_arn
     ]
   }
 }
@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "custom_s3_batch" {
     effect = "Allow"
 
     resources = [
-      "${module.metaflow-datastore.s3_bucket_arn}/*"
+      "${local.s3_bucket_arn}/*"
     ]
   }
 }
@@ -68,7 +68,7 @@ data "aws_iam_policy_document" "s3_kms" {
     ]
 
     resources = [
-      module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
+      local.datastore_s3_bucket_kms_key_arn
     ]
   }
 }
@@ -168,6 +168,7 @@ data "aws_iam_policy_document" "iam_pass_role" {
 }
 
 data "aws_iam_policy_document" "dynamodb" {
+  count = var.create_step_functions ? 1 : 0
   statement {
     sid = "Items"
     actions = [
@@ -179,7 +180,7 @@ data "aws_iam_policy_document" "dynamodb" {
     effect = "Allow"
 
     resources = [
-      module.metaflow-step-functions.metaflow_step_functions_dynamodb_table_arn
+      module.metaflow-step-functions[0].metaflow_step_functions_dynamodb_table_arn
     ]
   }
 }
@@ -237,10 +238,10 @@ resource "aws_iam_role_policy" "grant_iam_pass_role" {
 }
 
 resource "aws_iam_role_policy" "grant_dynamodb" {
-  count  = var.enable_step_functions ? 1 : 0
+  count  = var.create_step_functions ? 1 : 0
   name   = "dynamodb"
   role   = aws_iam_role.batch_s3_task_role.name
-  policy = data.aws_iam_policy_document.dynamodb.json
+  policy = data.aws_iam_policy_document.dynamodb[0].json
 }
 
 resource "aws_iam_role_policy" "grant_cloudwatch" {

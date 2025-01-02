@@ -1,15 +1,15 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v5.0.0
     hooks:
     - id: end-of-file-fixer
     - id: trailing-whitespace
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.62.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+    rev: v1.96.3
     hooks:
       - id: terraform_fmt
   - repo: https://github.com/terraform-docs/terraform-docs
-    rev: "v0.15.0"
+    rev: "v0.18.0"
     hooks:
       - id: terraform-docs-go
         name: "Main terraform module docs"

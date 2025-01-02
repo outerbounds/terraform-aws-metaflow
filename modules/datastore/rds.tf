@@ -5,7 +5,7 @@
 */
 resource "aws_db_subnet_group" "this" {
   name       = local.pg_subnet_group_name
-  subnet_ids = [var.subnet1_id, var.subnet2_id]
+  subnet_ids = var.subnet_ids
 
   tags = merge(
     var.standard_tags,
@@ -24,11 +24,21 @@ resource "aws_security_group" "rds_security_group" {
   vpc_id = var.metaflow_vpc_id
 
   # ingress only from port 5432
+  dynamic "ingress" {
+    for_each = length(var.allowed_security_group_ids) > 0 ? { 1 : 1 } : {}
+    content {
+      from_port       = 5432
+      to_port         = 5432
+      protocol        = "tcp"
+      security_groups = local.allowed_security_group_ids
+    }
+  }
+
   ingress {
-    from_port       = 5432
-    to_port         = 5432
-    protocol        = "tcp"
-    security_groups = [var.metadata_service_security_group_id]
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = var.vpc_cidr_blocks
   }
 
   # egress to anywhere
