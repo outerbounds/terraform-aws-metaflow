@@ -33,7 +33,19 @@ variable "db_username" {
 
 variable "metadata_service_security_group_id" {
   type        = string
-  description = "The security group ID used by the MetaData service. We'll grant this access to our DB."
+  description = "DEPRECATED: The security group ID used by the MetaData service. We'll grant this access to our DB."
+  default     = ""
+}
+
+variable "allowed_security_group_ids" {
+  description = "A list of security group ids that have access to the RDS instance"
+  type        = list(string)
+  default     = []
+}
+
+variable "vpc_cidr_blocks" {
+  type        = list(string)
+  description = "Current CIDR block for the VPC"
 }
 
 variable "metaflow_vpc_id" {
@@ -56,14 +68,9 @@ variable "standard_tags" {
   description = "The standard tags to apply to every AWS resource."
 }
 
-variable "subnet1_id" {
-  type        = string
-  description = "First subnet used for availability zone redundancy"
-}
-
-variable "subnet2_id" {
-  type        = string
-  description = "Second subnet used for availability zone redundancy"
+variable "subnet_ids" {
+  type        = list(string)
+  description = "A list of subnets to use for creating database instances"
 }
 
 variable "enable_key_rotation" {

@@ -71,14 +71,14 @@ variable "standard_tags" {
   description = "The standard tags to apply to every AWS resource."
 }
 
-variable "subnet1_id" {
-  type        = string
-  description = "First private subnet used for availability zone redundancy"
+variable "subnet_ids" {
+  type        = list(string)
+  description = "A list of private or public subnet ids used for creating Metaflow UI deployment"
 }
 
-variable "subnet2_id" {
-  type        = string
-  description = "Second private subnet used for availability zone redundancy"
+variable "alb_subnet_ids" {
+  type        = list(string)
+  description = "A list of private or public subnet ids to be used for hosting the UI ALB. This is configured separately from other instances to allow users to specify a public subnet for the ALB while using private subnets for the rest of the components"
 }
 
 variable "certificate_arn" {

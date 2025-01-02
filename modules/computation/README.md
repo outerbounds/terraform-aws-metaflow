@@ -29,8 +29,7 @@ To read more, see [the Metaflow docs](https://docs.metaflow.org/metaflow-on-aws/
 | <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | Prefix given to all AWS resources to differentiate between applications | `string` | n/a | yes |
 | <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | Suffix given to all AWS resources to differentiate between environment and workspace | `string` | n/a | yes |
 | <a name="input_standard_tags"></a> [standard\_tags](#input\_standard\_tags) | The standard tags to apply to every AWS resource. | `map(string)` | n/a | yes |
-| <a name="input_subnet1_id"></a> [subnet1\_id](#input\_subnet1\_id) | The first private subnet used for redundancy | `string` | n/a | yes |
-| <a name="input_subnet2_id"></a> [subnet2\_id](#input\_subnet2\_id) | The second private subnet used for redundancy | `string` | n/a | yes |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of private subnets that will be used to create compute instances | `list(string)` | n/a | yes |
 
 ## Outputs
 

@@ -53,10 +53,7 @@ resource "aws_batch_compute_environment" "this" {
     ], var.compute_environment_additional_security_group_ids)
 
     # Which subnet to launch the instances into.
-    subnets = [
-      var.subnet1_id,
-      var.subnet2_id
-    ]
+    subnets = var.subnet_ids
 
     # Type of instance Amazon EC2 for on-demand. Can use "SPOT" to use unused instances at discount if available
     type = local.enable_fargate_on_batch ? "FARGATE" : "EC2"
@@ -79,9 +76,10 @@ resource "aws_batch_job_queue" "this" {
   name     = local.batch_queue_name
   state    = "ENABLED"
   priority = 1
-  compute_environments = [
-    aws_batch_compute_environment.this.arn
-  ]
+  compute_environment_order {
+    compute_environment = aws_batch_compute_environment.this.arn
+    order               = 1
+  }
 
   tags = var.standard_tags
 }

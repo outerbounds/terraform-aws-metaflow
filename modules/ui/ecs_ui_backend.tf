@@ -61,7 +61,7 @@ resource "aws_ecs_service" "ui_backend" {
   network_configuration {
     security_groups  = [aws_security_group.fargate_security_group.id, var.metadata_service_security_group_id]
     assign_public_ip = true
-    subnets          = [var.subnet1_id, var.subnet2_id]
+    subnets          = var.subnet_ids
   }
 
   load_balancer {
