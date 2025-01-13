@@ -34,8 +34,11 @@ resource "aws_launch_template" "cpu" {
     http_put_response_hop_limit = var.launch_template_http_put_response_hop_limit
   }
 
-  # Supply custom user data as a base64 encoded string.
-  user_data = var.launch_template_custom_user_data
+  # Base64 encode user data for the launch template if it is defined. 
+  # User data must be in MIME multi-part archive format. 
+  # Refer to the AWS Batch user guide for examples. 
+  # https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html#lt-user-data
+  user_data = var.launch_template_custom_user_data != null ? base64encode(var.launch_template_custom_user_data ) : null
 
   tags = var.standard_tags
 }

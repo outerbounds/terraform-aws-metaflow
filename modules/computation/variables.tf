@@ -105,7 +105,7 @@ variable "launch_template_image_id" {
 
 variable "launch_template_custom_user_data" {
   type        = string
-  description = "Custom user data script for the launch template provided as a base64-encoded string."
+  description = "Custom user data in MIME multi-part archive format for the launch template. Refer to the AWS Batch user guide for examples at https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html#lt-user-data"
   nullable    = true
   default     = null
 }
