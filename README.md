@@ -106,6 +106,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_compute_environment_instance_types"></a> [compute\_environment\_instance\_types](#input\_compute\_environment\_instance\_types) | The instance types for the compute environment | `list(string)` | <pre>[<br/>  "c4.large",<br/>  "c4.xlarge",<br/>  "c4.2xlarge",<br/>  "c4.4xlarge",<br/>  "c4.8xlarge"<br/>]</pre> | no |
 | <a name="input_compute_environment_max_vcpus"></a> [compute\_environment\_max\_vcpus](#input\_compute\_environment\_max\_vcpus) | Maximum VCPUs for Batch Compute Environment [16-96] | `number` | `64` | no |
 | <a name="input_compute_environment_min_vcpus"></a> [compute\_environment\_min\_vcpus](#input\_compute\_environment\_min\_vcpus) | Minimum VCPUs for Batch Compute Environment [0-16] for EC2 Batch Compute Environment (ignored for Fargate) | `number` | `8` | no |
+| <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | n/a | `string` | `"11"` | no |
 | <a name="input_db_instance_tags"></a> [db\_instance\_tags](#input\_db\_instance\_tags) | A map of additional tags for the DB instance | `map(string)` | `{}` | no |
 | <a name="input_db_instance_type"></a> [db\_instance\_type](#input\_db\_instance\_type) | RDS instance type to launch for PostgresQL database. | `string` | `"db.t2.small"` | no |
 | <a name="input_db_migrate_lambda_runtime"></a> [db\_migrate\_lambda\_runtime](#input\_db\_migrate\_lambda\_runtime) | Runtime version for the DB migrate lambda | `string` | `"python3.7"` | no |

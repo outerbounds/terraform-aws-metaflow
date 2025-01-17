@@ -22,6 +22,11 @@ variable "db_instance_type" {
   default     = "db.t2.small"
 }
 
+variable "db_engine_version" {
+  type    = string
+  default = "11"
+}
+
 variable "db_migrate_lambda_zip_file" {
   type        = string
   description = "Output path for the zip file containing the DB migrate lambda"
