@@ -8,7 +8,7 @@ module "metaflow-datastore" {
   metaflow_vpc_id                    = var.vpc_id
   subnet1_id                         = var.subnet1_id
   subnet2_id                         = var.subnet2_id
-  db_instance_type                   = var.db_instance_typee
+  db_instance_type                   = var.db_instance_type
   db_engine_version                  = var.db_engine_version
 
   apply_immediately  = var.apply_immediately
