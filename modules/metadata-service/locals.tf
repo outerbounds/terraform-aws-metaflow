@@ -2,6 +2,11 @@ module "metaflow-common" {
   source = "../common"
 }
 
+data "aws_iam_role" "metadata_svc_ecs_task_role" {
+  name = var.metadata_svc_ecs_task_role_name
+  count = var.metadata_svc_ecs_task_role_name == "" ? 0 : 1
+}
+
 locals {
   # Name of ECS cluster.
   # replace() ensures names that are composed of just prefix + suffix do not have duplicate dashes
@@ -27,4 +32,7 @@ locals {
   lambda_ecs_execute_role_name = "${var.resource_prefix}lambda_ecs_execute${var.resource_suffix}"
 
   cloudwatch_logs_arn_prefix = "arn:${var.iam_partition}:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}"
+
+  metadata_svc_ecs_task_role_id = var.metadata_svc_ecs_task_role_name == "" ? aws_iam_role.metadata_svc_ecs_task_role[0].id : data.metadata_svc_ecs_task_role.id
+  metadata_svc_ecs_task_role_arn = var.metadata_svc_ecs_task_role_name == "" ? aws_iam_role.metadata_svc_ecs_task_role[0].arn : data.metadata_svc_ecs_task_role.arn
 }

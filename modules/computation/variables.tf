@@ -102,3 +102,21 @@ variable "launch_template_image_id" {
   nullable    = true
   default     = null
 }
+
+variable "batch_execution_role_name" {
+  type        = string
+  description = "Custom Name for the Batch Execution Role"
+  default     = ""
+}
+
+variable "ecs_execution_role_name" {
+  type        = string
+  description = "Custom Name for the ECS Execution Role"
+  default     = ""
+}
+
+variable "ecs_instance_role_name" {
+  type        = string
+  description = "Custom Name for the ECS Instance Role"
+  default     = ""
+}

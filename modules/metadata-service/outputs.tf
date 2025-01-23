@@ -29,7 +29,7 @@ output "metadata_service_security_group_id" {
 }
 
 output "metadata_svc_ecs_task_role_arn" {
-  value       = aws_iam_role.metadata_svc_ecs_task_role.arn
+  value       = local.metadata_svc_ecs_task_role_arn
   description = "This role is passed to AWS ECS' task definition as the `task_role`. This allows the running of the Metaflow Metadata Service to have the proper permissions to speak to other AWS resources."
 }
 

@@ -46,7 +46,9 @@ resource "aws_launch_template" "cpu" {
 */
 resource "aws_iam_instance_profile" "ecs_instance_role" {
   name = local.ecs_instance_role_name
-  role = aws_iam_role.ecs_instance_role.name
+  role = aws_iam_role.ecs_instance_role[0].name
+
+  count = var.ecs_instance_role_name == "" ? 1 : 0  
 }
 
 resource "aws_security_group" "this" {
