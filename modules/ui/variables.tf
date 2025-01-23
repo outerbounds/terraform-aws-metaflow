@@ -126,3 +126,10 @@ variable "alb_internal" {
   description = "Defines whether the ALB is internal"
   default     = false
 }
+
+variable "metadata_ui_ecs_task_role_name" {
+  type        = string
+  description = "Custom Name for the Metadata UI ECS Task Role"
+  default     = ""
+}
+

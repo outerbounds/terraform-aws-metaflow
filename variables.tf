@@ -199,3 +199,57 @@ variable "enable_key_rotation" {
   description = "Enable key rotation for KMS keys"
   default     = false
 }
+
+variable "batch_s3_task_role_name" { #DONE
+  type        = string
+  description = "Custom Name for the Batch S3 Task Role"
+  default     = ""
+}
+
+variable "batch_execution_role_name" { #DONE
+  type        = string
+  description = "Custom Name for the Batch Execution Role"
+  default     = ""
+}
+
+variable "ecs_execution_role_name" { #DONE
+  type        = string
+  description = "Custom Name for the ECS Execution Role"
+  default     = ""
+}
+
+variable "ecs_instance_role_name" { #DONE
+  type        = string
+  description = "Custom Name for the ECS Instance Role"
+  default     = ""
+}
+
+variable "metadata_svc_ecs_task_role_name" { #DONE
+  type        = string
+  description = "Custom Name for the Metadata Service ECS Task Role"
+  default     = ""
+}
+
+variable "lambda_ecs_execute_role_name" { #DONE
+  type        = string
+  description = "Custom Name for the Lambda ECS Execute Role"
+  default     = ""
+}
+
+variable "eventbridge_role_name" { #DONE
+  type        = string
+  description = "Custom Name for the EventBridge Role"
+  default     = ""
+}
+
+variable "step_functions_role_name" { #DONE
+  type        = string
+  description = "Custom Name for the Step Functions Role"
+  default     = ""
+}
+
+variable "metadata_ui_ecs_task_role_name" { #DONE
+  type        = string
+  description = "Custom Name for the Metadata UI ECS Task Role"
+  default     = ""
+}

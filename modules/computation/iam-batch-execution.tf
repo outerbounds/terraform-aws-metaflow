@@ -24,6 +24,8 @@ resource "aws_iam_role" "batch_execution_role" {
   assume_role_policy = data.aws_iam_policy_document.batch_execution_role_assume_role.json
 
   tags = var.standard_tags
+
+  count = var.batch_execution_role_name == "" ? 1 : 0
 }
 
 data "aws_iam_policy_document" "iam_pass_role" {
@@ -161,24 +163,32 @@ data "aws_iam_policy_document" "ec2_custom_policies" {
 
 resource "aws_iam_role_policy" "grant_iam_pass_role" {
   name   = "iam_pass_role"
-  role   = aws_iam_role.batch_execution_role.name
+  role   = aws_iam_role.batch_execution_role[0].name
   policy = data.aws_iam_policy_document.iam_pass_role.json
+
+  count = var.batch_execution_role_name == "" ? 1 : 0
 }
 
 resource "aws_iam_role_policy" "grant_custom_access_policy" {
   name   = "custom_access"
-  role   = aws_iam_role.batch_execution_role.name
+  role   = aws_iam_role.batch_execution_role[0].name
   policy = data.aws_iam_policy_document.custom_access_policy.json
+
+  count = var.batch_execution_role_name == "" ? 1 : 0
 }
 
 resource "aws_iam_role_policy" "grant_iam_custom_policies" {
   name   = "iam_custom"
-  role   = aws_iam_role.batch_execution_role.name
+  role   = aws_iam_role.batch_execution_role[0].name
   policy = data.aws_iam_policy_document.iam_custom_policies.json
+
+  count = var.batch_execution_role_name == "" ? 1 : 0
 }
 
 resource "aws_iam_role_policy" "grant_ec2_custom_policies" {
   name   = "ec2_custom"
-  role   = aws_iam_role.batch_execution_role.name
+  role   = aws_iam_role.batch_execution_role[0].name
   policy = data.aws_iam_policy_document.ec2_custom_policies.json
+
+  count = var.batch_execution_role_name == "" ? 1 : 0
 }

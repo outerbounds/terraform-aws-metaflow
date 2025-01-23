@@ -43,6 +43,9 @@ module "metaflow-metadata-service" {
   vpc_cidr_blocks                  = var.vpc_cidr_blocks
   with_public_ip                   = var.with_public_ip
 
+  metadata_svc_ecs_task_role_name = var.metadata_svc_ecs_task_role_name
+  lambda_ecs_execute_role_name    = var.lambda_ecs_execute_role_name
+
   standard_tags = var.tags
 }
 
@@ -73,6 +76,8 @@ module "metaflow-ui" {
   certificate_arn                    = var.ui_certificate_arn
   metadata_service_security_group_id = module.metaflow-metadata-service.metadata_service_security_group_id
 
+  metadata_ui_ecs_task_role_name = var.metadata_ui_ecs_task_role_name
+
   extra_ui_static_env_vars  = var.extra_ui_static_env_vars
   extra_ui_backend_env_vars = var.extra_ui_backend_env_vars
   standard_tags             = var.tags
@@ -98,6 +103,10 @@ module "metaflow-computation" {
   launch_template_http_tokens                 = var.launch_template_http_tokens
   launch_template_http_put_response_hop_limit = var.launch_template_http_put_response_hop_limit
 
+  batch_execution_role_name = var.batch_execution_role_name
+  ecs_execution_role_name   = var.ecs_execution_role_name
+  ecs_instance_role_name    = var.ecs_instance_role_name
+
   standard_tags = var.tags
 }
 
@@ -112,6 +121,9 @@ module "metaflow-step-functions" {
   iam_partition       = var.iam_partition
   s3_bucket_arn       = module.metaflow-datastore.s3_bucket_arn
   s3_bucket_kms_arn   = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
+
+  eventbridge_role_name    = var.eventbridge_role_name
+  step_functions_role_name = var.step_functions_role_name
 
   standard_tags = var.tags
 }

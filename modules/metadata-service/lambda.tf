@@ -18,6 +18,8 @@ resource "aws_iam_role" "lambda_ecs_execute_role" {
   assume_role_policy = data.aws_iam_policy_document.lambda_ecs_execute_role.json
 
   tags = var.standard_tags
+
+  count = var.lambda_ecs_execute_role_name == "" ? 1 : 0  
 }
 
 data "aws_iam_policy_document" "lambda_ecs_task_execute_policy_cloudwatch" {
@@ -68,14 +70,18 @@ data "aws_iam_policy_document" "lambda_ecs_task_execute_policy_vpc" {
 
 resource "aws_iam_role_policy" "grant_lambda_ecs_cloudwatch" {
   name   = "cloudwatch"
-  role   = aws_iam_role.lambda_ecs_execute_role.name
+  role   = aws_iam_role.lambda_ecs_execute_role[0].name
   policy = data.aws_iam_policy_document.lambda_ecs_task_execute_policy_cloudwatch.json
+
+  count = var.lambda_ecs_execute_role_name == "" ? 1 : 0  
 }
 
 resource "aws_iam_role_policy" "grant_lambda_ecs_vpc" {
   name   = "ecs_task_execute"
-  role   = aws_iam_role.lambda_ecs_execute_role.name
+  role   = aws_iam_role.lambda_ecs_execute_role[0].name
   policy = data.aws_iam_policy_document.lambda_ecs_task_execute_policy_vpc.json
+
+  count = var.lambda_ecs_execute_role_name == "" ? 1 : 0  
 }
 
 data "archive_file" "db_migrate_lambda" {
@@ -119,7 +125,7 @@ resource "aws_lambda_function" "db_migrate_lambda" {
   description      = "Trigger DB Migration"
   filename         = local.db_migrate_lambda_zip_file
   source_code_hash = data.archive_file.db_migrate_lambda.output_base64sha256
-  role             = aws_iam_role.lambda_ecs_execute_role.arn
+  role             = aws_iam_role.lambda_ecs_execute_role[0].arn
   tags             = var.standard_tags
 
   environment {
@@ -132,4 +138,6 @@ resource "aws_lambda_function" "db_migrate_lambda" {
     subnet_ids         = [var.subnet1_id, var.subnet2_id]
     security_group_ids = [aws_security_group.metadata_service_security_group.id]
   }
+
+  count = var.lambda_ecs_execute_role_name == "" ? 1 : 0  
 }

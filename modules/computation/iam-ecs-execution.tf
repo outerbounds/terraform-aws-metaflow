@@ -25,6 +25,8 @@ resource "aws_iam_role" "ecs_execution_role" {
   assume_role_policy = data.aws_iam_policy_document.ecs_execution_role_assume_role.json
 
   tags = var.standard_tags
+
+  count = var.ecs_execution_role_name == "" ? 1 : 0  
 }
 
 data "aws_iam_policy_document" "ecs_task_execution_policy" {
@@ -50,6 +52,8 @@ data "aws_iam_policy_document" "ecs_task_execution_policy" {
 
 resource "aws_iam_role_policy" "grant_ecs_access" {
   name   = "ecs_access"
-  role   = aws_iam_role.ecs_execution_role.name
+  role   = aws_iam_role.ecs_execution_role[0].name
   policy = data.aws_iam_policy_document.ecs_task_execution_policy.json
+
+  count = var.ecs_execution_role_name == "" ? 1 : 0  
 }

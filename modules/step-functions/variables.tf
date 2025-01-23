@@ -39,3 +39,15 @@ variable "standard_tags" {
   type        = map(string)
   description = "The standard tags to apply to every AWS resource."
 }
+
+variable "eventbridge_role_name" {
+  type        = string
+  description = "Custom Name for the EventBridge Role"
+  default     = ""
+}
+
+variable "step_functions_role_name" {
+  type        = string
+  description = "Custom Name for the Step Functions Role"
+  default     = ""
+}

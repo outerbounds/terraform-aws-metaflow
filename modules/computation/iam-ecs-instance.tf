@@ -22,6 +22,8 @@ resource "aws_iam_role" "ecs_instance_role" {
   description = "This role is passed to AWS Batch as a `instance_role`. This allows our Metaflow Batch jobs to execute with proper permissions."
 
   assume_role_policy = data.aws_iam_policy_document.ecs_instance_role_assume_role.json
+
+  count = var.ecs_instance_role_name == "" ? 1 : 0  
 }
 
 /*
@@ -32,6 +34,8 @@ resource "aws_iam_role" "ecs_instance_role" {
  https://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html
 */
 resource "aws_iam_role_policy_attachment" "ecs_instance_role" {
-  role       = aws_iam_role.ecs_instance_role.name
+  role       = aws_iam_role.ecs_instance_role[0].name
   policy_arn = "arn:${var.iam_partition}:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+
+  count = var.ecs_instance_role_name == "" ? 1 : 0  
 }

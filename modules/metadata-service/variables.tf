@@ -126,3 +126,15 @@ variable "with_public_ip" {
   type        = bool
   description = "Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1_id and subnet2_id, and false otherwise"
 }
+
+variable "metadata_svc_ecs_task_role_name" {
+  type        = string
+  description = "Custom Name for the Metadata Service ECS Task Role"
+  default     = ""
+}
+
+variable "lambda_ecs_execute_role_name" {
+  type        = string
+  description = "Custom Name for the Lambda ECS Execute Role"
+  default     = ""
+}
