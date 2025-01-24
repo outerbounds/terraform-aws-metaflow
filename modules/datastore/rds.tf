@@ -59,7 +59,7 @@ locals {
 
 resource "aws_rds_cluster" "this" {
   count              = local.use_aurora ? 1 : 0
-  cluster_identifier = "${var.resource_prefix}${var.db_name}${var.resource_suffix}"
+  cluster_identifier = local.rds_db_identifier
   kms_key_id         = aws_kms_key.rds.arn
   engine             = var.db_engine
 
@@ -71,7 +71,7 @@ resource "aws_rds_cluster" "this" {
   engine_version    = var.db_engine_version
   storage_encrypted = true
 
-  final_snapshot_identifier = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
+  final_snapshot_identifier = local.rds_final_snapshot_identifier # Snapshot upon delete
   vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
 
   apply_immediately            = var.apply_immediately
@@ -81,7 +81,7 @@ resource "aws_rds_cluster" "this" {
     var.standard_tags,
     var.db_instance_tags,
     {
-      Name     = "${var.resource_prefix}${var.db_name}${var.resource_suffix}"
+      Name     = local.rds_db_identifier
       Metaflow = "true"
     }
   )
@@ -89,7 +89,7 @@ resource "aws_rds_cluster" "this" {
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
   count              = local.use_aurora ? 1 : 0
-  identifier         = "${var.resource_prefix}${var.db_name}${var.resource_suffix}-${count.index}"
+  identifier         = "${local.rds_db_identifier}-${count.index}"
   cluster_identifier = aws_rds_cluster.this[0].id
   instance_class     = var.db_instance_type
   engine             = aws_rds_cluster.this[0].engine
@@ -112,15 +112,15 @@ resource "aws_db_instance" "this" {
   kms_key_id                = aws_kms_key.rds.arn
   engine                    = var.db_engine
   engine_version            = var.db_engine_version
-  instance_class            = var.db_instance_type                                         # Hardware configuration
-  identifier                = "${var.resource_prefix}${var.db_name}${var.resource_suffix}" # used for dns hostname needs to be customer unique in region
-  db_name                   = var.db_name                                                  # unique id for CLI commands (name of DB table which is why we're not adding the prefix as no conflicts will occur and the API expects this table name)
+  instance_class            = var.db_instance_type    # Hardware configuration
+  identifier                = local.rds_db_identifier # used for dns hostname needs to be customer unique in region
+  db_name                   = var.db_name             # unique id for CLI commands (name of DB table which is why we're not adding the prefix as no conflicts will occur and the API expects this table name)
   username                  = var.db_username
   password                  = random_password.this.result
   db_subnet_group_name      = aws_db_subnet_group.this.id
-  max_allocated_storage     = 1000                                                                                                           # Upper limit of automatic scaled storage
-  multi_az                  = true                                                                                                           # Multiple availability zone?
-  final_snapshot_identifier = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
+  max_allocated_storage     = 1000                                # Upper limit of automatic scaled storage
+  multi_az                  = true                                # Multiple availability zone?
+  final_snapshot_identifier = local.rds_final_snapshot_identifier # Snapshot upon delete
   vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
   ca_cert_identifier        = var.ca_cert_identifier
 
@@ -131,7 +131,7 @@ resource "aws_db_instance" "this" {
     var.standard_tags,
     var.db_instance_tags,
     {
-      Name     = "${var.resource_prefix}${var.db_name}${var.resource_suffix}"
+      Name     = local.rds_db_identifier
       Metaflow = "true"
     }
   )

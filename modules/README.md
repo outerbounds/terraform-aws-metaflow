@@ -24,3 +24,13 @@ Datastore to explore historic runs.
 Sets up remote computation resources that come with orchestration. This allows data scientists to schedule flows
 using crons as well as being able to kick off flows and shut down their machine, as the remote resources will handle
 all coordination.
+
+<!-- BEGIN_TF_DOCS -->
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

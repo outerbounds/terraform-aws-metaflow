@@ -127,3 +127,15 @@ variable "with_public_ip" {
   default     = false
   description = "Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1_id and subnet2_id, and false otherwise"
 }
+
+variable "load_balancer_name_prefix" {
+  type        = string
+  description = "Prefix for all load balancer names"
+  default     = ""
+}
+
+variable "ecs_cluster_settings" {
+  type        = map(string)
+  description = "Settings for the ECS cluster"
+  default     = {}
+}

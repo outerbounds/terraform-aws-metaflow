@@ -8,6 +8,7 @@ module "metaflow-datastore" {
   metaflow_vpc_id                    = var.vpc_id
   subnet1_id                         = var.subnet1_id
   subnet2_id                         = var.subnet2_id
+  db_identifier_prefix               = var.db_identifier_prefix
   db_instance_type                   = var.db_instance_type
   db_engine_version                  = var.db_engine_version
 
@@ -18,6 +19,7 @@ module "metaflow-datastore" {
   standard_tags    = var.tags
   db_instance_tags = var.db_instance_tags
 
+  s3_bucket_name     = var.s3_bucket_name
   bucket_key_enabled = var.bucket_key_enabled
 }
 
@@ -27,6 +29,8 @@ module "metaflow-metadata-service" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
+  ecs_cluster_settings             = var.ecs_cluster_settings
+  load_balancer_name_prefix        = var.load_balancer_name_prefix
   access_list_cidr_blocks          = var.access_list_cidr_blocks
   api_basic_auth                   = var.api_basic_auth
   database_name                    = module.metaflow-datastore.database_name
@@ -55,6 +59,8 @@ module "metaflow-ui" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
+  ecs_cluster_settings            = var.ecs_cluster_settings
+  load_balancer_name_prefix       = var.load_balancer_name_prefix
   database_name                   = module.metaflow-datastore.database_name
   database_password               = module.metaflow-datastore.database_password
   database_username               = module.metaflow-datastore.database_username
@@ -95,6 +101,7 @@ module "metaflow-computation" {
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
 
+  batch_cluster_name                          = var.batch_cluster_name
   batch_type                                  = var.batch_type
   compute_environment_desired_vcpus           = var.compute_environment_desired_vcpus
   compute_environment_instance_types          = var.compute_environment_instance_types

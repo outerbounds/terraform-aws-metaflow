@@ -10,10 +10,22 @@ variable "api_basic_auth" {
   description = "Enable basic auth for API Gateway? (requires key export)"
 }
 
+variable "batch_cluster_name" {
+  type        = string
+  description = "The name of the ECS cluster to use for batch processing"
+  default     = ""
+}
+
 variable "batch_type" {
   type        = string
   description = "AWS Batch Compute Type ('ec2', 'fargate')"
   default     = "ec2"
+}
+
+variable "db_identifier_prefix" {
+  type        = string
+  description = "Identifier prefix for the RDS instance"
+  default     = ""
 }
 
 variable "db_instance_type" {
@@ -159,7 +171,6 @@ variable "ui_cognito_user_pool_domain" {
   default     = ""
 }
 
-
 # variables from infra project that defines the VPC we will deploy to
 
 variable "subnet1_id" {
@@ -233,4 +244,22 @@ variable "bucket_key_enabled" {
   type        = bool
   description = "Whether or not to use Amazon S3 Bucket Keys for SSE-KMS"
   default     = false
+}
+
+variable "s3_bucket_name" {
+  type        = string
+  description = "The name of the S3 bucket used for Metaflow datastore"
+  default     = ""
+}
+
+variable "load_balancer_name_prefix" {
+  type        = string
+  description = "Prefix for all load balancer names"
+  default     = ""
+}
+
+variable "ecs_cluster_settings" {
+  type        = map(string)
+  description = "Settings for the ECS cluster"
+  default     = {}
 }

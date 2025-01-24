@@ -85,3 +85,10 @@ resource "aws_batch_job_queue" "this" {
 
   tags = var.standard_tags
 }
+
+resource "aws_ecs_tag" "batch" {
+  count        = var.batch_cluster_name != "" ? 1 : 0
+  resource_arn = aws_batch_compute_environment.this.ecs_cluster_arn
+  key          = "Name"
+  value        = var.batch_cluster_name
+}

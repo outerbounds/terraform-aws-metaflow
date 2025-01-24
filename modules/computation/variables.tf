@@ -1,3 +1,9 @@
+variable "batch_cluster_name" {
+  type        = string
+  description = "The name of the ECS cluster to use for batch processing"
+  default     = ""
+}
+
 variable "batch_type" {
   type        = string
   description = "AWS Batch Compute Type ('ec2', 'fargate')"

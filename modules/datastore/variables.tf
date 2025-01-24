@@ -20,6 +20,12 @@ variable "db_name" {
   default     = "metaflow"
 }
 
+variable "db_identifier_prefix" {
+  type        = string
+  description = "Identifier prefix for the RDS instance"
+  default     = ""
+}
+
 variable "force_destroy_s3_bucket" {
   type        = bool
   description = "Empty S3 bucket before destroying via terraform destroy"
@@ -91,7 +97,13 @@ variable "maintenance_window" {
 }
 
 variable "bucket_key_enabled" {
-  type = bool
+  type        = bool
   description = "Whether or not to use Amazon S3 Bucket Keys for SSE-KMS"
-  default = false
+  default     = false
+}
+
+variable "s3_bucket_name" {
+  type        = string
+  description = "The name of the S3 bucket used for Metaflow datastore"
+  default     = ""
 }

@@ -45,7 +45,7 @@ resource "aws_security_group" "metadata_service_security_group" {
 }
 
 resource "aws_lb" "this" {
-  name               = "${var.resource_prefix}nlb${var.resource_suffix}"
+  name               = var.load_balancer_name_prefix != "" ? "${var.load_balancer_name_prefix}-nlb" : "${var.resource_prefix}nlb${var.resource_suffix}"
   internal           = true
   load_balancer_type = "network"
   subnets            = [var.subnet1_id, var.subnet2_id]

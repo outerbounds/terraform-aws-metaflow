@@ -142,3 +142,15 @@ variable "cognito_user_pool_domain" {
   description = "The domain of the Cognito user pool"
   default     = ""
 }
+
+variable "load_balancer_name_prefix" {
+  type        = string
+  description = "Prefix for all load balancer names"
+  default     = ""
+}
+
+variable "ecs_cluster_settings" {
+  type        = map(string)
+  description = "Settings for the ECS cluster"
+  default     = {}
+}
