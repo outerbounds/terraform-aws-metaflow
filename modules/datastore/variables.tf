@@ -31,10 +31,17 @@ variable "force_destroy_s3_bucket" {
   description = "Empty S3 bucket before destroying via terraform destroy"
   default     = false
 }
+
 variable "db_username" {
   type        = string
   description = "PostgresQL username; defaults to 'metaflow'"
   default     = "metaflow"
+}
+
+variable "db_parameters" {
+  type        = map(string)
+  description = "A map of parameters to apply to the DB instance"
+  default     = {}
 }
 
 variable "metadata_service_security_group_id" {

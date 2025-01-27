@@ -11,6 +11,7 @@ module "metaflow-datastore" {
   db_identifier_prefix               = var.db_identifier_prefix
   db_instance_type                   = var.db_instance_type
   db_engine_version                  = var.db_engine_version
+  db_parameters                      = var.db_parameters
 
   apply_immediately  = var.apply_immediately
   maintenance_window = var.maintenance_window

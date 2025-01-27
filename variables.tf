@@ -51,6 +51,12 @@ variable "db_migrate_lambda_runtime" {
   default     = "python3.7"
 }
 
+variable "db_parameters" {
+  type        = map(string)
+  description = "A map of parameters to apply to the DB instance"
+  default     = {}
+}
+
 variable "enable_custom_batch_container_registry" {
   type        = bool
   default     = false

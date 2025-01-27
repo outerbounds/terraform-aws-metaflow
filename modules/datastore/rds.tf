@@ -123,6 +123,7 @@ resource "aws_db_instance" "this" {
   final_snapshot_identifier = local.rds_final_snapshot_identifier # Snapshot upon delete
   vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
   ca_cert_identifier        = var.ca_cert_identifier
+  parameter_group_name      = length(var.db_parameters) > 0 ? aws_db_parameter_group.this[0].name : null
 
   apply_immediately  = var.apply_immediately
   maintenance_window = length(var.maintenance_window) > 0 ? var.maintenance_window : null
@@ -135,4 +136,23 @@ resource "aws_db_instance" "this" {
       Metaflow = "true"
     }
   )
+}
+
+resource "aws_db_parameter_group" "this" {
+  count  = length(var.db_parameters) > 0 ? 1 : 0
+  name   = "${local.rds_db_identifier}-${var.db_engine}${var.db_engine_version}"
+  family = "${var.db_engine}${var.db_engine_version}"
+
+  dynamic "parameter" {
+    for_each = var.db_parameters
+    content {
+      apply_method = "immediate"
+      name         = parameter.key
+      value        = parameter.value
+    }
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
