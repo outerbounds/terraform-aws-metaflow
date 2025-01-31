@@ -125,8 +125,9 @@ resource "aws_db_instance" "this" {
   ca_cert_identifier        = var.ca_cert_identifier
   parameter_group_name      = length(var.db_parameters) > 0 ? aws_db_parameter_group.this[0].name : null
 
-  apply_immediately  = var.apply_immediately
-  maintenance_window = length(var.maintenance_window) > 0 ? var.maintenance_window : null
+  apply_immediately           = var.apply_immediately
+  maintenance_window          = length(var.maintenance_window) > 0 ? var.maintenance_window : null
+  allow_major_version_upgrade = var.db_allow_major_version_upgrade
 
   tags = merge(
     var.standard_tags,

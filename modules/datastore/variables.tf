@@ -44,6 +44,12 @@ variable "db_parameters" {
   default     = {}
 }
 
+variable "db_allow_major_version_upgrade" {
+  type        = bool
+  description = "Allow major version upgrades for the RDS instance"
+  default     = false
+}
+
 variable "metadata_service_security_group_id" {
   type        = string
   description = "The security group ID used by the MetaData service. We'll grant this access to our DB."

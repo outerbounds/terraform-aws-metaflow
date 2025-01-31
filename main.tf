@@ -13,9 +13,10 @@ module "metaflow-datastore" {
   db_engine_version                  = var.db_engine_version
   db_parameters                      = var.db_parameters
 
-  apply_immediately  = var.apply_immediately
-  maintenance_window = var.maintenance_window
-  ca_cert_identifier = var.ca_cert_identifier
+  apply_immediately              = var.apply_immediately
+  maintenance_window             = var.maintenance_window
+  ca_cert_identifier             = var.ca_cert_identifier
+  db_allow_major_version_upgrade = var.db_allow_major_version_upgrade
 
   standard_tags    = var.tags
   db_instance_tags = var.db_instance_tags
