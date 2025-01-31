@@ -79,9 +79,10 @@ resource "aws_batch_job_queue" "this" {
   name     = local.batch_queue_name
   state    = "ENABLED"
   priority = 1
-  compute_environments = [
-    aws_batch_compute_environment.this.arn
-  ]
+  compute_environment_order {
+    order               = 1
+    compute_environment = aws_batch_compute_environment.this.arn
+  }
 
   tags = var.standard_tags
 }
