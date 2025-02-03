@@ -19,4 +19,6 @@ locals {
   ecs_instance_role_name = "${var.resource_prefix}ecs-iam-role${var.resource_suffix}"
 
   enable_fargate_on_batch = var.batch_type == "fargate"
+
+  job_state_valid = ( var.job_state_time_limit_timeout != null && var.job_state_time_limit_reason != null )
 }
