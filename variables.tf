@@ -200,17 +200,16 @@ variable "enable_key_rotation" {
   default     = false
 }
 
-variable "job_state_time_limit_action" {
-  type        = string
-  description = "The action to take when the job times out"
-}
-
 variable "job_state_time_limit_timeout" {
   type        = number
   description = "The time limit in seconds for the job to run before the action is taken"
+    validation {
+    condition = var.job_state_time_limit_timeout >= 600
+    error_message = "The value for 'job_state_time_limit_timeout' must be greater than 600."
+  }
 }
 
 variable "job_state_time_limit_reason" {
-  type        = number
-  description = "The reason for the job state time limit action"
+  type        = string
+  description = "The reason to log for the action being taken."
 }
