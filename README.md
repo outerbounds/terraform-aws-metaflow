@@ -107,6 +107,11 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_compute_environment_instance_types"></a> [compute\_environment\_instance\_types](#input\_compute\_environment\_instance\_types) | The instance types for the compute environment | `list(string)` | <pre>[<br/>  "c4.large",<br/>  "c4.xlarge",<br/>  "c4.2xlarge",<br/>  "c4.4xlarge",<br/>  "c4.8xlarge"<br/>]</pre> | no |
 | <a name="input_compute_environment_max_vcpus"></a> [compute\_environment\_max\_vcpus](#input\_compute\_environment\_max\_vcpus) | Maximum VCPUs for Batch Compute Environment [16-96] | `number` | `64` | no |
 | <a name="input_compute_environment_min_vcpus"></a> [compute\_environment\_min\_vcpus](#input\_compute\_environment\_min\_vcpus) | Minimum VCPUs for Batch Compute Environment [0-16] for EC2 Batch Compute Environment (ignored for Fargate) | `number` | `8` | no |
+| <a name="input_database_ssl_cert_path"></a> [database\_ssl\_cert\_path](#input\_database\_ssl\_cert\_path) | The database SSL certificate path | `string` | `""` | no |
+| <a name="input_database_ssl_key_path"></a> [database\_ssl\_key\_path](#input\_database\_ssl\_key\_path) | The database SSL key path | `string` | `""` | no |
+| <a name="input_database_ssl_mode"></a> [database\_ssl\_mode](#input\_database\_ssl\_mode) | The database SSL mode | `string` | `"disable"` | no |
+| <a name="input_database_ssl_root_cert"></a> [database\_ssl\_root\_cert](#input\_database\_ssl\_root\_cert) | The database SSL root certificate | `string` | `""` | no |
+| <a name="input_db_allow_major_version_upgrade"></a> [db\_allow\_major\_version\_upgrade](#input\_db\_allow\_major\_version\_upgrade) | Allow major version upgrades for the RDS instance | `bool` | `false` | no |
 | <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | n/a | `string` | `"11"` | no |
 | <a name="input_db_identifier_prefix"></a> [db\_identifier\_prefix](#input\_db\_identifier\_prefix) | Identifier prefix for the RDS instance | `string` | `""` | no |
 | <a name="input_db_instance_tags"></a> [db\_instance\_tags](#input\_db\_instance\_tags) | A map of additional tags for the DB instance | `map(string)` | `{}` | no |

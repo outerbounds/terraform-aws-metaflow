@@ -38,6 +38,10 @@ module "metaflow-metadata-service" {
   database_name                    = module.metaflow-datastore.database_name
   database_password                = module.metaflow-datastore.database_password
   database_username                = module.metaflow-datastore.database_username
+  database_ssl_mode                = var.database_ssl_mode
+  database_ssl_cert_path           = var.database_ssl_cert_path
+  database_ssl_key_path            = var.database_ssl_key_path
+  database_ssl_root_cert           = var.database_ssl_root_cert
   db_migrate_lambda_zip_file       = var.db_migrate_lambda_zip_file
   db_migrate_lambda_runtime        = var.db_migrate_lambda_runtime
   datastore_s3_bucket_kms_key_arn  = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn

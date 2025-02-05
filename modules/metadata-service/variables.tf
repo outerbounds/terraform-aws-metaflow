@@ -25,6 +25,35 @@ variable "database_username" {
   description = "The database username"
 }
 
+variable "database_ssl_mode" {
+  type        = string
+  default     = "disable"
+  description = "The database SSL mode"
+
+  validation {
+    condition     = contains(["disable", "allow", "prefer", "require", "verify-ca", "verify-full"], var.database_ssl_mode)
+    error_message = "'database_ssl_mode' must be one of 'disable', 'allow', 'prefer', 'require', 'verify-ca', 'verify-full'"
+  }
+}
+
+variable "database_ssl_cert_path" {
+  type        = string
+  default     = ""
+  description = "The database SSL certificate path"
+}
+
+variable "database_ssl_key_path" {
+  type        = string
+  default     = ""
+  description = "The database SSL key path"
+}
+
+variable "database_ssl_root_cert" {
+  type        = string
+  default     = ""
+  description = "The database SSL root certificate"
+}
+
 variable "datastore_s3_bucket_kms_key_arn" {
   type        = string
   description = "The ARN of the KMS key used to encrypt the Metaflow datastore S3 bucket"

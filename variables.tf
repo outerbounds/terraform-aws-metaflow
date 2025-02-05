@@ -63,6 +63,30 @@ variable "db_allow_major_version_upgrade" {
   default     = false
 }
 
+variable "database_ssl_mode" {
+  type        = string
+  default     = "disable"
+  description = "The database SSL mode"
+}
+
+variable "database_ssl_cert_path" {
+  type        = string
+  default     = ""
+  description = "The database SSL certificate path"
+}
+
+variable "database_ssl_key_path" {
+  type        = string
+  default     = ""
+  description = "The database SSL key path"
+}
+
+variable "database_ssl_root_cert" {
+  type        = string
+  default     = ""
+  description = "The database SSL root certificate"
+}
+
 variable "enable_custom_batch_container_registry" {
   type        = bool
   default     = false

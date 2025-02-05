@@ -88,6 +88,10 @@ If the `access_list_cidr_blocks` variable is set, only traffic originating from 
 | <a name="input_api_basic_auth"></a> [api\_basic\_auth](#input\_api\_basic\_auth) | Enable basic auth for API Gateway? (requires key export) | `bool` | `true` | no |
 | <a name="input_database_name"></a> [database\_name](#input\_database\_name) | The database name | `string` | `"metaflow"` | no |
 | <a name="input_database_password"></a> [database\_password](#input\_database\_password) | The database password | `string` | n/a | yes |
+| <a name="input_database_ssl_cert_path"></a> [database\_ssl\_cert\_path](#input\_database\_ssl\_cert\_path) | The database SSL certificate path | `string` | `""` | no |
+| <a name="input_database_ssl_key_path"></a> [database\_ssl\_key\_path](#input\_database\_ssl\_key\_path) | The database SSL key path | `string` | `""` | no |
+| <a name="input_database_ssl_mode"></a> [database\_ssl\_mode](#input\_database\_ssl\_mode) | The database SSL mode | `string` | `"disable"` | no |
+| <a name="input_database_ssl_root_cert"></a> [database\_ssl\_root\_cert](#input\_database\_ssl\_root\_cert) | The database SSL root certificate | `string` | `""` | no |
 | <a name="input_database_username"></a> [database\_username](#input\_database\_username) | The database username | `string` | n/a | yes |
 | <a name="input_datastore_s3_bucket_kms_key_arn"></a> [datastore\_s3\_bucket\_kms\_key\_arn](#input\_datastore\_s3\_bucket\_kms\_key\_arn) | The ARN of the KMS key used to encrypt the Metaflow datastore S3 bucket | `string` | n/a | yes |
 | <a name="input_db_migrate_lambda_runtime"></a> [db\_migrate\_lambda\_runtime](#input\_db\_migrate\_lambda\_runtime) | Runtime version for the DB migrate lambda | `string` | `"python3.7"` | no |
