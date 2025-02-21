@@ -26,6 +26,12 @@ variable "db_identifier_prefix" {
   default     = ""
 }
 
+variable "db_multi_az" {
+  type        = bool
+  description = "Enable Multi-AZ for the RDS instance"
+  default     = true
+}
+
 variable "force_destroy_s3_bucket" {
   type        = bool
   description = "Empty S3 bucket before destroying via terraform destroy"

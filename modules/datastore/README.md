@@ -57,11 +57,13 @@ No modules.
 | <a name="input_apply_immediately"></a> [apply\_immediately](#input\_apply\_immediately) | Apply RDS modifications immediately, or wait for Maintenance Window | `bool` | `false` | no |
 | <a name="input_bucket_key_enabled"></a> [bucket\_key\_enabled](#input\_bucket\_key\_enabled) | Whether or not to use Amazon S3 Bucket Keys for SSE-KMS | `bool` | `false` | no |
 | <a name="input_ca_cert_identifier"></a> [ca\_cert\_identifier](#input\_ca\_cert\_identifier) | RDS CA cert identifier for the DB Instances, or leave blank for RDS default | `string` | `""` | no |
+| <a name="input_db_allow_major_version_upgrade"></a> [db\_allow\_major\_version\_upgrade](#input\_db\_allow\_major\_version\_upgrade) | Allow major version upgrades for the RDS instance | `bool` | `false` | no |
 | <a name="input_db_engine"></a> [db\_engine](#input\_db\_engine) | n/a | `string` | `"postgres"` | no |
 | <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | n/a | `string` | `"11"` | no |
 | <a name="input_db_identifier_prefix"></a> [db\_identifier\_prefix](#input\_db\_identifier\_prefix) | Identifier prefix for the RDS instance | `string` | `""` | no |
 | <a name="input_db_instance_tags"></a> [db\_instance\_tags](#input\_db\_instance\_tags) | A map of additional tags for the DB instance | `map(string)` | `{}` | no |
 | <a name="input_db_instance_type"></a> [db\_instance\_type](#input\_db\_instance\_type) | RDS instance type to launch for PostgresQL database. | `string` | `"db.t2.small"` | no |
+| <a name="input_db_multi_az"></a> [db\_multi\_az](#input\_db\_multi\_az) | Enable Multi-AZ for the RDS instance | `bool` | `true` | no |
 | <a name="input_db_name"></a> [db\_name](#input\_db\_name) | Name of PostgresQL database for Metaflow service. | `string` | `"metaflow"` | no |
 | <a name="input_db_parameters"></a> [db\_parameters](#input\_db\_parameters) | A map of parameters to apply to the DB instance | `map(string)` | `{}` | no |
 | <a name="input_db_username"></a> [db\_username](#input\_db\_username) | PostgresQL username; defaults to 'metaflow' | `string` | `"metaflow"` | no |

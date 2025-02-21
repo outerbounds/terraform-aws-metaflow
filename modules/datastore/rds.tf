@@ -118,8 +118,8 @@ resource "aws_db_instance" "this" {
   username                  = var.db_username
   password                  = random_password.this.result
   db_subnet_group_name      = aws_db_subnet_group.this.id
-  max_allocated_storage     = 1000                                # Upper limit of automatic scaled storage
-  multi_az                  = true                                # Multiple availability zone?
+  max_allocated_storage     = 1000 # Upper limit of automatic scaled storage
+  multi_az                  = var.db_multi_az
   final_snapshot_identifier = local.rds_final_snapshot_identifier # Snapshot upon delete
   vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
   ca_cert_identifier        = var.ca_cert_identifier

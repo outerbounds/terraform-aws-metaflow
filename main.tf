@@ -12,6 +12,7 @@ module "metaflow-datastore" {
   db_instance_type                   = var.db_instance_type
   db_engine_version                  = var.db_engine_version
   db_parameters                      = var.db_parameters
+  db_multi_az                        = var.db_multi_az
 
   apply_immediately              = var.apply_immediately
   maintenance_window             = var.maintenance_window

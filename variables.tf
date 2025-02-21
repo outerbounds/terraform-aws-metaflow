@@ -28,6 +28,12 @@ variable "db_identifier_prefix" {
   default     = ""
 }
 
+variable "db_multi_az" {
+  type        = bool
+  description = "Enable Multi-AZ for the RDS instance"
+  default     = true
+}
+
 variable "db_instance_type" {
   type        = string
   description = "RDS instance type to launch for PostgresQL database."
