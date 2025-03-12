@@ -199,3 +199,21 @@ variable "enable_key_rotation" {
   description = "Enable key rotation for KMS keys"
   default     = false
 }
+
+variable "enable_s3_versioning" {
+  type        = bool
+  description = "Enable versioning for S3 bucket"
+  default     = false
+}
+
+variable "rds_backup_retention_period" {
+  description = "The days to retain backups for"
+  type        = number
+  default     = null
+}
+
+variable "rds_preferred_backup_window" {
+  description = "The daily time range during which automated backups are created if automated backups are enabled using the `backup_retention_period` parameter. Time in UTC"
+  type        = string
+  default     = "02:00-03:00"
+}

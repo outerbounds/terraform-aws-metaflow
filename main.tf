@@ -12,6 +12,10 @@ module "metaflow-datastore" {
   subnet1_id                         = var.subnet1_id
   subnet2_id                         = var.subnet2_id
 
+  enable_versioning       = var.enable_s3_versioning
+  backup_retention_period = var.rds_backup_retention_period
+  preferred_backup_window = var.rds_preferred_backup_window
+
   db_instance_type  = var.db_instance_type
   db_engine_version = var.db_engine_version
 
