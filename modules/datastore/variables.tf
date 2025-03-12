@@ -71,3 +71,9 @@ variable "enable_key_rotation" {
   description = "Enable key rotation for KMS keys"
   default     = false
 }
+
+variable "enable_versioning" {
+  type        = bool
+  description = "Enable versioning for S3 bucket"
+  default     = false
+}

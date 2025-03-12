@@ -19,6 +19,14 @@ resource "aws_s3_bucket" "this" {
   )
 }
 
+resource "aws_s3_bucket_versioning" "this" {
+  count  = var.enable_versioning ? 1 : 0
+  bucket = aws_s3_bucket.this.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_public_access_block" "this" {
   bucket = aws_s3_bucket.this.id
 
