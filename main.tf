@@ -23,6 +23,7 @@ module "metaflow-datastore" {
   db_instance_tags = var.db_instance_tags
 
   s3_bucket_name     = var.s3_bucket_name
+  s3_bucket_tags     = var.s3_bucket_tags
   bucket_key_enabled = var.bucket_key_enabled
 }
 

@@ -191,6 +191,12 @@ variable "db_instance_tags" {
   default     = {}
 }
 
+variable "s3_bucket_tags" {
+  description = "A map of additional tags for the S3 bucket"
+  type        = map(string)
+  default     = {}
+}
+
 variable "ui_alb_internal" {
   type        = bool
   description = "Defines whether the ALB for the UI is internal"

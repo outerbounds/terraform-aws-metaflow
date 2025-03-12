@@ -14,6 +14,7 @@ resource "aws_s3_bucket" "this" {
 
   tags = merge(
     var.standard_tags,
+    var.s3_bucket_tags,
     {
       Metaflow = "true"
     }

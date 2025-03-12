@@ -87,6 +87,12 @@ variable "db_instance_tags" {
   default     = {}
 }
 
+variable "s3_bucket_tags" {
+  description = "A map of additional tags for the S3 bucket"
+  type        = map(string)
+  default     = {}
+}
+
 variable "subnet1_id" {
   type        = string
   description = "First subnet used for availability zone redundancy"
