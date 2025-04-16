@@ -84,7 +84,7 @@ module "metaflow-ui" {
   ui_static_container_image       = local.ui_static_container_image
   alb_internal                    = var.ui_alb_internal
   ui_allow_list                   = var.ui_allow_list
-  lb_access_log_bucket            = var.enable_lb_access_logging ? aws_s3_bucket.elb_access_logs_bucket[0].id : null
+  elb_access_logging_bucket       = var.elb_access_logging_enabled ? aws_s3_bucket.elb_access_logs_bucket[0].id : null
 
   cognito_user_pool_arn       = var.ui_cognito_user_pool_arn
   cognito_user_pool_client_id = var.ui_cognito_user_pool_client_id

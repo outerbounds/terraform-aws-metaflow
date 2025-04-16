@@ -83,9 +83,9 @@ resource "aws_lb" "this" {
   ]
 
   dynamic "access_logs" {
-    for_each = var.lb_access_log_bucket != null ? [1] : []
+    for_each = var.elb_access_logging_bucket != null ? [1] : []
     content {
-      bucket  = var.lb_access_log_bucket
+      bucket  = var.elb_access_logging_bucket
       enabled = true
       prefix  = ""
     }

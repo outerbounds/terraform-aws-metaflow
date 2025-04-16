@@ -312,10 +312,16 @@ variable "ecs_cluster_settings" {
   default     = {}
 }
 
-variable "enable_lb_access_logging" {
+variable "elb_access_logging_enabled" {
   type        = bool
-  description = "Enable access logging for all load balancers"
+  description = "Enable access logging for all Elastic Load Balancers"
   default     = false
+}
+
+variable "elb_access_logging_bucket_prefix" {
+  type        = string
+  description = "Optional Prefix for the ELB access logging bucket"
+  default     = ""
 }
 
 variable "region_available_before_2022" {

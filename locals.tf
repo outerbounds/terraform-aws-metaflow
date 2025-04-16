@@ -24,5 +24,5 @@ locals {
     module.metaflow-common.default_ui_static_container_image :
     var.ui_static_container_image
   )
-  lb_access_logs_bucket_name = "${local.resource_prefix}elb-access-logs-${local.aws_account_id}-${local.aws_region_short}"
+  lb_access_logs_bucket_name = var.elb_access_logging_bucket_prefix != "" ? "${var.elb_access_logging_bucket_prefix}-elb-access-logs-${local.aws_account_id}-${local.aws_region_short}" : "${local.resource_prefix}elb-access-logs-${local.aws_account_id}-${local.aws_region_short}"
 }
