@@ -122,6 +122,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_db_parameters"></a> [db\_parameters](#input\_db\_parameters) | A map of parameters to apply to the DB instance | `map(string)` | `{}` | no |
 | <a name="input_ecs_cluster_settings"></a> [ecs\_cluster\_settings](#input\_ecs\_cluster\_settings) | Settings for the ECS cluster | `map(string)` | `{}` | no |
 | <a name="input_enable_custom_batch_container_registry"></a> [enable\_custom\_batch\_container\_registry](#input\_enable\_custom\_batch\_container\_registry) | Provisions infrastructure for custom Amazon ECR container registry if enabled | `bool` | `false` | no |
+| <a name="input_enable_lb_access_logging"></a> [enable\_lb\_access\_logging](#input\_enable\_lb\_access\_logging) | Enable access logging for all load balancers | `bool` | `false` | no |
 | <a name="input_enable_step_functions"></a> [enable\_step\_functions](#input\_enable\_step\_functions) | Provisions infrastructure for step functions if enabled | `bool` | n/a | yes |
 | <a name="input_extra_ui_backend_env_vars"></a> [extra\_ui\_backend\_env\_vars](#input\_extra\_ui\_backend\_env\_vars) | Additional environment variables for UI backend container | `map(string)` | `{}` | no |
 | <a name="input_extra_ui_static_env_vars"></a> [extra\_ui\_static\_env\_vars](#input\_extra\_ui\_static\_env\_vars) | Additional environment variables for UI static app | `map(string)` | `{}` | no |
@@ -132,6 +133,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_load_balancer_name_prefix"></a> [load\_balancer\_name\_prefix](#input\_load\_balancer\_name\_prefix) | Prefix for all load balancer names | `string` | `""` | no |
 | <a name="input_maintenance_window"></a> [maintenance\_window](#input\_maintenance\_window) | Maintenance Window in format "ddd:hh24:mi-ddd:hh24:mi" eg. "Mon:00:00-Mon:03:00", or leave blank to randomise | `string` | `""` | no |
 | <a name="input_metadata_service_container_image"></a> [metadata\_service\_container\_image](#input\_metadata\_service\_container\_image) | Container image for metadata service | `string` | `""` | no |
+| <a name="input_region_available_before_2022"></a> [region\_available\_before\_2022](#input\_region\_available\_before\_2022) | Set to false if the region is not available before 2022. This is used for the ELB access logging bucket policy, as older regions have different bucket policy principle statements, see: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html#attach-bucket-policy | `bool` | `true` | no |
 | <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | string prefix for all resources | `string` | `"metaflow"` | no |
 | <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | string suffix for all resources | `string` | `""` | no |
 | <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | The name of the S3 bucket used for Metaflow datastore | `string` | `""` | no |

@@ -311,3 +311,15 @@ variable "ecs_cluster_settings" {
   description = "Settings for the ECS cluster"
   default     = {}
 }
+
+variable "enable_lb_access_logging" {
+  type        = bool
+  description = "Enable access logging for all load balancers"
+  default     = false
+}
+
+variable "region_available_before_2022" {
+  type        = bool
+  default     = true
+  description = "Set to false if the region is not available before 2022. This is used for the ELB access logging bucket policy, as older regions have different bucket policy principle statements, see: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html#attach-bucket-policy"
+}

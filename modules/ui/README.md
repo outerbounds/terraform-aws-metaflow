@@ -71,6 +71,7 @@ The services are deployed behind an AWS ALB, and the module will output the ALB 
 | <a name="input_fargate_execution_role_arn"></a> [fargate\_execution\_role\_arn](#input\_fargate\_execution\_role\_arn) | This role allows Fargate to pull container images and logs. We'll use it as execution\_role for our Fargate task | `string` | n/a | yes |
 | <a name="input_iam_partition"></a> [iam\_partition](#input\_iam\_partition) | IAM Partition (Select aws-us-gov for AWS GovCloud, otherwise leave as is) | `string` | `"aws"` | no |
 | <a name="input_is_gov"></a> [is\_gov](#input\_is\_gov) | Set to true if IAM partition is 'aws-us-gov' | `bool` | `false` | no |
+| <a name="input_lb_access_log_bucket"></a> [lb\_access\_log\_bucket](#input\_lb\_access\_log\_bucket) | The bucket to store load balancer access logs | `string` | `null` | no |
 | <a name="input_load_balancer_name_prefix"></a> [load\_balancer\_name\_prefix](#input\_load\_balancer\_name\_prefix) | Prefix for all load balancer names | `string` | `""` | no |
 | <a name="input_metadata_service_security_group_id"></a> [metadata\_service\_security\_group\_id](#input\_metadata\_service\_security\_group\_id) | The security group ID used by the MetaData service. This security group should allow connections to the RDS instance. | `string` | n/a | yes |
 | <a name="input_metaflow_vpc_id"></a> [metaflow\_vpc\_id](#input\_metaflow\_vpc\_id) | VPC to deploy services into | `string` | n/a | yes |

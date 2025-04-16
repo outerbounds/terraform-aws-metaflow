@@ -154,3 +154,9 @@ variable "ecs_cluster_settings" {
   description = "Settings for the ECS cluster"
   default     = {}
 }
+
+variable "lb_access_log_bucket" {
+  type        = string
+  description = "The bucket to store load balancer access logs"
+  default     = null
+}

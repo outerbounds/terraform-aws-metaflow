@@ -82,6 +82,15 @@ resource "aws_lb" "this" {
     aws_security_group.ui_lb_security_group.id
   ]
 
+  dynamic "access_logs" {
+    for_each = var.lb_access_log_bucket != null ? [1] : []
+    content {
+      bucket  = var.lb_access_log_bucket
+      enabled = true
+      prefix  = ""
+    }
+  }
+
   tags = var.standard_tags
 }
 
