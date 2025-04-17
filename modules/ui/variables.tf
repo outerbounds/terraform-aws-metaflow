@@ -158,5 +158,5 @@ variable "ecs_cluster_settings" {
 variable "elb_access_logging_bucket" {
   type        = string
   description = "The bucket to store ELB access logs"
-  default     = null
+  default     = ""
 }
