@@ -155,8 +155,15 @@ variable "ecs_cluster_settings" {
   default     = {}
 }
 
+variable "elb_access_logging_enabled" {
+  type        = bool
+  description = "Enable access logging for all Elastic Load Balancers"
+  default     = false
+}
+
 variable "elb_access_logging_bucket" {
   type        = string
   description = "The bucket to store ELB access logs"
   default     = ""
 }
+

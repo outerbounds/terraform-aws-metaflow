@@ -83,9 +83,8 @@ resource "aws_lb" "this" {
   ]
 
   access_logs {
-    bucket  = var.elb_access_logging_bucket != "" ? var.elb_access_logging_bucket : null
-    enabled = var.elb_access_logging_bucket != "" ? true : false
-    prefix  = var.elb_access_logging_bucket != "" ? "" : null
+    bucket  = var.elb_access_logging_enabled && var.elb_access_logging_bucket != "" ? var.elb_access_logging_bucket : ""
+    enabled = var.elb_access_logging_enabled && var.elb_access_logging_bucket != ""
   }
 
   tags = var.standard_tags
