@@ -71,6 +71,9 @@ resource "aws_rds_cluster" "this" {
   engine_version    = var.db_engine_version
   storage_encrypted = true
 
+  backup_retention_period = var.backup_retention_period
+  preferred_backup_window = var.preferred_backup_window
+
   final_snapshot_identifier = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
   vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
 
@@ -114,6 +117,7 @@ resource "aws_db_instance" "this" {
   multi_az                  = true                                                                                                           # Multiple availability zone?
   final_snapshot_identifier = "${var.resource_prefix}${var.db_name}-final-snapshot${var.resource_suffix}-${random_pet.final_snapshot_id.id}" # Snapshot upon delete
   vpc_security_group_ids    = [aws_security_group.rds_security_group.id]
+  backup_retention_period   = var.backup_retention_period
 
   tags = merge(
     var.standard_tags,
