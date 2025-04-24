@@ -167,3 +167,8 @@ variable "elb_access_logging_bucket" {
   default     = ""
 }
 
+variable "elb_ssl_policy" {
+  type        = string
+  description = "The SSL policy to use for the load balancer"
+  default     = "ELBSecurityPolicy-2016-08"
+}

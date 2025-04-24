@@ -123,6 +123,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_ecs_cluster_settings"></a> [ecs\_cluster\_settings](#input\_ecs\_cluster\_settings) | Settings for the ECS cluster | `map(string)` | `{}` | no |
 | <a name="input_elb_access_logging_bucket_prefix"></a> [elb\_access\_logging\_bucket\_prefix](#input\_elb\_access\_logging\_bucket\_prefix) | Optional Prefix for the ELB access logging bucket | `string` | `""` | no |
 | <a name="input_elb_access_logging_enabled"></a> [elb\_access\_logging\_enabled](#input\_elb\_access\_logging\_enabled) | Enable access logging for all Elastic Load Balancers | `bool` | `false` | no |
+| <a name="input_elb_ssl_policy"></a> [elb\_ssl\_policy](#input\_elb\_ssl\_policy) | The SSL policy to use for the load balancer | `string` | `"ELBSecurityPolicy-2016-08"` | no |
 | <a name="input_enable_custom_batch_container_registry"></a> [enable\_custom\_batch\_container\_registry](#input\_enable\_custom\_batch\_container\_registry) | Provisions infrastructure for custom Amazon ECR container registry if enabled | `bool` | `false` | no |
 | <a name="input_enable_step_functions"></a> [enable\_step\_functions](#input\_enable\_step\_functions) | Provisions infrastructure for step functions if enabled | `bool` | n/a | yes |
 | <a name="input_extra_ui_backend_env_vars"></a> [extra\_ui\_backend\_env\_vars](#input\_extra\_ui\_backend\_env\_vars) | Additional environment variables for UI backend container | `map(string)` | `{}` | no |

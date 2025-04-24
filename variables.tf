@@ -329,3 +329,9 @@ variable "region_available_before_2022" {
   default     = true
   description = "Set to false if the region is not available before 2022. This is used for the ELB access logging bucket policy, as older regions have different bucket policy principle statements, see: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html#attach-bucket-policy"
 }
+
+variable "elb_ssl_policy" {
+  type        = string
+  description = "The SSL policy to use for the load balancer"
+  default     = "ELBSecurityPolicy-2016-08"
+}
