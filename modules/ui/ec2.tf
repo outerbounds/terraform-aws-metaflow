@@ -56,6 +56,19 @@ resource "aws_security_group" "ui_lb_security_group" {
     description = "Internal communication"
   }
 
+  dynamic "ingress" {
+    for_each = toset(var.ui_security_group_ingress_ids)
+
+    content {
+      from_port       = 443
+      to_port         = 443
+      protocol        = "tcp"
+      cidr_blocks     = []
+      security_groups = [each.key]
+      description     = "Allow shared-vpn traffic"
+    }
+  }
+
   # egress to anywhere
   egress {
     from_port   = 0

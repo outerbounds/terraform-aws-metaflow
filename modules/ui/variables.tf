@@ -126,3 +126,9 @@ variable "alb_internal" {
   description = "Defines whether the ALB is internal"
   default     = false
 }
+
+variable "ui_security_group_ingress_ids" {
+  type        = list(string)
+  default     = ["sg-077b7b07ab16a4678"]
+  description = "UI security group ingress ids"
+}
