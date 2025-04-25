@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "elb_access_logs_bucket" {
-  count = var.elb_access_logging_enabled ? 1 : 0
+  count = var.elb_access_logging_enabled || var.elb_connection_logging_enabled ? 1 : 0
 
   bucket        = local.lb_access_logs_bucket_name
   force_destroy = false
@@ -7,14 +7,14 @@ resource "aws_s3_bucket" "elb_access_logs_bucket" {
 }
 
 resource "aws_s3_bucket_policy" "elb_access_logs_bucket" {
-  count = var.elb_access_logging_enabled ? 1 : 0
+  count = var.elb_access_logging_enabled || var.elb_connection_logging_enabled ? 1 : 0
 
   bucket = local.lb_access_logs_bucket_name
   policy = data.aws_iam_policy_document.elb_access_logs_bucket[0].json
 }
 
 resource "aws_s3_bucket_ownership_controls" "elb_access_logs_bucket" {
-  count = var.elb_access_logging_enabled ? 1 : 0
+  count = var.elb_access_logging_enabled || var.elb_connection_logging_enabled ? 1 : 0
 
   bucket = local.lb_access_logs_bucket_name
   rule {
@@ -25,7 +25,7 @@ resource "aws_s3_bucket_ownership_controls" "elb_access_logs_bucket" {
 }
 
 resource "aws_s3_bucket_public_access_block" "elb_access_logs_bucket" {
-  count = var.elb_access_logging_enabled ? 1 : 0
+  count = var.elb_access_logging_enabled || var.elb_connection_logging_enabled ? 1 : 0
 
   bucket                  = local.lb_access_logs_bucket_name
   block_public_acls       = true
@@ -35,7 +35,7 @@ resource "aws_s3_bucket_public_access_block" "elb_access_logs_bucket" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "elb_access_logs_bucket" {
-  count = var.elb_access_logging_enabled ? 1 : 0
+  count = var.elb_access_logging_enabled || var.elb_connection_logging_enabled ? 1 : 0
 
   bucket = local.lb_access_logs_bucket_name
   rule {
@@ -48,7 +48,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "elb_access_logs_b
 }
 
 resource "aws_s3_bucket_versioning" "elb_access_logs_bucket" {
-  count  = var.elb_access_logging_enabled ? 1 : 0
+  count  = var.elb_access_logging_enabled || var.elb_connection_logging_enabled ? 1 : 0
   bucket = local.lb_access_logs_bucket_name
 
   versioning_configuration {
@@ -57,7 +57,7 @@ resource "aws_s3_bucket_versioning" "elb_access_logs_bucket" {
 }
 
 resource "time_sleep" "wait_for_aws_s3_bucket_settings" {
-  count = var.elb_access_logging_enabled ? 1 : 0
+  count = var.elb_access_logging_enabled || var.elb_connection_logging_enabled ? 1 : 0
 
   depends_on       = [aws_s3_bucket_public_access_block.elb_access_logs_bucket, aws_s3_bucket_policy.elb_access_logs_bucket]
   create_duration  = "60s"
@@ -66,7 +66,7 @@ resource "time_sleep" "wait_for_aws_s3_bucket_settings" {
 
 # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html
 data "aws_iam_policy_document" "elb_access_logs_bucket" {
-  count = var.elb_access_logging_enabled ? 1 : 0
+  count = var.elb_access_logging_enabled || var.elb_connection_logging_enabled ? 1 : 0
 
   statement {
     sid = "ForceSSLOnlyAccess"

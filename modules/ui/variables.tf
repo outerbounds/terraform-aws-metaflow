@@ -172,3 +172,9 @@ variable "elb_ssl_policy" {
   description = "The SSL policy to use for the load balancer"
   default     = "ELBSecurityPolicy-2016-08"
 }
+
+variable "elb_connection_logging_enabled" {
+  type        = bool
+  description = "Enable connection logging for all Elastic Load Balancers"
+  default     = false
+}

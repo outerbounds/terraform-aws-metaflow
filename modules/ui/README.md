@@ -68,6 +68,7 @@ The services are deployed behind an AWS ALB, and the module will output the ALB 
 | <a name="input_ecs_cluster_settings"></a> [ecs\_cluster\_settings](#input\_ecs\_cluster\_settings) | Settings for the ECS cluster | `map(string)` | `{}` | no |
 | <a name="input_elb_access_logging_bucket"></a> [elb\_access\_logging\_bucket](#input\_elb\_access\_logging\_bucket) | The bucket to store ELB access logs | `string` | `""` | no |
 | <a name="input_elb_access_logging_enabled"></a> [elb\_access\_logging\_enabled](#input\_elb\_access\_logging\_enabled) | Enable access logging for all Elastic Load Balancers | `bool` | `false` | no |
+| <a name="input_elb_connection_logging_enabled"></a> [elb\_connection\_logging\_enabled](#input\_elb\_connection\_logging\_enabled) | Enable connection logging for all Elastic Load Balancers | `bool` | `false` | no |
 | <a name="input_elb_ssl_policy"></a> [elb\_ssl\_policy](#input\_elb\_ssl\_policy) | The SSL policy to use for the load balancer | `string` | `"ELBSecurityPolicy-2016-08"` | no |
 | <a name="input_extra_ui_backend_env_vars"></a> [extra\_ui\_backend\_env\_vars](#input\_extra\_ui\_backend\_env\_vars) | Additional environment variables for UI backend container | `map(string)` | `{}` | no |
 | <a name="input_extra_ui_static_env_vars"></a> [extra\_ui\_static\_env\_vars](#input\_extra\_ui\_static\_env\_vars) | Additional environment variables for UI static app | `map(string)` | `{}` | no |

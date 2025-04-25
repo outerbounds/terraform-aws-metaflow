@@ -85,9 +85,10 @@ module "metaflow-ui" {
   alb_internal                    = var.ui_alb_internal
   ui_allow_list                   = var.ui_allow_list
 
-  elb_access_logging_enabled = var.elb_access_logging_enabled
-  elb_access_logging_bucket  = local.lb_access_logs_bucket_name
-  elb_ssl_policy             = var.elb_ssl_policy
+  elb_access_logging_enabled     = var.elb_access_logging_enabled
+  elb_access_logging_bucket      = local.lb_access_logs_bucket_name
+  elb_connection_logging_enabled = var.elb_connection_logging_enabled
+  elb_ssl_policy                 = var.elb_ssl_policy
 
   cognito_user_pool_arn       = var.ui_cognito_user_pool_arn
   cognito_user_pool_client_id = var.ui_cognito_user_pool_client_id
