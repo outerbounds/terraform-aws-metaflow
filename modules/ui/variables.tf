@@ -121,6 +121,12 @@ variable "ui_allow_list" {
   default     = []
 }
 
+variable "ui_allow_security_groups" {
+  type        = list(string)
+  description = "A list of security groups the UI will be available to"
+  default     = []
+}
+
 variable "alb_internal" {
   type        = bool
   description = "Defines whether the ALB is internal"
