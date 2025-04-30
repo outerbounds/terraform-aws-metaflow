@@ -56,6 +56,14 @@ resource "aws_security_group" "ui_lb_security_group" {
     description = "Internal communication"
   }
 
+  ingress {
+    from_port       = 443
+    to_port         = 443
+    protocol        = "tcp"
+    security_groups = var.ui_allow_security_groups
+    description     = "Allow public HTTPS"
+  }
+
   # egress to anywhere
   egress {
     from_port   = 0
