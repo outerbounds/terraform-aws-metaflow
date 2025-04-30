@@ -69,6 +69,7 @@ module "metaflow-ui" {
   ui_static_container_image       = local.ui_static_container_image
   alb_internal                    = var.ui_alb_internal
   ui_allow_list                   = var.ui_allow_list
+  ui_allow_security_groups        = var.ui_allow_security_groups
 
   METAFLOW_DATASTORE_SYSROOT_S3      = module.metaflow-datastore.METAFLOW_DATASTORE_SYSROOT_S3
   certificate_arn                    = var.ui_certificate_arn
