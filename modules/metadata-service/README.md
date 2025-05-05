@@ -30,6 +30,7 @@ If the `access_list_cidr_blocks` variable is set, only traffic originating from 
 | <a name="input_metadata_service_cpu"></a> [metadata\_service\_cpu](#input\_metadata\_service\_cpu) | ECS task CPU unit for metadata service | `number` | `512` | no |
 | <a name="input_metadata_service_memory"></a> [metadata\_service\_memory](#input\_metadata\_service\_memory) | ECS task memory in MiB for metadata service | `number` | `1024` | no |
 | <a name="input_metaflow_vpc_id"></a> [metaflow\_vpc\_id](#input\_metaflow\_vpc\_id) | ID of the Metaflow VPC this SageMaker notebook instance is to be deployed in | `string` | n/a | yes |
+| <a name="input_python_runtime"></a> [python\_runtime](#input\_python\_runtime) | Python runtime to be used by lambdas | `string` | `"python3.12"` | no |
 | <a name="input_rds_master_instance_endpoint"></a> [rds\_master\_instance\_endpoint](#input\_rds\_master\_instance\_endpoint) | The database connection endpoint in address:port format | `string` | n/a | yes |
 | <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | Prefix given to all AWS resources to differentiate between applications | `string` | n/a | yes |
 | <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | Suffix given to all AWS resources to differentiate between environment and workspace | `string` | n/a | yes |

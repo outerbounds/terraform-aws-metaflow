@@ -113,7 +113,7 @@ EOF
 resource "aws_lambda_function" "db_migrate_lambda" {
   function_name    = local.db_migrate_lambda_name
   handler          = "index.handler"
-  runtime          = "python3.12"
+  runtime          = var.python_runtime
   memory_size      = 128
   timeout          = 900
   description      = "Trigger DB Migration"
