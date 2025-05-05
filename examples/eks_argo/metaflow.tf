@@ -20,7 +20,7 @@ data "aws_availability_zones" "available" {
 
 module "metaflow-datastore" {
   source  = "outerbounds/metaflow/aws//modules/datastore"
-  version = "0.10.0"
+  version = "0.12.0"
 
   force_destroy_s3_bucket = true
 
@@ -37,12 +37,12 @@ module "metaflow-datastore" {
 
 module "metaflow-common" {
   source  = "outerbounds/metaflow/aws//modules/common"
-  version = "0.10.0"
+  version = "0.12.0"
 }
 
 module "metaflow-metadata-service" {
   source  = "outerbounds/metaflow/aws//modules/metadata-service"
-  version = "0.10.0"
+  version = "0.12.0"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
