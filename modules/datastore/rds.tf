@@ -58,10 +58,12 @@ locals {
 }
 
 resource "aws_rds_cluster" "this" {
-  count              = local.use_aurora ? 1 : 0
-  cluster_identifier = "${var.resource_prefix}${var.db_name}${var.resource_suffix}"
-  kms_key_id         = aws_kms_key.rds.arn
-  engine             = var.db_engine
+  count                       = local.use_aurora ? 1 : 0
+  cluster_identifier          = "${var.resource_prefix}${var.db_name}${var.resource_suffix}"
+  kms_key_id                  = aws_kms_key.rds.arn
+  engine                      = var.db_engine
+  apply_immediately           = var.db_apply_immediately
+  allow_major_version_upgrade = var.db_allow_major_version_upgrade
 
   database_name        = var.db_name
   master_username      = var.db_username

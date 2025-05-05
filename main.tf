@@ -12,8 +12,10 @@ module "metaflow-datastore" {
   subnet1_id                         = var.subnet1_id
   subnet2_id                         = var.subnet2_id
 
-  db_instance_type  = var.db_instance_type
-  db_engine_version = var.db_engine_version
+  db_instance_type               = var.db_instance_type
+  db_engine_version              = var.db_engine_version
+  db_allow_major_version_upgrade = var.db_allow_major_version_upgrade
+  db_apply_immediately           = var.db_apply_immediately
 
   standard_tags = var.tags
 }
