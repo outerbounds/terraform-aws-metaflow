@@ -138,3 +138,13 @@ variable "with_public_ip" {
   type        = bool
   description = "Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1_id and subnet2_id, and false otherwise"
 }
+
+variable "nlb_arn" {
+  type        = string
+  description = "The ARN of the network load balancer to use for Metaflow. A new resource will be created if unfilled. Must be provided together with nlb_dns_name."
+}
+
+variable "nlb_dns_name" {
+  type        = string
+  description = "The DNS name of the network load balancer to use for Metaflow. Must be provided together with nlb_arn."
+}

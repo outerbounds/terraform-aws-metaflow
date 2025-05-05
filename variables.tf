@@ -70,12 +70,12 @@ variable "compute_environment_egress_cidr_blocks" {
 variable "db_instance_type" {
   type        = string
   description = "RDS instance type to launch for PostgresQL database."
-  default     = "db.t2.small"
+  default     = "db.t3.small"
 }
 
 variable "db_engine_version" {
   type    = string
-  default = "11"
+  default = "13"
 }
 
 variable "launch_template_http_endpoint" {
@@ -198,4 +198,16 @@ variable "enable_key_rotation" {
   type        = bool
   description = "Enable key rotation for KMS keys"
   default     = false
+}
+
+variable "nlb_arn" {
+  type        = string
+  description = "The ARN of the network load balancer to use for Metaflow. A new resource will be created if unfilled. Must be provided together with nlb_dns_name."
+  default     = ""
+}
+
+variable "nlb_dns_name" {
+  type        = string
+  description = "The DNS name of the network load balancer to use for Metaflow. Must be provided together with nlb_arn."
+  default     = ""
 }

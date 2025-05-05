@@ -124,7 +124,7 @@ resource "aws_lambda_function" "db_migrate_lambda" {
 
   environment {
     variables = {
-      MD_LB_ADDRESS = "http://${aws_lb.this.dns_name}:8082"
+      MD_LB_ADDRESS = "http://${var.nlb_dns_name == "" ? aws_lb.this[0].dns_name : var.nlb_dns_name}:8082"
     }
   }
 
