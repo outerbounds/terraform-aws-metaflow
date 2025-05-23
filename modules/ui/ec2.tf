@@ -61,7 +61,15 @@ resource "aws_security_group" "ui_lb_security_group" {
     to_port         = 443
     protocol        = "tcp"
     security_groups = var.ui_allow_security_groups
-    description     = "Allow public HTTPS"
+    description     = "Allow shared-vpn traffic https"
+  }
+
+  ingress {
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
+    security_groups = var.ui_allow_security_groups
+    description     = "Allow shared-vpn traffic postgres"
   }
 
   # egress to anywhere
