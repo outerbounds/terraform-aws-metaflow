@@ -35,7 +35,8 @@ data "aws_iam_policy_document" "custom_s3_list_batch" {
     effect = "Allow"
 
     resources = [
-      module.metaflow-datastore.s3_bucket_arn
+      module.metaflow-datastore.s3_bucket_arn,
+      "arn:aws:s3:::tgtg-ml-recs-ranking" # To write model for online serving project
     ]
   }
 }
@@ -52,7 +53,8 @@ data "aws_iam_policy_document" "custom_s3_batch" {
     effect = "Allow"
 
     resources = [
-      "${module.metaflow-datastore.s3_bucket_arn}/*"
+      "${module.metaflow-datastore.s3_bucket_arn}/*",
+      "arn:aws:s3:::tgtg-ml-recs-ranking/*" # To write model for online serving project
     ]
   }
 }
