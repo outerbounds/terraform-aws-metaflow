@@ -34,10 +34,10 @@ data "aws_iam_policy_document" "custom_s3_list_batch" {
 
     effect = "Allow"
 
-    resources = [
-      module.metaflow-datastore.s3_bucket_arn,
-      "arn:aws:s3:::tgtg-ml-recs-ranking" # To write model for online serving project
-    ]
+    resources = concat(
+      [module.metaflow-datastore.s3_bucket_arn],
+      var.custom_s3_buckets
+    )
   }
 }
 
@@ -52,10 +52,10 @@ data "aws_iam_policy_document" "custom_s3_batch" {
 
     effect = "Allow"
 
-    resources = [
-      "${module.metaflow-datastore.s3_bucket_arn}/*",
-      "arn:aws:s3:::tgtg-ml-recs-ranking/*" # To write model for online serving project
-    ]
+    resources = concat(
+      [module.metaflow-datastore.s3_bucket_arn],
+      formatlist("%s/*", var.custom_s3_buckets)
+    )
   }
 }
 
