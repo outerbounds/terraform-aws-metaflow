@@ -82,7 +82,7 @@ resource "aws_ecs_service" "this" {
   name            = "${var.resource_prefix}metadata-service${var.resource_suffix}"
   cluster         = aws_ecs_cluster.this.id
   task_definition = aws_ecs_task_definition.this.arn
-  desired_count   = 1
+  desired_count   = var.metadata_service_desired_count
   launch_type     = "FARGATE"
 
   network_configuration {
@@ -101,10 +101,6 @@ resource "aws_ecs_service" "this" {
     target_group_arn = aws_lb_target_group.db_migrate.arn
     container_name   = "${var.resource_prefix}service${var.resource_suffix}"
     container_port   = 8082
-  }
-
-  lifecycle {
-    ignore_changes = [desired_count]
   }
 
   tags = var.standard_tags

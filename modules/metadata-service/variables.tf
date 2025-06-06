@@ -94,6 +94,12 @@ variable "metadata_service_container_image" {
   description = "Container image for metadata service"
 }
 
+variable "metadata_service_desired_count" {
+  type        = number
+  default     = 1
+  description = "Number of desired instances of the metadata service"
+}
+
 variable "metadata_service_cpu" {
   type        = number
   default     = 512

@@ -50,6 +50,7 @@ module "metaflow-metadata-service" {
   fargate_execution_role_arn       = module.metaflow-computation.ecs_execution_role_arn
   iam_partition                    = var.iam_partition
   metadata_service_container_image = local.metadata_service_container_image
+  metadata_service_desired_count   = var.metadata_service_desired_count
   metaflow_vpc_id                  = var.vpc_id
   rds_master_instance_endpoint     = module.metaflow-datastore.rds_master_instance_endpoint
   s3_bucket_arn                    = module.metaflow-datastore.s3_bucket_arn
@@ -81,7 +82,9 @@ module "metaflow-ui" {
   subnet1_id                      = var.subnet1_id
   subnet2_id                      = var.subnet2_id
   ui_backend_container_image      = local.metadata_service_container_image
+  ui_backend_desired_count        = var.ui_backend_desired_count
   ui_static_container_image       = local.ui_static_container_image
+  ui_static_desired_count         = var.ui_static_desired_count
   alb_internal                    = var.ui_alb_internal
   ui_allow_list                   = var.ui_allow_list
 

@@ -109,10 +109,22 @@ variable "ui_backend_container_image" {
   description = "Container image for UI backend"
 }
 
+variable "ui_backend_desired_count" {
+  type        = number
+  default     = 1
+  description = "Desired count for the UI backend service"
+}
+
 variable "ui_static_container_image" {
   type        = string
   default     = ""
   description = "Container image for the UI frontend app"
+}
+
+variable "ui_static_desired_count" {
+  type        = number
+  default     = 1
+  description = "Desired count for the UI static service"
 }
 
 variable "ui_allow_list" {

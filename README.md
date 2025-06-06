@@ -136,6 +136,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_load_balancer_name_prefix"></a> [load\_balancer\_name\_prefix](#input\_load\_balancer\_name\_prefix) | Prefix for all load balancer names | `string` | `""` | no |
 | <a name="input_maintenance_window"></a> [maintenance\_window](#input\_maintenance\_window) | Maintenance Window in format "ddd:hh24:mi-ddd:hh24:mi" eg. "Mon:00:00-Mon:03:00", or leave blank to randomise | `string` | `""` | no |
 | <a name="input_metadata_service_container_image"></a> [metadata\_service\_container\_image](#input\_metadata\_service\_container\_image) | Container image for metadata service | `string` | `""` | no |
+| <a name="input_metadata_service_desired_count"></a> [metadata\_service\_desired\_count](#input\_metadata\_service\_desired\_count) | Number of desired instances of the metadata service | `number` | `1` | no |
 | <a name="input_region_available_before_2022"></a> [region\_available\_before\_2022](#input\_region\_available\_before\_2022) | Set to false if the region is not available before 2022. This is used for the ELB access logging bucket policy, as older regions have different bucket policy principle statements, see: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html#attach-bucket-policy | `bool` | `true` | no |
 | <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | string prefix for all resources | `string` | `"metaflow"` | no |
 | <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | string suffix for all resources | `string` | `""` | no |
@@ -146,11 +147,13 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_tags"></a> [tags](#input\_tags) | aws tags | `map(string)` | n/a | yes |
 | <a name="input_ui_alb_internal"></a> [ui\_alb\_internal](#input\_ui\_alb\_internal) | Defines whether the ALB for the UI is internal | `bool` | `false` | no |
 | <a name="input_ui_allow_list"></a> [ui\_allow\_list](#input\_ui\_allow\_list) | List of CIDRs we want to grant access to our Metaflow UI Service. Usually this is our VPN's CIDR blocks. | `list(string)` | `[]` | no |
+| <a name="input_ui_backend_desired_count"></a> [ui\_backend\_desired\_count](#input\_ui\_backend\_desired\_count) | Desired count for the UI backend service | `number` | `1` | no |
 | <a name="input_ui_certificate_arn"></a> [ui\_certificate\_arn](#input\_ui\_certificate\_arn) | SSL certificate for UI. | `string` | n/a | yes |
 | <a name="input_ui_cognito_user_pool_arn"></a> [ui\_cognito\_user\_pool\_arn](#input\_ui\_cognito\_user\_pool\_arn) | The ARN of the Cognito user pool | `string` | `""` | no |
 | <a name="input_ui_cognito_user_pool_client_id"></a> [ui\_cognito\_user\_pool\_client\_id](#input\_ui\_cognito\_user\_pool\_client\_id) | The ID of the Cognito user pool client | `string` | `""` | no |
 | <a name="input_ui_cognito_user_pool_domain"></a> [ui\_cognito\_user\_pool\_domain](#input\_ui\_cognito\_user\_pool\_domain) | The domain of the Cognito user pool | `string` | `""` | no |
 | <a name="input_ui_static_container_image"></a> [ui\_static\_container\_image](#input\_ui\_static\_container\_image) | Container image for the UI frontend app | `string` | `""` | no |
+| <a name="input_ui_static_desired_count"></a> [ui\_static\_desired\_count](#input\_ui\_static\_desired\_count) | Desired count for the UI static service | `number` | `1` | no |
 | <a name="input_vpc_cidr_blocks"></a> [vpc\_cidr\_blocks](#input\_vpc\_cidr\_blocks) | The VPC CIDR blocks that we'll access list on our Metadata Service API to allow all internal communications | `list(string)` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the single VPC we stood up for all Metaflow resources to exist in. | `string` | n/a | yes |
 | <a name="input_with_public_ip"></a> [with\_public\_ip](#input\_with\_public\_ip) | Enable public IP assignment for the Metadata Service. Typically you want this to be set to true if using public subnets as subnet1\_id and subnet2\_id, and false otherwise | `bool` | `false` | no |

@@ -174,10 +174,28 @@ variable "metadata_service_container_image" {
   description = "Container image for metadata service"
 }
 
+variable "metadata_service_desired_count" {
+  type        = number
+  default     = 1
+  description = "Number of desired instances of the metadata service"
+}
+
 variable "ui_static_container_image" {
   type        = string
   default     = ""
   description = "Container image for the UI frontend app"
+}
+
+variable "ui_static_desired_count" {
+  type        = number
+  default     = 1
+  description = "Desired count for the UI static service"
+}
+
+variable "ui_backend_desired_count" {
+  type        = number
+  default     = 1
+  description = "Desired count for the UI backend service"
 }
 
 variable "tags" {

@@ -103,6 +103,7 @@ If the `access_list_cidr_blocks` variable is set, only traffic originating from 
 | <a name="input_load_balancer_name_prefix"></a> [load\_balancer\_name\_prefix](#input\_load\_balancer\_name\_prefix) | Prefix for all load balancer names | `string` | `""` | no |
 | <a name="input_metadata_service_container_image"></a> [metadata\_service\_container\_image](#input\_metadata\_service\_container\_image) | Container image for metadata service | `string` | `""` | no |
 | <a name="input_metadata_service_cpu"></a> [metadata\_service\_cpu](#input\_metadata\_service\_cpu) | ECS task CPU unit for metadata service | `number` | `512` | no |
+| <a name="input_metadata_service_desired_count"></a> [metadata\_service\_desired\_count](#input\_metadata\_service\_desired\_count) | Number of desired instances of the metadata service | `number` | `1` | no |
 | <a name="input_metadata_service_memory"></a> [metadata\_service\_memory](#input\_metadata\_service\_memory) | ECS task memory in MiB for metadata service | `number` | `1024` | no |
 | <a name="input_metaflow_vpc_id"></a> [metaflow\_vpc\_id](#input\_metaflow\_vpc\_id) | ID of the Metaflow VPC this SageMaker notebook instance is to be deployed in | `string` | n/a | yes |
 | <a name="input_rds_master_instance_endpoint"></a> [rds\_master\_instance\_endpoint](#input\_rds\_master\_instance\_endpoint) | The database connection endpoint in address:port format | `string` | n/a | yes |

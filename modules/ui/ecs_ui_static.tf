@@ -47,7 +47,7 @@ resource "aws_ecs_service" "ui_static" {
   name            = "${var.resource_prefix}ui_static${var.resource_suffix}"
   cluster         = aws_ecs_cluster.this.id
   task_definition = aws_ecs_task_definition.ui_static.arn
-  desired_count   = 1
+  desired_count   = var.ui_static_desired_count
   launch_type     = "FARGATE"
 
   network_configuration {
@@ -60,10 +60,6 @@ resource "aws_ecs_service" "ui_static" {
     target_group_arn = aws_lb_target_group.ui_static.arn
     container_name   = "${var.resource_prefix}ui_static${var.resource_suffix}"
     container_port   = 3000
-  }
-
-  lifecycle {
-    ignore_changes = [desired_count]
   }
 
   tags = var.standard_tags

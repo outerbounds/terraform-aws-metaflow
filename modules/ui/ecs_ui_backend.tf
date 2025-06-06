@@ -55,7 +55,7 @@ resource "aws_ecs_service" "ui_backend" {
   name            = "${var.resource_prefix}ui_backend${var.resource_suffix}"
   cluster         = aws_ecs_cluster.this.id
   task_definition = aws_ecs_task_definition.ui_backend.arn
-  desired_count   = 1
+  desired_count   = var.ui_backend_desired_count
   launch_type     = "FARGATE"
 
   network_configuration {
@@ -68,10 +68,6 @@ resource "aws_ecs_service" "ui_backend" {
     target_group_arn = aws_lb_target_group.ui_backend.arn
     container_name   = "${var.resource_prefix}ui_backend${var.resource_suffix}"
     container_port   = 8083
-  }
-
-  lifecycle {
-    ignore_changes = [desired_count]
   }
 
   tags = var.standard_tags
