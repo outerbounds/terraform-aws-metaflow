@@ -17,6 +17,7 @@ module "metaflow-datastore" {
   apply_immediately              = var.apply_immediately
   maintenance_window             = var.maintenance_window
   ca_cert_identifier             = var.ca_cert_identifier
+  db_auto_minor_version_upgrade  = var.db_auto_minor_version_upgrade
   db_allow_major_version_upgrade = var.db_allow_major_version_upgrade
 
   standard_tags    = var.tags

@@ -112,6 +112,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_database_ssl_mode"></a> [database\_ssl\_mode](#input\_database\_ssl\_mode) | The database SSL mode | `string` | `"disable"` | no |
 | <a name="input_database_ssl_root_cert"></a> [database\_ssl\_root\_cert](#input\_database\_ssl\_root\_cert) | The database SSL root certificate | `string` | `""` | no |
 | <a name="input_db_allow_major_version_upgrade"></a> [db\_allow\_major\_version\_upgrade](#input\_db\_allow\_major\_version\_upgrade) | Allow major version upgrades for the RDS instance | `bool` | `false` | no |
+| <a name="input_db_auto_minor_version_upgrade"></a> [db\_auto\_minor\_version\_upgrade](#input\_db\_auto\_minor\_version\_upgrade) | Enable auto minor version upgrade for the RDS instance | `bool` | `false` | no |
 | <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | n/a | `string` | `"11"` | no |
 | <a name="input_db_identifier_prefix"></a> [db\_identifier\_prefix](#input\_db\_identifier\_prefix) | Identifier prefix for the RDS instance | `string` | `""` | no |
 | <a name="input_db_instance_tags"></a> [db\_instance\_tags](#input\_db\_instance\_tags) | A map of additional tags for the DB instance | `map(string)` | `{}` | no |

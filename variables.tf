@@ -63,6 +63,12 @@ variable "db_parameters" {
   default     = {}
 }
 
+variable "db_auto_minor_version_upgrade" {
+  type        = bool
+  description = "Enable auto minor version upgrade for the RDS instance"
+  default     = true
+}
+
 variable "db_allow_major_version_upgrade" {
   type        = bool
   description = "Allow major version upgrades for the RDS instance"

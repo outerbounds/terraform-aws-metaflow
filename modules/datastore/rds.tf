@@ -128,6 +128,7 @@ resource "aws_db_instance" "this" {
 
   apply_immediately           = var.apply_immediately
   maintenance_window          = length(var.maintenance_window) > 0 ? var.maintenance_window : null
+  auto_minor_version_upgrade  = var.db_auto_minor_version_upgrade
   allow_major_version_upgrade = var.db_allow_major_version_upgrade
 
   tags = merge(
