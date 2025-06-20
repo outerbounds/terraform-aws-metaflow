@@ -112,7 +112,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_database_ssl_mode"></a> [database\_ssl\_mode](#input\_database\_ssl\_mode) | The database SSL mode | `string` | `"disable"` | no |
 | <a name="input_database_ssl_root_cert"></a> [database\_ssl\_root\_cert](#input\_database\_ssl\_root\_cert) | The database SSL root certificate | `string` | `""` | no |
 | <a name="input_db_allow_major_version_upgrade"></a> [db\_allow\_major\_version\_upgrade](#input\_db\_allow\_major\_version\_upgrade) | Allow major version upgrades for the RDS instance | `bool` | `false` | no |
-| <a name="input_db_auto_minor_version_upgrade"></a> [db\_auto\_minor\_version\_upgrade](#input\_db\_auto\_minor\_version\_upgrade) | Enable auto minor version upgrade for the RDS instance | `bool` | `false` | no |
+| <a name="input_db_auto_minor_version_upgrade"></a> [db\_auto\_minor\_version\_upgrade](#input\_db\_auto\_minor\_version\_upgrade) | Enable auto minor version upgrade for the RDS instance | `bool` | `true` | no |
 | <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | n/a | `string` | `"11"` | no |
 | <a name="input_db_identifier_prefix"></a> [db\_identifier\_prefix](#input\_db\_identifier\_prefix) | Identifier prefix for the RDS instance | `string` | `""` | no |
 | <a name="input_db_instance_tags"></a> [db\_instance\_tags](#input\_db\_instance\_tags) | A map of additional tags for the DB instance | `map(string)` | `{}` | no |
@@ -121,6 +121,7 @@ You can find a more complete example that uses this module but also includes set
 | <a name="input_db_migrate_lambda_zip_file"></a> [db\_migrate\_lambda\_zip\_file](#input\_db\_migrate\_lambda\_zip\_file) | Output path for the zip file containing the DB migrate lambda | `string` | `null` | no |
 | <a name="input_db_multi_az"></a> [db\_multi\_az](#input\_db\_multi\_az) | Enable Multi-AZ for the RDS instance | `bool` | `true` | no |
 | <a name="input_db_parameters"></a> [db\_parameters](#input\_db\_parameters) | A map of parameters to apply to the DB instance | `map(string)` | `{}` | no |
+| <a name="input_db_snapshot_identifier"></a> [db\_snapshot\_identifier](#input\_db\_snapshot\_identifier) | The snapshot identifier to restore the RDS instance from, or leave blank to create a new instance | `string` | `null` | no |
 | <a name="input_ecs_cluster_settings"></a> [ecs\_cluster\_settings](#input\_ecs\_cluster\_settings) | Settings for the ECS cluster | `map(string)` | `{}` | no |
 | <a name="input_elb_access_logging_bucket_prefix"></a> [elb\_access\_logging\_bucket\_prefix](#input\_elb\_access\_logging\_bucket\_prefix) | Optional Prefix for the ELB access logging bucket | `string` | `""` | no |
 | <a name="input_elb_access_logging_enabled"></a> [elb\_access\_logging\_enabled](#input\_elb\_access\_logging\_enabled) | Enable access logging for all Elastic Load Balancers | `bool` | `false` | no |

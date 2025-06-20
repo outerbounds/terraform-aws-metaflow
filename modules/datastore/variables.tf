@@ -1,3 +1,9 @@
+variable "db_snapshot_identifier" {
+  type        = string
+  description = "The snapshot identifier to restore the RDS instance from, or leave blank to create a new instance"
+  default     = null
+}
+
 variable "db_instance_type" {
   type        = string
   description = "RDS instance type to launch for PostgresQL database."

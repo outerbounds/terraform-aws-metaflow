@@ -22,6 +22,12 @@ variable "batch_type" {
   default     = "ec2"
 }
 
+variable "db_snapshot_identifier" {
+  type        = string
+  description = "The snapshot identifier to restore the RDS instance from, or leave blank to create a new instance"
+  default     = null
+}
+
 variable "db_identifier_prefix" {
   type        = string
   description = "Identifier prefix for the RDS instance"

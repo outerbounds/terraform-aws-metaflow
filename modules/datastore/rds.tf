@@ -116,6 +116,7 @@ resource "aws_db_instance" "this" {
   instance_class            = var.db_instance_type    # Hardware configuration
   identifier                = local.rds_db_identifier # used for dns hostname needs to be customer unique in region
   db_name                   = var.db_name             # unique id for CLI commands (name of DB table which is why we're not adding the prefix as no conflicts will occur and the API expects this table name)
+  snapshot_identifier       = var.db_snapshot_identifier
   username                  = var.db_username
   password                  = random_password.this.result
   db_subnet_group_name      = aws_db_subnet_group.this.id
