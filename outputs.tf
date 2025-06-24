@@ -128,3 +128,7 @@ output "batch_compute_environment_security_group_id" {
   value       = module.metaflow-computation.batch_compute_environment_security_group_id
   description = "The ID of the security group attached to the Batch Compute environment."
 }
+
+output "datastore_bucket_id" {
+  value = module.metaflow-datastore.s3_bucket_id
+}

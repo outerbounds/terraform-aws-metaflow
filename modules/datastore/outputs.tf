@@ -42,3 +42,7 @@ output "s3_bucket_name" {
   value       = aws_s3_bucket.this.bucket
   description = "The name of the bucket we'll be using as blob storage"
 }
+
+output "s3_bucket_id" {
+  value = aws_s3_bucket.this.id
+}
