@@ -1,17 +1,32 @@
 
-# VPC infra using https://github.com/terraform-aws-modules/terraform-aws-vpc
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "5.1.2"
+# Use existing VPC instead of creating new one
+data "aws_vpc" "existing" {
+  id = "vpc-01195e9922f40d28d"
+}
 
-  name = "${local.resource_prefix}-${local.resource_suffix}"
-  cidr = "10.10.0.0/16"
+data "aws_subnets" "all" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.existing.id]
+  }
+}
 
-  azs             = data.aws_availability_zones.available.names
-  private_subnets = ["10.10.8.0/21", "10.10.16.0/21", "10.10.24.0/21"]
-  public_subnets  = ["10.10.128.0/21", "10.10.136.0/21", "10.10.144.0/21"]
+data "aws_subnet" "all_subnets" {
+  for_each = toset(data.aws_subnets.all.ids)
+  id       = each.value
+}
 
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
+# For now, we'll use all subnets as private since none have public IP mapping
+# This may need adjustment based on your specific requirements
+locals {
+  # Using first two subnets for private (spread across AZs)
+  private_subnet_ids = [
+    "subnet-06d24ca1cdc68006b",  # us-west-2a
+    "subnet-0b9f28860c7718324"   # us-west-2b  
+  ]
+  # Using last two subnets as "public" (though they're actually private)
+  public_subnet_ids = [
+    "subnet-0037943db9c00ae6a",  # us-west-2a
+    "subnet-01922add8c95526d7"   # us-west-2b
+  ]
 }

@@ -4,12 +4,12 @@ module "eks" {
   version = "17.23.0"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.24"
-  subnets         = module.vpc.private_subnets
+  cluster_version = "1.28"
+  subnets         = local.private_subnet_ids
   enable_irsa     = true
   tags            = local.tags
 
-  vpc_id = module.vpc.vpc_id
+  vpc_id = data.aws_vpc.existing.id
 
   node_groups_defaults = {
     ami_type  = "AL2_x86_64"

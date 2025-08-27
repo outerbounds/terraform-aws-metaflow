@@ -20,7 +20,7 @@ data "aws_availability_zones" "available" {
 
 module "metaflow-datastore" {
   source  = "outerbounds/metaflow/aws//modules/datastore"
-  version = "0.10.0"
+  version = "0.12.1"
 
   force_destroy_s3_bucket = true
 
@@ -28,21 +28,25 @@ module "metaflow-datastore" {
   resource_suffix = local.resource_suffix
 
   metadata_service_security_group_id = module.metaflow-metadata-service.metadata_service_security_group_id
-  metaflow_vpc_id                    = module.vpc.vpc_id
-  subnet1_id                         = module.vpc.private_subnets[0]
-  subnet2_id                         = module.vpc.private_subnets[1]
+  metaflow_vpc_id                    = data.aws_vpc.existing.id
+  subnet1_id                         = local.private_subnet_ids[0]
+  subnet2_id                         = local.private_subnet_ids[1]
+
+  # Override RDS configuration to use supported instance class
+  db_instance_type = "db.t3.small"
+  db_engine_version = "13.16"
 
   standard_tags = local.tags
 }
 
 module "metaflow-common" {
   source  = "outerbounds/metaflow/aws//modules/common"
-  version = "0.10.0"
+  version = "0.12.1"
 }
 
 module "metaflow-metadata-service" {
   source  = "outerbounds/metaflow/aws//modules/metadata-service"
-  version = "0.10.0"
+  version = "0.12.1"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
@@ -54,13 +58,13 @@ module "metaflow-metadata-service" {
   database_username                = module.metaflow-datastore.database_username
   datastore_s3_bucket_kms_key_arn  = module.metaflow-datastore.datastore_s3_bucket_kms_key_arn
   fargate_execution_role_arn       = aws_iam_role.ecs_execution_role.arn
-  metaflow_vpc_id                  = module.vpc.vpc_id
+  metaflow_vpc_id                  = data.aws_vpc.existing.id
   metadata_service_container_image = module.metaflow-common.default_metadata_service_container_image
   rds_master_instance_endpoint     = module.metaflow-datastore.rds_master_instance_endpoint
   s3_bucket_arn                    = module.metaflow-datastore.s3_bucket_arn
-  subnet1_id                       = module.vpc.private_subnets[0]
-  subnet2_id                       = module.vpc.private_subnets[1]
-  vpc_cidr_blocks                  = [module.vpc.vpc_cidr_block]
+  subnet1_id                       = local.private_subnet_ids[0]
+  subnet2_id                       = local.private_subnet_ids[1]
+  vpc_cidr_blocks                  = [data.aws_vpc.existing.cidr_block]
   with_public_ip                   = var.with_public_ip
 
   standard_tags = local.tags
