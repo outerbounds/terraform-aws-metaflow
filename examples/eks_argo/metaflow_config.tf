@@ -3,7 +3,7 @@ data "aws_api_gateway_api_key" "metadata_api_key" {
 }
 
 resource "local_file" "foo" {
-  content = jsonencode({
+  content = tostring(jsonencode({
     "METAFLOW_SERVICE_AUTH_KEY"            = data.aws_api_gateway_api_key.metadata_api_key.value
     "METAFLOW_DATASTORE_SYSROOT_S3"        = module.metaflow-datastore.METAFLOW_DATASTORE_SYSROOT_S3
     "METAFLOW_DATATOOLS_S3ROOT"            = module.metaflow-datastore.METAFLOW_DATATOOLS_S3ROOT
@@ -17,6 +17,6 @@ resource "local_file" "foo" {
     "METAFLOW_ARGO_EVENTS_SERVICE_ACCOUNT" = "operate-workflow-sa"
     "METAFLOW_ARGO_EVENTS_EVENT"           = "metaflow-event"
     "METAFLOW_ARGO_EVENTS_WEBHOOK_URL"     = "http://argo-events-webhook-eventsource-svc.default:12000/metaflow-event"
-  })
+  }))
   filename = "${path.module}/config.json"
 }
