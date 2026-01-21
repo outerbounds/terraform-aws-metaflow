@@ -199,3 +199,17 @@ variable "enable_key_rotation" {
   description = "Enable key rotation for KMS keys"
   default     = false
 }
+
+variable "job_state_time_limit_timeout" {
+  type        = number
+  description = "The time limit in seconds for the job to run before the action is taken"
+    validation {
+    condition = var.job_state_time_limit_timeout >= 600
+    error_message = "The value for 'job_state_time_limit_timeout' must be greater than 600."
+  }
+}
+
+variable "job_state_time_limit_reason" {
+  type        = string
+  description = "The reason to log for the action being taken."
+}

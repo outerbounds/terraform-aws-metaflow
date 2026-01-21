@@ -101,3 +101,13 @@ variable "launch_template_image_id" {
   description = "AMI id for launch template, defaults to allow AWS Batch to decide"
   default     = null
 }
+
+variable "job_state_time_limit_timeout" {
+  type        = number
+  description = "The time limit in seconds for the job to run before the action is taken"
+}
+
+variable "job_state_time_limit_reason" {
+  type        = string
+  description = "The reason for the job state time limit action"
+}

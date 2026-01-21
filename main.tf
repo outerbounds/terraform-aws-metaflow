@@ -98,6 +98,8 @@ module "metaflow-computation" {
   launch_template_http_endpoint               = var.launch_template_http_endpoint
   launch_template_http_tokens                 = var.launch_template_http_tokens
   launch_template_http_put_response_hop_limit = var.launch_template_http_put_response_hop_limit
+  job_state_time_limit_timeout                = var.job_state_time_limit_timeout
+  job_state_time_limit_reason                 = var.job_state_time_limit_reason
 
   standard_tags = var.tags
 }
