@@ -31,6 +31,13 @@ resource "aws_security_group" "rds_security_group" {
     security_groups = [var.metadata_service_security_group_id]
   }
 
+  ingress {
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
+    cidr_blocks     = var.rds_sg_ingress_cidr
+  }
+
   # egress to anywhere
   egress {
     from_port   = 0

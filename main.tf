@@ -8,6 +8,7 @@ module "metaflow-datastore" {
   resource_suffix = local.resource_suffix
 
   metadata_service_security_group_id = module.metaflow-metadata-service.metadata_service_security_group_id
+  rds_sg_ingress_cidr                = var.rds_sg_ingress_cidr
   metaflow_vpc_id                    = var.vpc_id
   subnet1_id                         = var.subnet1_id
   subnet2_id                         = var.subnet2_id

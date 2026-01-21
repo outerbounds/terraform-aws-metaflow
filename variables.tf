@@ -199,3 +199,9 @@ variable "enable_key_rotation" {
   description = "Enable key rotation for KMS keys"
   default     = false
 }
+
+variable "rds_sg_ingress_cidr" {
+  type        = list(string)
+  description = "Add additional ingress CIDR access rules to RDS SG"
+  default     = []
+}
