@@ -8,17 +8,7 @@ resource "aws_batch_compute_environment" "this" {
   */
   compute_environment_name_prefix = local.compute_env_prefix_name
 
-  # Give permissions so the batch service can make API calls.
-  service_role = aws_iam_role.batch_execution_role.arn
-  type         = "MANAGED"
-
-  # On destroy, this avoids removing these policies below until compute environments are destroyed
-  depends_on = [
-    aws_iam_role_policy.grant_iam_pass_role,
-    aws_iam_role_policy.grant_custom_access_policy,
-    aws_iam_role_policy.grant_iam_custom_policies,
-    aws_iam_role_policy.grant_ec2_custom_policies,
-  ]
+  type = "MANAGED"
 
   compute_resources {
     # Give permissions so the ECS container instances can make API call.
@@ -73,6 +63,15 @@ resource "aws_batch_compute_environment" "this" {
     # To ensure terraform redeploys do not silently overwrite an up to date desired_vcpus that metaflow may modify
     ignore_changes = [compute_resources.0.desired_vcpus]
   }
+
+  /* Define a custom service role for AWS Batch. Usually this is not
+     needed, as AWS Batch will create a Service-Linked Role (SLR)
+     when you create your first compute environment.
+
+     For more information, refer to https://docs.aws.amazon.com/batch/latest/userguide/using-service-linked-roles.html.
+  */
+  service_role = var.custom_batch_service_role_arn
+
 }
 
 resource "aws_batch_job_queue" "this" {

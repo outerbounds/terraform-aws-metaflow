@@ -101,3 +101,10 @@ variable "launch_template_image_id" {
   description = "AMI id for launch template, defaults to allow AWS Batch to decide"
   default     = null
 }
+
+variable "custom_batch_service_role_arn" {
+  type        = string
+  description = "The ARN of a custom service role for AWS Batch managed services to leverage. For more information, refer to https://docs.aws.amazon.com/batch/latest/userguide/using-service-linked-roles.html"
+  nullable    = true
+  default     = null
+}
