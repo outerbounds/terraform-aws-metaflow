@@ -101,3 +101,10 @@ variable "launch_template_image_id" {
   description = "AMI id for launch template, defaults to allow AWS Batch to decide"
   default     = null
 }
+
+variable "launch_template_custom_user_data" {
+  type        = string
+  description = "Custom user data in MIME multi-part archive format for the launch template. Refer to the AWS Batch user guide for examples at https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html#lt-user-data"
+  nullable    = true
+  default     = null
+}
