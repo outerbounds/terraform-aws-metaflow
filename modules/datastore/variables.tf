@@ -11,7 +11,7 @@ variable "db_engine" {
 
 variable "db_engine_version" {
   type    = string
-  default = "13"
+  default = "16"
 }
 
 variable "db_name" {

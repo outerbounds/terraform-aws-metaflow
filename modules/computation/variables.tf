@@ -99,6 +99,5 @@ variable "launch_template_http_put_response_hop_limit" {
 variable "launch_template_image_id" {
   type        = string
   description = "AMI id for launch template, defaults to allow AWS Batch to decide"
-  nullable    = true
   default     = null
 }

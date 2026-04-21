@@ -75,7 +75,7 @@ variable "db_instance_type" {
 
 variable "db_engine_version" {
   type    = string
-  default = "13"
+  default = "16"
 }
 
 variable "launch_template_http_endpoint" {

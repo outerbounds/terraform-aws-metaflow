@@ -1,23 +1,23 @@
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "17.23.0"
+  version = "20.37.2"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.24"
-  subnets         = module.vpc.private_subnets
+  cluster_version = "1.33"
+  subnet_ids      = module.vpc.private_subnets
   enable_irsa     = true
   tags            = local.tags
 
   vpc_id = module.vpc.vpc_id
 
-  node_groups_defaults = {
-    ami_type  = "AL2_x86_64"
-    disk_size = 50
+  eks_managed_node_group_defaults = {
+    ami_type  = "AL2023_x86_64_STANDARD"
+    disk_size = 100
   }
 
 
-  node_groups = {
+  eks_managed_node_groups = {
     main = {
       desired_capacity = 1
       max_capacity     = 5
@@ -30,10 +30,10 @@ module "eks" {
     }
   }
 
-  workers_additional_policies = [
-    aws_iam_policy.default_node.arn,
-    aws_iam_policy.cluster_autoscaler.arn,
-  ]
+  iam_role_additional_policies = {
+    default_node       = aws_iam_policy.default_node.arn
+    cluster_autoscaler = aws_iam_policy.cluster_autoscaler.arn
+  }
 }
 
 

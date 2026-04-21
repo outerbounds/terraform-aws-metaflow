@@ -20,6 +20,18 @@ variable "database_username" {
   description = "The database username"
 }
 
+variable "database_ssl_mode" {
+  type        = string
+  description = "The metadata service database connection ssl mode"
+  default     = "disable"
+
+  # https://github.com/Netflix/metaflow-service/blob/master/run_goose.py#L63
+  validation {
+    condition     = contains(["disable", "allow", "prefer", "require", "verify-ca", "verify-full"], var.database_ssl_mode)
+    error_message = "The database_ssl_mode variable is invalid."
+  }
+}
+
 variable "datastore_s3_bucket_kms_key_arn" {
   type        = string
   description = "The ARN of the KMS key used to encrypt the Metaflow datastore S3 bucket"
