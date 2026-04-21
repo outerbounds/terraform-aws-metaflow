@@ -1,5 +1,5 @@
 output "METAFLOW_SERVICE_INTERNAL_URL" {
-  value       = "http://${aws_lb.this.dns_name}/"
+  value       = "http://${var.nlb_dns_name == "" ? aws_lb.this[0].dns_name : var.nlb_dns_name}/"
   description = "URL for Metadata Service (Accessible in VPC)"
 }
 
@@ -34,6 +34,6 @@ output "metadata_svc_ecs_task_role_arn" {
 }
 
 output "network_load_balancer_dns_name" {
-  value       = aws_lb.this.dns_name
+  value       = var.nlb_dns_name == "" ? aws_lb.this[0].dns_name : var.nlb_dns_name
   description = "The DNS addressable name for the Network Load Balancer that accepts requests and forwards them to our Fargate MetaData service instance(s)"
 }

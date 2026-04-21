@@ -128,3 +128,23 @@ output "batch_compute_environment_security_group_id" {
   value       = module.metaflow-computation.batch_compute_environment_security_group_id
   description = "The ID of the security group attached to the Batch Compute environment."
 }
+
+output "database_name" {
+  value       = module.metaflow-datastore.database_name
+  description = "The database name"
+}
+
+output "database_password" {
+  value       = module.metaflow-datastore.database_password
+  description = "The database password"
+}
+
+output "database_username" {
+  value       = module.metaflow-datastore.database_username
+  description = "The database username"
+}
+
+output "rds_master_instance_endpoint" {
+  value       = module.metaflow-datastore.rds_master_instance_endpoint
+  description = "The database connection endpoint in address:port format"
+}
